@@ -1,0 +1,4 @@
+15:42:11: Server started | Server started on port 8080!
+15:44:15: Server started | Server started on port 8080!
+15:44:19 - Type: CLIENT_CONECTED Details: Client connected!
+15:44:19 - Type: CLIENT_CONECTED Details: Client connected!
