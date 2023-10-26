@@ -3,6 +3,8 @@ package server;
 import event_snapshot.Snapshot;
 import logger.LogType;
 import logger.Logger;
+import logger.LoggerException;
+import models.Callback;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -43,10 +45,11 @@ public class Server {
                 }
             }
         } catch (Exception e) {
-            System.out.println("There was an error when trying to start a server on port " + this.socket + "! ERROR: " + e.getMessage());
+            this.updateSnapshot("There was an error when trying to start a server on port " + this.socket + "! ERROR: " + e.getMessage());
+            Logger.logMessage(LogType.ERROR, true, this.currentEvent);
         }
     }
-    private static void handleClient(Socket client) throws IOException {
+    private void handleClient(Socket client) throws IOException, LoggerException {
         BufferedReader br = new BufferedReader(new InputStreamReader(client.getInputStream()));
 
         StringBuilder requestBuilder = new StringBuilder();
@@ -56,36 +59,51 @@ public class Server {
         }
 
         String request = requestBuilder.toString();
-        String[] requestsLines = request.split("\r\n");
-        String[] requestLine = requestsLines[0].split(" ");
-        String method = requestLine[0];
-        String path = requestLine[1].split("\\?")[0];
-        Map<String, String> params = new HashMap<>();
-        if(requestLine[1].split("\\?").length > 1) {
-            params = URLParser.getURLparams(requestLine[1].split("\\?")[1]);
-        }
-        String version = requestLine[2];
-        String host = requestsLines[1].split(" ")[1];
+        Request req = parseRequest(request);
+        List<String> headers = parseHeaders(request.split("\r\n"));
 
-        List<String> headers = new ArrayList<>();
-        Arrays.asList(requestsLines).subList(2, requestsLines.length).stream()
-                .map(value -> headers.add(value));
+        this.updateSnapshot("Client Info: " + client.toString() + " | Request: " + req.toString() + " | Headers: " + headers.toString() + "");
 
-        String accessLog = String.format("Client %s, method %s, path %s, version %s, host %s, headers %s",
-                client.toString(), method, path, version, host, headers.toString());
-        System.out.println(accessLog);
+        Logger.logRequest(req, true, this.currentEvent);
 
-        Path filePath = getFilePath(path);
+        Path filePath = getFilePath(req.path);
 
         if (Files.exists(filePath)) {
-            // file exist
             String contentType = guessContentType(filePath);
             sendResponse(client, "200 OK", contentType, Files.readAllBytes(filePath));
         } else {
-            // 404
             byte[] notFoundContent = "<h1>Not found :(</h1>".getBytes();
             sendResponse(client, "404 Not Found", "text/html", notFoundContent);
         }
+    }
+
+    private static Request parseRequest(String req) {
+        String[] reqLines = req.split("\r\n");
+        String[] reqLine = reqLines[0].split(" ");
+        String method = reqLine[0];
+        String path = reqLine[1].split("\\?")[0];
+
+        Map<String, String> params = new HashMap<>();
+        if(reqLine[1].split("\\?").length > 1) {
+            params = URLParser.getURLparams(reqLine[1].split("\\?")[1]);
+        }
+
+        String version = reqLine[2];
+        String host = reqLines[1].split(" ")[1];
+
+        List<String> headers = new ArrayList<>();
+        Arrays.asList(reqLines).subList(2, reqLines.length).stream()
+                .map(headers::add);
+
+        return new Request(method, path, params, version, host, headers);
+    }
+
+    private static List<String> parseHeaders(String[] reqLines) {
+        return Arrays.asList(reqLines).subList(2, reqLines.length);
+    }
+
+    public void addRoute(Route route, Callback callback) {
+        this.router.registerRoute(route, callback);
     }
 
     private static void sendResponse(Socket client, String status, String contentType, byte[] content) throws IOException {

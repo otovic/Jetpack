@@ -4,17 +4,16 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a5281412-b623-4d1d-80f0-0256ec10c029" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/event_snapshot/Snapshot.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/logger/LogType.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/logger/Logger.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/logger/LoggerException.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/server/Request.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/utility/UtilityService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+    <list default="true" id="a5281412-b623-4d1d-80f0-0256ec10c029" name="Changes" comment="Added logger">
+      <change afterPath="$PROJECT_DIR$/src/main/java/models/Callback.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/server/Response.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/server/Route.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server_logs.txt" beforeDir="false" afterPath="$PROJECT_DIR$/server_logs.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/logger/Logger.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/logger/Logger.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/server/Request.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/server/Request.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/server/Router.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/server/Router.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/server/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/server/Server.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -26,12 +25,16 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Enum" />
+        <option value="Interface" />
         <option value="Class" />
       </list>
     </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
   </component>
   <component name="ProjectId" id="2WkVq2L8be3tmzwjTFRcX4Ak2iR" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
@@ -48,7 +51,8 @@
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)"
+    "node.js.selected.package.tslint": "(autodetect)",
+    "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
@@ -60,8 +64,29 @@
       <option name="presentableId" value="Default" />
       <updated>1697276773642</updated>
       <workItem from="1697276773874" duration="8000" />
+      <workItem from="1698304451380" duration="5794000" />
     </task>
+    <task id="LOCAL-00001" summary="Added logger">
+      <option name="closed" value="true" />
+      <created>1698241535805</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1698241535805</updated>
+    </task>
+    <task id="LOCAL-00002" summary="Added logger">
+      <option name="closed" value="true" />
+      <created>1698241555657</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1698241555657</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
@@ -73,5 +98,9 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Added logger" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added logger" />
   </component>
 </project>

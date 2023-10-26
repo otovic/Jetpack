@@ -7,7 +7,6 @@ import utility.UtilityService;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
-import java.io.IOException;
 import java.time.LocalTime;
 
 public class Logger {
@@ -38,19 +37,20 @@ public class Logger {
             switch (type) {
                 case SERVER_START -> logger.append(UtilityService.parseTimeForLog(time))
                         .append(": ")
-                        .append("Server started | ")
-                        .append(priorEvent.snapshot + "\n");
+                        .append("Type: SERVER_START | ")
+                        .append("Details: " + priorEvent.snapshot + "\n");
 
                 case ERROR -> logger.append(UtilityService.parseTimeForLog(time))
                         .append(": ")
-                        .append("Error occurred on the server")
-                        .append(priorEvent.snapshot + "\n");
+                        .append("Type: ERROR | ")
+                        .append("Details: " + priorEvent.snapshot + "\n");
 
                 case CLIENT_CONNECTED -> logger.append(UtilityService.parseTimeForLog(time))
                         .append(" - ")
                         .append("Type: CLIENT_CONNECTED ")
                         .append("Details: " + priorEvent.snapshot + "\n");
             }
+            if(printToConsole) System.out.println(priorEvent.snapshot);
         } catch (Exception e) {
             System.out.println("ERROR: Error while writing logs! MESSAGE: " + e.getMessage());
         }
