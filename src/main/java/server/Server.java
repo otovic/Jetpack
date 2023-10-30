@@ -63,18 +63,17 @@ public class Server {
         List<String> headers = parseHeaders(request.split("\r\n"));
 
         this.updateSnapshot("Client Info: " + client.toString() + " | Request: " + req.toString() + " | Headers: " + headers.toString() + "");
-
         Logger.logRequest(req, true, this.currentEvent);
 
-        Path filePath = getFilePath(req.path);
-
-        if (Files.exists(filePath)) {
-            String contentType = guessContentType(filePath);
-            sendResponse(client, "200 OK", contentType, Files.readAllBytes(filePath));
-        } else {
-            byte[] notFoundContent = "<h1>Not found :(</h1>".getBytes();
-            sendResponse(client, "404 Not Found", "text/html", notFoundContent);
-        }
+        this.router.routes.forEach((route, callback) -> {
+            if(route.equals(req.path)) {
+                try {
+                    callback.exe(req, new Response(client));
+                } catch (Exception e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        });
     }
 
     private static Request parseRequest(String req) {
@@ -102,30 +101,7 @@ public class Server {
         return Arrays.asList(reqLines).subList(2, reqLines.length);
     }
 
-    public void addRoute(Route route, Callback callback) {
+    public void addRoute(String route , Callback callback) {
         this.router.registerRoute(route, callback);
-    }
-
-    private static void sendResponse(Socket client, String status, String contentType, byte[] content) throws IOException {
-        OutputStream clientOutput = client.getOutputStream();
-        clientOutput.write(("HTTP/1.1 \r\n" + status).getBytes());
-        clientOutput.write(("ContentType: " + contentType + "\r\n").getBytes());
-        clientOutput.write("\r\n".getBytes());
-        clientOutput.write(content);
-        clientOutput.write("\r\n\r\n".getBytes());
-        clientOutput.flush();
-        client.close();
-    }
-
-    private static Path getFilePath(String path) {
-        if ("/".equals(path)) {
-            path = "/index.html";
-        }
-
-        return Paths.get("/tmp/www", path);
-    }
-
-    private static String guessContentType(Path filePath) throws IOException {
-        return Files.probeContentType(filePath);
     }
 }

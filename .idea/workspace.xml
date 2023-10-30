@@ -4,15 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a5281412-b623-4d1d-80f0-0256ec10c029" name="Changes" comment="Added logger">
-      <change afterPath="$PROJECT_DIR$/src/main/java/models/Callback.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/server/Response.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/server/Route.java" afterDir="false" />
+    <list default="true" id="a5281412-b623-4d1d-80f0-0256ec10c029" name="Changes" comment="Restructured server component, fixed logger messages">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/server_logs.txt" beforeDir="false" afterPath="$PROJECT_DIR$/server_logs.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/logger/Logger.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/logger/Logger.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/server/Request.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/server/Request.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/models/Callback.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/models/Callback.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/server/Response.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/server/Response.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/server/Route.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/server/Route.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/server/Router.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/server/Router.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/server/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/server/Server.java" afterDir="false" />
     </list>
@@ -24,9 +22,11 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Enum" />
         <option value="Interface" />
         <option value="Class" />
+        <option value="JavaScript File" />
+        <option value="Enum" />
+        <option value="HTML File" />
       </list>
     </option>
   </component>
@@ -42,19 +42,20 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;DefaultHtmlFileTemplate&quot;: &quot;HTML File&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -64,7 +65,10 @@
       <option name="presentableId" value="Default" />
       <updated>1697276773642</updated>
       <workItem from="1697276773874" duration="8000" />
-      <workItem from="1698304451380" duration="5794000" />
+      <workItem from="1698304451380" duration="6141000" />
+      <workItem from="1698314119655" duration="5197000" />
+      <workItem from="1698657159841" duration="261000" />
+      <workItem from="1698657601630" duration="2714000" />
     </task>
     <task id="LOCAL-00001" summary="Added logger">
       <option name="closed" value="true" />
@@ -82,7 +86,15 @@
       <option name="project" value="LOCAL" />
       <updated>1698241555657</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Restructured server component, fixed logger messages">
+      <option name="closed" value="true" />
+      <created>1698312833416</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1698312833416</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -101,6 +113,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Added logger" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added logger" />
+    <MESSAGE value="Restructured server component, fixed logger messages" />
+    <option name="LAST_COMMIT_MESSAGE" value="Restructured server component, fixed logger messages" />
   </component>
 </project>
