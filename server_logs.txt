@@ -76,4 +76,23 @@
 11:6:24: Request made11:6:24 - Type: CLIENT_CONNECTED Details: Client connected!
 11:6:24: Request made11:6:26 - Type: CLIENT_CONNECTED Details: Client connected!
 11:6:26: Request made11:6:26 - Type: CLIENT_CONNECTED Details: Client connected!
-11:6:26: Request made
+11:6:26: Request made13:32:15: Type: SERVER_START | Details: Server started on port 8080!
+13:32:25 - Type: CLIENT_CONNECTED Details: Client connected!
+13:32:25: Request made13:32:25 - Type: CLIENT_CONNECTED Details: Client connected!
+13:32:25: Request made13:32:41 - Type: CLIENT_CONNECTED Details: Client connected!
+13:32:41: Request made13:32:41 - Type: CLIENT_CONNECTED Details: Client connected!
+13:32:41: Request made13:34:16: Type: SERVER_START | Details: Server started on port 8080!
+13:34:23 - Type: CLIENT_CONNECTED Details: Client connected!
+13:34:23: Request made13:34:23 - Type: CLIENT_CONNECTED Details: Client connected!
+13:34:23: Request made13:35:25: Type: SERVER_START | Details: Server started on port 8080!
+13:35:26 - Type: CLIENT_CONNECTED Details: Client connected!
+13:35:26: Request made13:35:26 - Type: CLIENT_CONNECTED Details: Client connected!
+13:35:26: Request made13:36:51: Type: SERVER_START | Details: Server started on port 8080!
+13:36:57 - Type: CLIENT_CONNECTED Details: Client connected!
+13:36:57: Request made13:36:57 - Type: CLIENT_CONNECTED Details: Client connected!
+13:36:57: Request made13:37:30 - Type: CLIENT_CONNECTED Details: Client connected!
+13:37:30: Request made13:37:30 - Type: CLIENT_CONNECTED Details: Client connected!
+13:37:30: Request made13:38:27: Type: SERVER_START | Details: Server started on port 8080!
+13:38:36 - Type: CLIENT_CONNECTED Details: Client connected!
+13:38:36: Request made13:38:36 - Type: CLIENT_CONNECTED Details: Client connected!
+13:38:36: Request made

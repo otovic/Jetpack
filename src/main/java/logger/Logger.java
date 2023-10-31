@@ -1,6 +1,7 @@
 package logger;
 
 import event_snapshot.Snapshot;
+import exceptions.LoggerException;
 import server.Request;
 import utility.UtilityService;
 

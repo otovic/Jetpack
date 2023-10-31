@@ -4,15 +4,21 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a5281412-b623-4d1d-80f0-0256ec10c029" name="Changes" comment="Restructured server component, fixed logger messages">
+    <list default="true" id="a5281412-b623-4d1d-80f0-0256ec10c029" name="Changes" comment="Restructured server component, Response now works">
+      <change afterPath="$PROJECT_DIR$/src/main/java/client/ParamsRouter.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/exceptions/RoutingException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/models/ParamKey.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/models/RoutableFromParams.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/test_classes/Person.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/static/index.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/server_logs.txt" beforeDir="false" afterPath="$PROJECT_DIR$/server_logs.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/models/Callback.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/models/Callback.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/server/Response.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/server/Response.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/server/Route.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/server/Route.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/logger/Logger.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/logger/Logger.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/logger/LoggerException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/exceptions/LoggerException.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/server/Router.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/server/Router.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/server/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/server/Server.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/server/URLParser.java" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -22,11 +28,11 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Interface" />
-        <option value="Class" />
         <option value="JavaScript File" />
         <option value="Enum" />
         <option value="HTML File" />
+        <option value="Interface" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -53,6 +59,7 @@
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
@@ -68,7 +75,8 @@
       <workItem from="1698304451380" duration="6141000" />
       <workItem from="1698314119655" duration="5197000" />
       <workItem from="1698657159841" duration="261000" />
-      <workItem from="1698657601630" duration="2714000" />
+      <workItem from="1698657601630" duration="3963000" />
+      <workItem from="1698751885389" duration="4158000" />
     </task>
     <task id="LOCAL-00001" summary="Added logger">
       <option name="closed" value="true" />
@@ -94,7 +102,15 @@
       <option name="project" value="LOCAL" />
       <updated>1698312833416</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Restructured server component, Response now works">
+      <option name="closed" value="true" />
+      <created>1698660642524</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1698660642524</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -114,6 +130,7 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Added logger" />
     <MESSAGE value="Restructured server component, fixed logger messages" />
-    <option name="LAST_COMMIT_MESSAGE" value="Restructured server component, fixed logger messages" />
+    <MESSAGE value="Restructured server component, Response now works" />
+    <option name="LAST_COMMIT_MESSAGE" value="Restructured server component, Response now works" />
   </component>
 </project>

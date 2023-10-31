@@ -3,24 +3,19 @@ package server;
 import event_snapshot.Snapshot;
 import logger.LogType;
 import logger.Logger;
-import logger.LoggerException;
+import exceptions.LoggerException;
 import models.Callback;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.io.OutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.nio.file.Files;
-import java.nio.file.Path;
 import java.util.*;
-import java.nio.file.Paths;
 
 public class Server {
     public int socket;
     public boolean allowClientConnections = false;
-    private URLParser urlParser = new URLParser();
     private Router router = new Router();
 
     private Snapshot currentEvent = new Snapshot();
@@ -76,7 +71,7 @@ public class Server {
         });
     }
 
-    private static Request parseRequest(String req) {
+    private Request parseRequest(String req) {
         String[] reqLines = req.split("\r\n");
         String[] reqLine = reqLines[0].split(" ");
         String method = reqLine[0];
@@ -84,7 +79,7 @@ public class Server {
 
         Map<String, String> params = new HashMap<>();
         if(reqLine[1].split("\\?").length > 1) {
-            params = URLParser.getURLparams(reqLine[1].split("\\?")[1]);
+            params = this.router.getURLParams(reqLine[1].split("\\?")[1]);
         }
 
         String version = reqLine[2];
