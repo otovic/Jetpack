@@ -5,6 +5,7 @@ import logger.LogType;
 import logger.Logger;
 import exceptions.LoggerException;
 import models.Callback;
+import models.RequestMethod;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -18,6 +19,8 @@ public class Server {
     public boolean allowClientConnections = false;
     private Router router = new Router();
 
+    public CORSConfig corsConfig = new CORSConfig();
+
     private Snapshot currentEvent = new Snapshot();
 
     public Server(int socket, boolean allowClientConnections) {
@@ -28,6 +31,7 @@ public class Server {
     private void updateSnapshot(String event) {
         this.currentEvent.updateSnapshot(event);
     }
+
     public void startServer() throws Exception {
         try (ServerSocket serverSocket = new ServerSocket(this.socket)) {
             this.updateSnapshot("Server started on port " + this.socket + "!");
@@ -60,10 +64,10 @@ public class Server {
         this.updateSnapshot("Client Info: " + client.toString() + " | Request: " + req.toString() + " | Headers: " + headers.toString() + "");
         Logger.logRequest(req, true, this.currentEvent);
 
-        this.router.routes.forEach((route, callback) -> {
-            if(route.equals(req.path)) {
+        this.router.routes.forEach((routePath, route) -> {
+            if(routePath.equals(req.path)) {
                 try {
-                    callback.exe(req, new Response(client));
+                    route.callback.exe(req, new Response(client, req, route, this.corsConfig));
                 } catch (Exception e) {
                     throw new RuntimeException(e);
                 }
@@ -96,7 +100,11 @@ public class Server {
         return Arrays.asList(reqLines).subList(2, reqLines.length);
     }
 
-    public void addRoute(String route , Callback callback) {
-        this.router.registerRoute(route, callback);
+    public void addRoute(String route, RequestMethod reqMethod, CORSConfig routeCORS, Callback callback) {
+        this.router.registerRoute(route, reqMethod, routeCORS, callback);
+    }
+
+    public void addRoute(String route, RequestMethod reqMethod, Callback callback) {
+        this.router.registerRoute(route, reqMethod, null, callback);
     }
 }
