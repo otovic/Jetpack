@@ -11,14 +11,14 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 
 public class Response {
-    private Socket client;
-    private Request req;
-    private Route route;
-    private CORSConfig serverCors;
+    private final Socket client;
+    private final Request req;
+    private final Route route;
+    private final CORSConfig serverCors;
 
-    private String allowedMethods;
-    private String allowedOrigins;
-    private String allowedHeaders;
+    private final String allowedMethods;
+    private final String allowedOrigins;
+    private final String allowedHeaders;
 
     public Response(Socket client, Request req, Route route, CORSConfig serverCors) {
         this.client = client;
@@ -41,19 +41,29 @@ public class Response {
         Path filePath = Paths.get("src/main/resources/static/" + file);
         try {
             RequestMethod requestMethod = UtilityService.getRequestMethodFromString(req.method);
+            if(requestMethod.equals(RequestMethod.OPTIONS)) {
+                this.sendResponse("200 OK", "text/html", "".getBytes());
+                return true;
+            }
             if(requestMethod != route.method) {
+                System.out.println("Methods do not match! Expected: " + route.method + " | Actual: " + requestMethod);
                 this.send404("Methods do not match! Expected: " + route.method + " | Actual: " + requestMethod);
+                return false;
             }
             if(!serverCors.getAllowMethods().contains(req.method)) {
+                System.out.println("Method not allowed! Expected: " + this.allowedMethods + " | Actual: " + req.method);
                 this.send404("Method not allowed! Expected: " + this.allowedMethods + " | Actual: " + req.method);
+                return false;
             }
             if (Files.exists(filePath)) {
                 String contentType = guessContentType(filePath);
                 this.sendResponse(status, contentType, Files.readAllBytes(filePath));
+                return true;
             } else {
+                System.out.println("File not found!");
                 this.send404("File not found!");
+                return true;
             }
-            return true;
         } catch (Exception e) {
             System.out.println("Error: " + e.getMessage());
             return false;
@@ -66,6 +76,7 @@ public class Response {
     }
 
     private void writeClientOutput(OutputStream stream, String status, String contentType, byte[] content) throws IOException {
+        System.out.println(status);
         stream.write(("HTTP/1.1 " + status + "\r\n").getBytes());
         stream.write(("Content-Type: " + contentType + "\r\n").getBytes());
         stream.write(("Access-Control-Allow-Origin: " + allowedOrigins + "\r\n").getBytes());

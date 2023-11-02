@@ -64,6 +64,24 @@ public class Server {
         this.updateSnapshot("Client Info: " + client.toString() + " | Request: " + req.toString() + " | Headers: " + headers.toString() + "");
         Logger.logRequest(req, true, this.currentEvent);
 
+        if(req.method.equals("POST") || req.method.equals("PUT")) {
+            if(headers.contains("Content-Length: 0")) {
+                req.body = "";
+            } else {
+                int contentLength = Integer.parseInt(headers.stream()
+                        .filter(header -> header.contains("Content-Length: "))
+                        .findFirst()
+                        .orElse("Content-Length: 0")
+                        .split(" ")[1]);
+
+                char[] bodyData = new char[contentLength];
+                br.read(bodyData);
+
+                String requestBody = new String(bodyData);
+                System.out.println("Request Body: " + requestBody);
+            }
+        }
+
         this.router.routes.forEach((routePath, route) -> {
             if(routePath.equals(req.path)) {
                 try {
