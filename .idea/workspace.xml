@@ -6,9 +6,8 @@
   <component name="ChangeListManager">
     <list default="true" id="a5281412-b623-4d1d-80f0-0256ec10c029" name="Changes" comment="Restructured server component, Response now works">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server_logs.txt" beforeDir="false" afterPath="$PROJECT_DIR$/server_logs.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/server/Response.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/server/Response.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/client/ParamsRouter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/client/ParamsRouter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/server/Request.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/server/Request.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

@@ -12,8 +12,7 @@ public class ParamsRouter {
     public static <T> T routeFromParams(Map<String, String> params, Class<T> object) throws RoutingException {
         try {
             T instance = object.newInstance();
-            boolean isRoutable = instance.getClass().isAnnotationPresent(RoutableFromParams.class);
-            if(isRoutable) {
+            if(instance.getClass().isAnnotationPresent(RoutableFromParams.class)) {
                 Arrays.stream(instance.getClass().getFields())
                         .filter(field -> field.isAnnotationPresent(ParamKey.class))
                         .forEach(field -> {
@@ -34,5 +33,9 @@ public class ParamsRouter {
         } catch (InstantiationException | IllegalAccessException e) {
             throw new RoutingException("Could not instantiate object");
         }
+    }
+
+    public static <T> T routeFromBody(Map<String, String> params, Class<T> object) {
+        return null;
     }
 }
