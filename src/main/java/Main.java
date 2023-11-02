@@ -16,7 +16,6 @@ public class Main {
         server.corsConfig.setAllowHeaders(Arrays.asList("Content-Type"));
 
         server.addRoute("/", RequestMethod.GET, ((req, res) -> {
-            Person person = ParamsRouter.routeFromParams(req.params, Person.class);
             return res.send("200 OK", "index.html");
         }));
 
@@ -24,8 +23,7 @@ public class Main {
                 Arrays.asList("GET", "POST", "PUT", "DELETE"),
                 Arrays.asList("Content-Type"));
 
-        server.addRoute("/test", RequestMethod.POST, config, ((req, res) -> {
-            Person p = ParamsRouter.routeFromParams(req.params, Person.class);
+        server.addRoute("/test", RequestMethod.GET, config, ((req, res) -> {
             return res.send("200 OK", "index.html");
         }));
 

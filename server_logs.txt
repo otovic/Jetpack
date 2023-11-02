@@ -12,4 +12,31 @@
 15:35:45 - Type: CLIENT_CONNECTED Details: Client connected!
 15:35:46: Request made15:36:3: Type: SERVER_START | Details: Server started on port 8080!
 15:36:7 - Type: CLIENT_CONNECTED Details: Client connected!
-15:36:7: Request made
+15:36:7: Request made9:36:8: Type: SERVER_START | Details: Server started on port 8080!
+9:36:31 - Type: CLIENT_CONNECTED Details: Client connected!
+9:36:31: Request made9:36:31 - Type: CLIENT_CONNECTED Details: Client connected!
+9:36:31: Request made9:36:36 - Type: CLIENT_CONNECTED Details: Client connected!
+9:36:36: Request made9:36:37 - Type: CLIENT_CONNECTED Details: Client connected!
+9:36:37: Request made9:36:46 - Type: CLIENT_CONNECTED Details: Client connected!
+9:36:46: Request made9:36:46 - Type: CLIENT_CONNECTED Details: Client connected!
+9:36:46: Request made9:38:31 - Type: CLIENT_CONNECTED Details: Client connected!
+9:38:31: Request made9:38:32 - Type: CLIENT_CONNECTED Details: Client connected!
+9:38:32: Request made9:38:32 - Type: CLIENT_CONNECTED Details: Client connected!
+9:38:32: Request made9:38:32 - Type: CLIENT_CONNECTED Details: Client connected!
+9:38:32: Request made9:38:32 - Type: CLIENT_CONNECTED Details: Client connected!
+9:38:32: Request made9:38:32 - Type: CLIENT_CONNECTED Details: Client connected!
+9:38:32: Request made9:38:52: Type: SERVER_START | Details: Server started on port 8080!
+9:38:56 - Type: CLIENT_CONNECTED Details: Client connected!
+9:38:56: Request made9:38:56 - Type: CLIENT_CONNECTED Details: Client connected!
+9:38:56: Request made9:39:52: Type: SERVER_START | Details: Server started on port 8080!
+9:39:54 - Type: CLIENT_CONNECTED Details: Client connected!
+9:39:54: Request made9:39:54 - Type: CLIENT_CONNECTED Details: Client connected!
+9:39:54: Request made9:42:45: Type: SERVER_START | Details: Server started on port 8080!
+9:42:49 - Type: CLIENT_CONNECTED Details: Client connected!
+9:42:49: Request made9:42:49 - Type: CLIENT_CONNECTED Details: Client connected!
+9:42:49: Request made9:42:54 - Type: CLIENT_CONNECTED Details: Client connected!
+9:42:54: Request made9:42:55 - Type: CLIENT_CONNECTED Details: Client connected!
+9:42:55: Request made9:43:7: Type: SERVER_START | Details: Server started on port 8080!
+9:43:11 - Type: CLIENT_CONNECTED Details: Client connected!
+9:43:11: Request made9:43:11 - Type: CLIENT_CONNECTED Details: Client connected!
+9:43:11: Request made

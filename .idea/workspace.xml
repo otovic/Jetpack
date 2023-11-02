@@ -5,18 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a5281412-b623-4d1d-80f0-0256ec10c029" name="Changes" comment="Restructured server component, Response now works">
-      <change afterPath="$PROJECT_DIR$/src/main/java/models/RequestMethod.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/server/CORSConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_25_10_2023_11_26_[Changes]/shelved.patch" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_25_10_2023_11_26__Changes_.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/server_logs.txt" beforeDir="false" afterPath="$PROJECT_DIR$/server_logs.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/server/Response.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/server/Response.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/server/Route.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/server/Route.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/server/Router.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/server/Router.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/server/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/server/Server.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/utility/UtilityService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/utility/UtilityService.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -113,7 +105,15 @@
       <option name="project" value="LOCAL" />
       <updated>1698660642524</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="CORS now works, can add custom CORS to routes or apply server specific CORS for all routes">
+      <option name="closed" value="true" />
+      <created>1698849435988</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1698849435988</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -146,6 +146,7 @@
     <MESSAGE value="Added logger" />
     <MESSAGE value="Restructured server component, fixed logger messages" />
     <MESSAGE value="Restructured server component, Response now works" />
-    <option name="LAST_COMMIT_MESSAGE" value="Restructured server component, Response now works" />
+    <MESSAGE value="CORS now works, can add custom CORS to routes or apply server specific CORS for all routes" />
+    <option name="LAST_COMMIT_MESSAGE" value="CORS now works, can add custom CORS to routes or apply server specific CORS for all routes" />
   </component>
 </project>
