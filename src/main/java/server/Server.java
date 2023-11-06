@@ -44,7 +44,7 @@ public class Server {
                 try (Socket client = serverSocket.accept()) {
                     this.updateSnapshot("Client connected!");
                     Logger.logMessage(LogType.CLIENT_CONNECTED, true, this.currentEvent);
-                    handleClient(client);
+                    handleIncomingRequest(client);
                 }
             }
         } catch (Exception e) {
@@ -53,37 +53,19 @@ public class Server {
         }
     }
 
-    private void handleClient(Socket client) throws IOException, LoggerException {
-        BufferedReader br = new BufferedReader(new InputStreamReader(client.getInputStream()));
+    private void handleIncomingRequest(Socket client) throws IOException, LoggerException {
+        final BufferedReader br = new BufferedReader(new InputStreamReader(client.getInputStream()));
+        final StringBuilder requestBuilder = this.buildRequest(br);
+        final Request req = parseRequest(requestBuilder.toString());
 
-        StringBuilder requestBuilder = new StringBuilder();
-        String line;
-        while (!(line = br.readLine()).isBlank()) {
-            requestBuilder.append(line + "\r\n");
-        }
-
-        String request = requestBuilder.toString();
-        Request req = parseRequest(request);
-        List<String> headers = parseHeaders(request.split("\r\n"));
-
-        this.updateSnapshot("Client Info: " + client.toString() + " | Request: " + req.toString() + " | Headers: " + headers.toString() + "");
+        this.updateSnapshot("Client Info: " + client.toString() + " | Request: " + req.toString() + " | Headers: " + req.headers.toString() + "");
         Logger.logRequest(req, true, this.currentEvent);
 
         if(req.method.equals("POST") || req.method.equals("PUT")) {
-            if(headers.contains("Content-Length: 0")) {
+            if(req.headers.contains("Content-Length: 0")) {
                 req.body = "";
             } else {
-                int contentLength = Integer.parseInt(headers.stream()
-                        .filter(header -> header.contains("Content-Length: "))
-                        .findFirst()
-                        .orElse("Content-Length: 0")
-                        .split(" ")[1]);
-
-                char[] bodyData = new char[contentLength];
-                br.read(bodyData);
-
-                String requestBody = new String(bodyData);
-                System.out.println(JSON.toList(requestBody, Person.class));
+                req.body = this.parseBody(req.headers, br).toString();
             }
         }
 
@@ -98,29 +80,49 @@ public class Server {
         });
     }
 
+    private StringBuilder parseBody(List<String> headers, BufferedReader br) throws IOException {
+        int contentLength = Integer.parseInt(headers.stream()
+                .filter(header -> header.contains("Content-Length: "))
+                .findFirst()
+                .orElse("Content-Length: 0")
+                .split(" ")[1]);
+
+        char[] bodyData = new char[contentLength];
+        br.read(bodyData);
+
+        return new StringBuilder(new String(bodyData));
+    }
+
+    private StringBuilder buildRequest(BufferedReader br) throws IOException {
+        StringBuilder requestBuilder = new StringBuilder();
+        String line;
+        while (!(line = br.readLine()).isBlank()) {
+            requestBuilder.append(line + "\r\n");
+        }
+
+        return requestBuilder;
+    }
+
     private Request parseRequest(String req) {
         String[] reqLines = req.split("\r\n");
         String[] reqLine = reqLines[0].split(" ");
+
         String method = reqLine[0];
         String path = reqLine[1].split("\\?")[0];
-
+        String version = reqLine[2];
+        String host = reqLines[1].split(" ")[1];
         Map<String, String> params = new HashMap<>();
+
         if(reqLine[1].split("\\?").length > 1) {
             params = this.router.getURLParams(reqLine[1].split("\\?")[1]);
         }
 
-        String version = reqLine[2];
-        String host = reqLines[1].split(" ")[1];
-
         List<String> headers = new ArrayList<>();
-        Arrays.asList(reqLines).subList(2, reqLines.length).stream()
-                .map(headers::add);
+        Arrays.asList(reqLines).subList(2, reqLines.length).stream().forEach(line -> {
+            headers.add(line);
+        });
 
         return new Request(method, path, params, version, host, headers);
-    }
-
-    private static List<String> parseHeaders(String[] reqLines) {
-        return Arrays.asList(reqLines).subList(2, reqLines.length);
     }
 
     public void addRoute(String route, RequestMethod reqMethod, CORSConfig routeCORS, Callback callback) {

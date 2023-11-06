@@ -9,8 +9,8 @@ public class Request {
     public Map<String, String> params;
     public String version;
     public String host;
-
     public String body;
+    public List<String> headers;
 
     public Request(String method, String path, Map<String, String> params, String version, String host, List<String> headers) {
         this.method = method;
@@ -18,5 +18,6 @@ public class Request {
         this.params = params;
         this.version = version;
         this.host = host;
+        this.headers = headers;
     }
 }
