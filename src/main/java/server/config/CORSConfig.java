@@ -1,4 +1,4 @@
-package server;
+package server.config;
 
 import java.util.List;
 

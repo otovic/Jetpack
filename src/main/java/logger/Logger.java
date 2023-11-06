@@ -2,7 +2,7 @@ package logger;
 
 import event_snapshot.Snapshot;
 import exceptions.LoggerException;
-import server.Request;
+import server.client.Request;
 import utility.UtilityService;
 
 import java.io.BufferedWriter;

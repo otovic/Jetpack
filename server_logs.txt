@@ -75,4 +75,28 @@
 11:9:20: Request made11:9:20 - Type: CLIENT_CONNECTED Details: Client connected!
 11:9:20: Request made11:10:7 - Type: CLIENT_CONNECTED Details: Client connected!
 11:10:7: Request made11:10:7 - Type: CLIENT_CONNECTED Details: Client connected!
-11:10:7: Request made
+11:10:7: Request made13:28:43: Type: SERVER_START | Details: Server started on port 8080!
+13:28:55 - Type: CLIENT_CONNECTED Details: Client connected!
+13:28:55: Request made13:28:56 - Type: CLIENT_CONNECTED Details: Client connected!
+13:28:56: Request made13:30:37: Type: SERVER_START | Details: Server started on port 8080!
+13:30:41 - Type: CLIENT_CONNECTED Details: Client connected!
+13:30:41: Request made13:30:41 - Type: CLIENT_CONNECTED Details: Client connected!
+13:30:41: Request made13:43:40: Type: SERVER_START | Details: Server started on port 8080!
+13:43:44 - Type: CLIENT_CONNECTED Details: Client connected!
+13:43:44: Request made13:43:44 - Type: CLIENT_CONNECTED Details: Client connected!
+13:43:44: Request made13:46:1: Type: SERVER_START | Details: Server started on port 8080!
+13:46:5 - Type: CLIENT_CONNECTED Details: Client connected!
+13:46:5: Request made13:46:5 - Type: CLIENT_CONNECTED Details: Client connected!
+13:46:5: Request made13:46:38: Type: SERVER_START | Details: Server started on port 8080!
+13:47:25 - Type: CLIENT_CONNECTED Details: Client connected!
+13:47:25: Request made13:47:25 - Type: CLIENT_CONNECTED Details: Client connected!
+13:47:25: Request made13:49:6: Type: SERVER_START | Details: Server started on port 8080!
+13:49:9 - Type: CLIENT_CONNECTED Details: Client connected!
+13:49:9: Request made13:49:9 - Type: CLIENT_CONNECTED Details: Client connected!
+13:49:9: Request made13:50:50: Type: SERVER_START | Details: Server started on port 8080!
+13:50:53 - Type: CLIENT_CONNECTED Details: Client connected!
+13:50:53: Request made13:50:53 - Type: CLIENT_CONNECTED Details: Client connected!
+13:50:53: Request made13:51:45: Type: SERVER_START | Details: Server started on port 8080!
+13:51:47 - Type: CLIENT_CONNECTED Details: Client connected!
+13:51:47: Request made13:51:47 - Type: CLIENT_CONNECTED Details: Client connected!
+13:51:47: Request made

@@ -1,6 +1,8 @@
-package server;
+package server.client;
 
 import models.RequestMethod;
+import server.config.CORSConfig;
+import server.routing.Route;
 import utility.UtilityService;
 
 import java.io.IOException;
@@ -41,6 +43,7 @@ public class Response {
         Path filePath = Paths.get("src/main/resources/static/" + file);
         try {
             RequestMethod requestMethod = UtilityService.getRequestMethodFromString(req.method);
+            assert requestMethod != null;
             if(requestMethod.equals(RequestMethod.OPTIONS)) {
                 this.sendResponse("200 OK", "text/html", "".getBytes());
                 return true;

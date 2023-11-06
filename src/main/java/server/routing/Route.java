@@ -1,13 +1,14 @@
-package server;
+package server.routing;
 
 import models.Callback;
 import models.RequestMethod;
+import server.config.CORSConfig;
 
 public class Route {
-    public String path;
-    public RequestMethod method;
-    public CORSConfig routeSpecificCORSConfig;
-    public Callback callback;
+    public final String path;
+    public final RequestMethod method;
+    public final CORSConfig routeSpecificCORSConfig;
+    public final Callback callback;
 
     public Route(String path, RequestMethod method, CORSConfig corsConfig, Callback callback) {
         this.path = path;

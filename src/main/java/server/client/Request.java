@@ -1,4 +1,4 @@
-package server;
+package server.client;
 
 import java.util.List;
 import java.util.Map;

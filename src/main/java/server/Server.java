@@ -6,6 +6,12 @@ import logger.Logger;
 import exceptions.LoggerException;
 import models.Callback;
 import models.RequestMethod;
+import server.client.Request;
+import server.client.Response;
+import server.config.CORSConfig;
+import server.routing.Router;
+import test_classes.Person;
+import utility.json.JSON;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -18,9 +24,7 @@ public class Server {
     public int socket;
     public boolean allowClientConnections = false;
     private Router router = new Router();
-
     public CORSConfig corsConfig = new CORSConfig();
-
     private Snapshot currentEvent = new Snapshot();
 
     public Server(int socket, boolean allowClientConnections) {
@@ -32,7 +36,7 @@ public class Server {
         this.currentEvent.updateSnapshot(event);
     }
 
-    public void startServer() throws Exception {
+    public void start() throws Exception {
         try (ServerSocket serverSocket = new ServerSocket(this.socket)) {
             this.updateSnapshot("Server started on port " + this.socket + "!");
             Logger.logMessage(LogType.SERVER_START, true, this.currentEvent);
@@ -48,6 +52,7 @@ public class Server {
             Logger.logMessage(LogType.ERROR, true, this.currentEvent);
         }
     }
+
     private void handleClient(Socket client) throws IOException, LoggerException {
         BufferedReader br = new BufferedReader(new InputStreamReader(client.getInputStream()));
 
@@ -78,7 +83,7 @@ public class Server {
                 br.read(bodyData);
 
                 String requestBody = new String(bodyData);
-                System.out.println("Request Body: " + requestBody);
+                System.out.println(JSON.toList(requestBody, Person.class));
             }
         }
 

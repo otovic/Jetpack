@@ -1,7 +1,7 @@
 package models;
 
-import server.Request;
-import server.Response;
+import server.client.Request;
+import server.client.Response;
 
 public interface Callback {
     boolean exe(Request req, Response res) throws Exception;

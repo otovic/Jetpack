@@ -1,4 +1,4 @@
-package client;
+package server.routing;
 
 import exceptions.RoutingException;
 import models.ParamKey;

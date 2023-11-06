@@ -1,7 +1,8 @@
-package server;
+package server.routing;
 
 import models.Callback;
 import models.RequestMethod;
+import server.config.CORSConfig;
 
 import java.util.HashMap;
 import java.util.Map;
