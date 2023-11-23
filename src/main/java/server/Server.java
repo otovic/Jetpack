@@ -67,6 +67,8 @@ public class Server {
             } else {
                 req.body = this.parseBody(req.headers, br).toString();
             }
+        } else {
+            req.body = "";
         }
 
         this.router.routes.forEach((routePath, route) -> {

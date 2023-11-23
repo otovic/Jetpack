@@ -166,4 +166,314 @@
 13:17:40: Request made13:17:40 - Type: CLIENT_CONNECTED Details: Client connected!
 13:17:40: Request made13:17:51 - Type: CLIENT_CONNECTED Details: Client connected!
 13:17:51: Request made13:17:51 - Type: CLIENT_CONNECTED Details: Client connected!
-13:17:51: Request made
+13:17:51: Request made13:19:29: Type: SERVER_START | Details: Server started on port 8080!
+13:19:33 - Type: CLIENT_CONNECTED Details: Client connected!
+13:19:33: Request made13:19:33 - Type: CLIENT_CONNECTED Details: Client connected!
+13:19:33: Request made9:18:9: Type: SERVER_START | Details: Server started on port 8080!
+9:20:13 - Type: CLIENT_CONNECTED Details: Client connected!
+9:20:13: Request made9:20:13 - Type: CLIENT_CONNECTED Details: Client connected!
+9:20:13: Request made9:24:37 - Type: CLIENT_CONNECTED Details: Client connected!
+9:24:37: Request made9:24:37 - Type: CLIENT_CONNECTED Details: Client connected!
+9:24:37: Request made9:25:27 - Type: CLIENT_CONNECTED Details: Client connected!
+9:25:27: Request made9:25:27 - Type: CLIENT_CONNECTED Details: Client connected!
+9:25:27: Request made9:27:36 - Type: CLIENT_CONNECTED Details: Client connected!
+9:27:36: Request made9:27:36 - Type: CLIENT_CONNECTED Details: Client connected!
+9:27:36: Request made10:28:47: Type: SERVER_START | Details: Server started on port 8080!
+10:29:5 - Type: CLIENT_CONNECTED Details: Client connected!
+10:29:5: Request made10:29:5 - Type: CLIENT_CONNECTED Details: Client connected!
+10:29:5: Request made10:29:5: Type: ERROR | Details: There was an error when trying to start a server on port 8080! ERROR: Range [2, 0) out of bounds for length 146
+10:31:37: Type: SERVER_START | Details: Server started on port 8080!
+10:31:39 - Type: CLIENT_CONNECTED Details: Client connected!
+10:31:39: Request made10:31:39 - Type: CLIENT_CONNECTED Details: Client connected!
+10:31:39: Request made10:31:39: Type: ERROR | Details: There was an error when trying to start a server on port 8080! ERROR: Range [4, 1) out of bounds for length 148
+10:33:34: Type: SERVER_START | Details: Server started on port 8080!
+10:33:36 - Type: CLIENT_CONNECTED Details: Client connected!
+10:33:36: Request made10:33:37 - Type: CLIENT_CONNECTED Details: Client connected!
+10:33:37: Request made10:33:37: Type: ERROR | Details: There was an error when trying to start a server on port 8080! ERROR: Range [3, 2) out of bounds for length 147
+10:34:39: Type: SERVER_START | Details: Server started on port 8080!
+10:34:41 - Type: CLIENT_CONNECTED Details: Client connected!
+10:34:41: Request made10:34:41 - Type: CLIENT_CONNECTED Details: Client connected!
+10:34:41: Request made10:35:9: Type: SERVER_START | Details: Server started on port 8080!
+10:35:12 - Type: CLIENT_CONNECTED Details: Client connected!
+10:35:12: Request made10:35:12 - Type: CLIENT_CONNECTED Details: Client connected!
+10:35:12: Request made10:36:3: Type: SERVER_START | Details: Server started on port 8080!
+10:36:5 - Type: CLIENT_CONNECTED Details: Client connected!
+10:36:5: Request made10:36:5 - Type: CLIENT_CONNECTED Details: Client connected!
+10:36:5: Request made10:36:5: Type: ERROR | Details: There was an error when trying to start a server on port 8080! ERROR: Range [-1, 144) out of bounds for length 144
+10:39:47: Type: SERVER_START | Details: Server started on port 8080!
+10:39:50 - Type: CLIENT_CONNECTED Details: Client connected!
+10:39:50: Request made10:39:50 - Type: CLIENT_CONNECTED Details: Client connected!
+10:39:50: Request made10:39:50: Type: ERROR | Details: There was an error when trying to start a server on port 8080! ERROR: Range [-1, 144) out of bounds for length 144
+10:40:16: Type: SERVER_START | Details: Server started on port 8080!
+10:40:39 - Type: CLIENT_CONNECTED Details: Client connected!
+10:40:39: Request made10:40:39 - Type: CLIENT_CONNECTED Details: Client connected!
+10:40:39: Request made10:41:30: Type: ERROR | Details: There was an error when trying to start a server on port 8080! ERROR: Range [-1, 144) out of bounds for length 144
+10:41:43: Type: SERVER_START | Details: Server started on port 8080!
+10:41:45 - Type: CLIENT_CONNECTED Details: Client connected!
+10:41:45: Request made10:41:45 - Type: CLIENT_CONNECTED Details: Client connected!
+10:41:45: Request made10:42:1: Type: SERVER_START | Details: Server started on port 8080!
+10:42:4 - Type: CLIENT_CONNECTED Details: Client connected!
+10:42:4: Request made10:42:4 - Type: CLIENT_CONNECTED Details: Client connected!
+10:42:4: Request made10:43:50: Type: SERVER_START | Details: Server started on port 8080!
+10:43:52 - Type: CLIENT_CONNECTED Details: Client connected!
+10:43:52: Request made10:43:52 - Type: CLIENT_CONNECTED Details: Client connected!
+10:43:52: Request made10:44:49: Type: SERVER_START | Details: Server started on port 8080!
+10:44:51 - Type: CLIENT_CONNECTED Details: Client connected!
+10:44:51: Request made10:44:51 - Type: CLIENT_CONNECTED Details: Client connected!
+10:44:51: Request made10:47:23: Type: SERVER_START | Details: Server started on port 8080!
+10:47:24 - Type: CLIENT_CONNECTED Details: Client connected!
+10:47:25: Request made10:47:25 - Type: CLIENT_CONNECTED Details: Client connected!
+10:47:25: Request made10:48:45: Type: SERVER_START | Details: Server started on port 8080!
+10:48:46 - Type: CLIENT_CONNECTED Details: Client connected!
+10:48:46: Request made10:48:46 - Type: CLIENT_CONNECTED Details: Client connected!
+10:48:46: Request made10:51:46: Type: ERROR | Details: There was an error when trying to start a server on port 8080! ERROR: Range [1, 0) out of bounds for length 145
+10:57:19: Type: SERVER_START | Details: Server started on port 8080!
+10:57:23 - Type: CLIENT_CONNECTED Details: Client connected!
+10:57:23: Request made10:57:23 - Type: CLIENT_CONNECTED Details: Client connected!
+10:57:23: Request made10:58:40: Type: SERVER_START | Details: Server started on port 8080!
+10:58:42 - Type: CLIENT_CONNECTED Details: Client connected!
+10:58:42: Request made10:58:42 - Type: CLIENT_CONNECTED Details: Client connected!
+10:58:42: Request made10:59:49: Type: ERROR | Details: There was an error when trying to start a server on port 8080! ERROR: Range [-1, 144) out of bounds for length 287
+11:0:9: Type: SERVER_START | Details: Server started on port 8080!
+11:0:11 - Type: CLIENT_CONNECTED Details: Client connected!
+11:0:11: Request made11:0:11 - Type: CLIENT_CONNECTED Details: Client connected!
+11:0:11: Request made11:1:54: Type: ERROR | Details: There was an error when trying to start a server on port 8080! ERROR: Range [1, 0) out of bounds for length 144
+11:6:25: Type: SERVER_START | Details: Server started on port 8080!
+11:6:28 - Type: CLIENT_CONNECTED Details: Client connected!
+11:6:28: Request made11:6:28 - Type: CLIENT_CONNECTED Details: Client connected!
+11:6:28: Request made11:7:17: Type: SERVER_START | Details: Server started on port 8080!
+11:7:20 - Type: CLIENT_CONNECTED Details: Client connected!
+11:7:20: Request made11:7:20 - Type: CLIENT_CONNECTED Details: Client connected!
+11:7:20: Request made11:12:3: Type: SERVER_START | Details: Server started on port 8080!
+11:12:5 - Type: CLIENT_CONNECTED Details: Client connected!
+11:12:5: Request made11:12:5 - Type: CLIENT_CONNECTED Details: Client connected!
+11:12:5: Request made11:13:13: Type: ERROR | Details: There was an error when trying to start a server on port 8080! ERROR: Range [1, 0) out of bounds for length 145
+11:14:2: Type: SERVER_START | Details: Server started on port 8080!
+11:14:4 - Type: CLIENT_CONNECTED Details: Client connected!
+11:14:4: Request made11:14:4 - Type: CLIENT_CONNECTED Details: Client connected!
+11:14:4: Request made12:46:19: Type: SERVER_START | Details: Server started on port 8080!
+12:51:37 - Type: CLIENT_CONNECTED Details: Client connected!
+12:51:37: Request made12:51:37 - Type: CLIENT_CONNECTED Details: Client connected!
+12:51:37: Request made12:51:37: Type: ERROR | Details: There was an error when trying to start a server on port 8080! ERROR: Range [2, 0) out of bounds for length 144
+12:51:49: Type: SERVER_START | Details: Server started on port 8080!
+12:52:1 - Type: CLIENT_CONNECTED Details: Client connected!
+12:52:1: Request made12:52:1 - Type: CLIENT_CONNECTED Details: Client connected!
+12:52:1: Request made12:53:46: Type: ERROR | Details: There was an error when trying to start a server on port 8080! ERROR: Range [2, 0) out of bounds for length 144
+12:54:30: Type: SERVER_START | Details: Server started on port 8080!
+12:54:33 - Type: CLIENT_CONNECTED Details: Client connected!
+12:54:33: Request made12:54:33 - Type: CLIENT_CONNECTED Details: Client connected!
+12:54:33: Request made12:56:20: Type: ERROR | Details: There was an error when trying to start a server on port 8080! ERROR: Range [2, 1) out of bounds for length 144
+12:56:31: Type: SERVER_START | Details: Server started on port 8080!
+12:56:34 - Type: CLIENT_CONNECTED Details: Client connected!
+12:56:34: Request made12:56:34 - Type: CLIENT_CONNECTED Details: Client connected!
+12:56:34: Request made12:57:6: Type: ERROR | Details: There was an error when trying to start a server on port 8080! ERROR: Range [2, 1) out of bounds for length 144
+12:57:14: Type: SERVER_START | Details: Server started on port 8080!
+12:57:16 - Type: CLIENT_CONNECTED Details: Client connected!
+12:57:16: Request made12:57:16 - Type: CLIENT_CONNECTED Details: Client connected!
+12:57:16: Request made12:57:47: Type: ERROR | Details: There was an error when trying to start a server on port 8080! ERROR: Range [2, 1) out of bounds for length 144
+12:57:57: Type: SERVER_START | Details: Server started on port 8080!
+12:57:59 - Type: CLIENT_CONNECTED Details: Client connected!
+12:57:59: Request made12:57:59 - Type: CLIENT_CONNECTED Details: Client connected!
+12:57:59: Request made13:0:20: Type: ERROR | Details: There was an error when trying to start a server on port 8080! ERROR: Range [2, 1) out of bounds for length 143
+13:0:40: Type: SERVER_START | Details: Server started on port 8080!
+13:0:42 - Type: CLIENT_CONNECTED Details: Client connected!
+13:0:42: Request made13:0:42 - Type: CLIENT_CONNECTED Details: Client connected!
+13:0:42: Request made13:2:36: Type: SERVER_START | Details: Server started on port 8080!
+13:2:39 - Type: CLIENT_CONNECTED Details: Client connected!
+13:2:39: Request made13:2:39 - Type: CLIENT_CONNECTED Details: Client connected!
+13:2:39: Request made13:7:22: Type: SERVER_START | Details: Server started on port 8080!
+13:7:25 - Type: CLIENT_CONNECTED Details: Client connected!
+13:7:25: Request made13:7:25 - Type: CLIENT_CONNECTED Details: Client connected!
+13:7:25: Request made13:8:5: Type: SERVER_START | Details: Server started on port 8080!
+13:8:7 - Type: CLIENT_CONNECTED Details: Client connected!
+13:8:7: Request made13:8:7 - Type: CLIENT_CONNECTED Details: Client connected!
+13:8:7: Request made11:41:6: Type: SERVER_START | Details: Server started on port 8080!
+11:41:18 - Type: CLIENT_CONNECTED Details: Client connected!
+11:41:18: Request made11:41:18 - Type: CLIENT_CONNECTED Details: Client connected!
+11:41:18: Request made11:48:25: Type: SERVER_START | Details: Server started on port 8080!
+11:48:29 - Type: CLIENT_CONNECTED Details: Client connected!
+11:48:29: Request made11:48:29 - Type: CLIENT_CONNECTED Details: Client connected!
+11:48:29: Request made11:55:4: Type: SERVER_START | Details: Server started on port 8080!
+11:55:9 - Type: CLIENT_CONNECTED Details: Client connected!
+11:55:9: Request made11:55:9 - Type: CLIENT_CONNECTED Details: Client connected!
+11:55:9: Request made12:15:57: Type: SERVER_START | Details: Server started on port 8080!
+12:16:3 - Type: CLIENT_CONNECTED Details: Client connected!
+12:16:3: Request made12:16:3 - Type: CLIENT_CONNECTED Details: Client connected!
+12:16:3: Request made13:53:2: Type: SERVER_START | Details: Server started on port 8080!
+13:53:13 - Type: CLIENT_CONNECTED Details: Client connected!
+13:53:13: Request made13:53:13 - Type: CLIENT_CONNECTED Details: Client connected!
+13:53:13: Request made13:53:51: Type: SERVER_START | Details: Server started on port 8080!
+13:53:54 - Type: CLIENT_CONNECTED Details: Client connected!
+13:53:54: Request made13:53:54 - Type: CLIENT_CONNECTED Details: Client connected!
+13:53:54: Request made13:55:25: Type: SERVER_START | Details: Server started on port 8080!
+13:55:27 - Type: CLIENT_CONNECTED Details: Client connected!
+13:55:27: Request made13:55:27 - Type: CLIENT_CONNECTED Details: Client connected!
+13:55:27: Request made13:56:4: Type: SERVER_START | Details: Server started on port 8080!
+13:56:6 - Type: CLIENT_CONNECTED Details: Client connected!
+13:56:7: Request made13:56:7 - Type: CLIENT_CONNECTED Details: Client connected!
+13:56:7: Request made13:57:18 - Type: CLIENT_CONNECTED Details: Client connected!
+13:57:18: Request made13:57:18 - Type: CLIENT_CONNECTED Details: Client connected!
+13:57:18: Request made13:57:34: Type: SERVER_START | Details: Server started on port 8080!
+13:57:38 - Type: CLIENT_CONNECTED Details: Client connected!
+13:57:38: Request made13:57:38 - Type: CLIENT_CONNECTED Details: Client connected!
+13:57:38: Request made13:59:26: Type: SERVER_START | Details: Server started on port 8080!
+13:59:29 - Type: CLIENT_CONNECTED Details: Client connected!
+13:59:29: Request made13:59:29 - Type: CLIENT_CONNECTED Details: Client connected!
+13:59:29: Request made14:0:9: Type: SERVER_START | Details: Server started on port 8080!
+14:0:11 - Type: CLIENT_CONNECTED Details: Client connected!
+14:0:11: Request made14:0:11 - Type: CLIENT_CONNECTED Details: Client connected!
+14:0:11: Request made14:1:18: Type: SERVER_START | Details: Server started on port 8080!
+14:1:20 - Type: CLIENT_CONNECTED Details: Client connected!
+14:1:20: Request made14:1:20 - Type: CLIENT_CONNECTED Details: Client connected!
+14:1:20: Request made14:13:35: Type: SERVER_START | Details: Server started on port 8080!
+14:13:37 - Type: CLIENT_CONNECTED Details: Client connected!
+14:13:37: Request made14:13:37 - Type: CLIENT_CONNECTED Details: Client connected!
+14:13:37: Request made15:13:25: Type: SERVER_START | Details: Server started on port 8080!
+15:13:29 - Type: CLIENT_CONNECTED Details: Client connected!
+15:13:29: Request made15:13:29 - Type: CLIENT_CONNECTED Details: Client connected!
+15:13:29: Request made15:13:29: Type: ERROR | Details: There was an error when trying to start a server on port 8080! ERROR: java.lang.StringIndexOutOfBoundsException: Index 0 out of bounds for length 0
+15:13:56: Type: SERVER_START | Details: Server started on port 8080!
+15:14:10 - Type: CLIENT_CONNECTED Details: Client connected!
+15:14:10: Request made15:14:11 - Type: CLIENT_CONNECTED Details: Client connected!
+15:14:11: Request made15:14:37: Type: ERROR | Details: There was an error when trying to start a server on port 8080! ERROR: java.lang.StringIndexOutOfBoundsException: Index 0 out of bounds for length 0
+15:14:47: Type: SERVER_START | Details: Server started on port 8080!
+15:14:50 - Type: CLIENT_CONNECTED Details: Client connected!
+15:14:50: Request made15:14:50 - Type: CLIENT_CONNECTED Details: Client connected!
+15:14:50: Request made15:16:2: Type: ERROR | Details: There was an error when trying to start a server on port 8080! ERROR: java.lang.StringIndexOutOfBoundsException: Index 0 out of bounds for length 0
+14:22:22: Type: SERVER_START | Details: Server started on port 8080!
+14:22:29 - Type: CLIENT_CONNECTED Details: Client connected!
+14:22:29: Request made14:22:29 - Type: CLIENT_CONNECTED Details: Client connected!
+14:22:29: Request made14:22:58: Type: ERROR | Details: There was an error when trying to start a server on port 8080! ERROR: java.lang.StringIndexOutOfBoundsException: Index -1 out of bounds for length 143
+14:23:31: Type: SERVER_START | Details: Server started on port 8080!
+14:23:39 - Type: CLIENT_CONNECTED Details: Client connected!
+14:23:39: Request made14:23:39 - Type: CLIENT_CONNECTED Details: Client connected!
+14:23:39: Request made14:25:53: Type: ERROR | Details: There was an error when trying to start a server on port 8080! ERROR: java.lang.StringIndexOutOfBoundsException: Index -1 out of bounds for length 143
+14:27:41: Type: SERVER_START | Details: Server started on port 8080!
+14:27:43 - Type: CLIENT_CONNECTED Details: Client connected!
+14:27:43: Request made14:27:43 - Type: CLIENT_CONNECTED Details: Client connected!
+14:27:43: Request made14:29:52: Type: ERROR | Details: There was an error when trying to start a server on port 8080! ERROR: java.lang.StringIndexOutOfBoundsException: Range [-1, 0) out of bounds for length 143
+14:30:10: Type: SERVER_START | Details: Server started on port 8080!
+14:30:15 - Type: CLIENT_CONNECTED Details: Client connected!
+14:30:15: Request made14:30:15 - Type: CLIENT_CONNECTED Details: Client connected!
+14:30:15: Request made14:31:32: Type: ERROR | Details: There was an error when trying to start a server on port 8080! ERROR: java.lang.StringIndexOutOfBoundsException: Range [-1, 0) out of bounds for length 143
+14:32:1: Type: SERVER_START | Details: Server started on port 8080!
+14:32:5 - Type: CLIENT_CONNECTED Details: Client connected!
+14:32:5: Request made14:32:5 - Type: CLIENT_CONNECTED Details: Client connected!
+14:32:5: Request made14:32:50: Type: ERROR | Details: There was an error when trying to start a server on port 8080! ERROR: java.lang.StringIndexOutOfBoundsException: Range [-1, 0) out of bounds for length 142
+14:33:57: Type: SERVER_START | Details: Server started on port 8080!
+14:34:2 - Type: CLIENT_CONNECTED Details: Client connected!
+14:34:2: Request made14:34:2 - Type: CLIENT_CONNECTED Details: Client connected!
+14:34:2: Request made14:34:27: Type: ERROR | Details: There was an error when trying to start a server on port 8080! ERROR: java.lang.StringIndexOutOfBoundsException: Range [-1, 0) out of bounds for length 142
+14:35:19: Type: SERVER_START | Details: Server started on port 8080!
+14:35:25 - Type: CLIENT_CONNECTED Details: Client connected!
+14:35:25: Request made14:35:25 - Type: CLIENT_CONNECTED Details: Client connected!
+14:35:25: Request made14:35:51: Type: ERROR | Details: There was an error when trying to start a server on port 8080! ERROR: java.lang.StringIndexOutOfBoundsException: Range [-1, 0) out of bounds for length 142
+14:38:9: Type: SERVER_START | Details: Server started on port 8080!
+14:38:12 - Type: CLIENT_CONNECTED Details: Client connected!
+14:38:12: Request made14:38:12 - Type: CLIENT_CONNECTED Details: Client connected!
+14:38:12: Request made14:41:36: Type: ERROR | Details: There was an error when trying to start a server on port 8080! ERROR: java.lang.StringIndexOutOfBoundsException: Index 0 out of bounds for length 0
+14:45:31: Type: SERVER_START | Details: Server started on port 8080!
+14:45:36 - Type: CLIENT_CONNECTED Details: Client connected!
+14:45:36: Request made14:45:36 - Type: CLIENT_CONNECTED Details: Client connected!
+14:45:36: Request made14:45:46: Type: ERROR | Details: There was an error when trying to start a server on port 8080! ERROR: Address already in use: bind
+14:45:52: Type: ERROR | Details: There was an error when trying to start a server on port 8080! ERROR: java.lang.StringIndexOutOfBoundsException: Index 0 out of bounds for length 0
+14:51:12: Type: SERVER_START | Details: Server started on port 8080!
+14:52:6 - Type: CLIENT_CONNECTED Details: Client connected!
+14:52:6: Request made14:52:6 - Type: CLIENT_CONNECTED Details: Client connected!
+14:52:6: Request made14:55:2: Type: SERVER_START | Details: Server started on port 8080!
+14:55:8 - Type: CLIENT_CONNECTED Details: Client connected!
+14:55:8: Request made14:55:8 - Type: CLIENT_CONNECTED Details: Client connected!
+14:55:8: Request made14:55:57: Type: ERROR | Details: There was an error when trying to start a server on port 8080! ERROR: Address already in use: bind
+14:56:19: Type: ERROR | Details: There was an error when trying to start a server on port 8080! ERROR: java.lang.StringIndexOutOfBoundsException: Index 0 out of bounds for length 0
+14:59:16: Type: SERVER_START | Details: Server started on port 8082!
+14:59:32 - Type: CLIENT_CONNECTED Details: Client connected!
+14:59:32: Request made14:59:33 - Type: CLIENT_CONNECTED Details: Client connected!
+14:59:33: Request made15:7:5: Type: ERROR | Details: There was an error when trying to start a server on port 8082! ERROR: java.lang.StringIndexOutOfBoundsException: Index 0 out of bounds for length 0
+15:7:12: Type: SERVER_START | Details: Server started on port 8082!
+15:7:14 - Type: CLIENT_CONNECTED Details: Client connected!
+15:7:14: Request made15:7:14 - Type: CLIENT_CONNECTED Details: Client connected!
+15:7:14: Request made15:7:45: Type: ERROR | Details: There was an error when trying to start a server on port 8082! ERROR: java.lang.StringIndexOutOfBoundsException: Index 0 out of bounds for length 0
+15:8:1: Type: SERVER_START | Details: Server started on port 8082!
+15:8:2 - Type: CLIENT_CONNECTED Details: Client connected!
+15:8:2: Request made15:8:2 - Type: CLIENT_CONNECTED Details: Client connected!
+15:8:2: Request made15:9:48: Type: ERROR | Details: There was an error when trying to start a server on port 8082! ERROR: java.lang.StringIndexOutOfBoundsException: Index 0 out of bounds for length 0
+15:10:36: Type: SERVER_START | Details: Server started on port 8082!
+15:10:38 - Type: CLIENT_CONNECTED Details: Client connected!
+15:10:38: Request made15:10:38 - Type: CLIENT_CONNECTED Details: Client connected!
+15:10:38: Request made15:11:49: Type: ERROR | Details: There was an error when trying to start a server on port 8082! ERROR: java.lang.StringIndexOutOfBoundsException: Index 0 out of bounds for length 0
+15:11:58: Type: SERVER_START | Details: Server started on port 8082!
+15:12:0 - Type: CLIENT_CONNECTED Details: Client connected!
+15:12:0: Request made15:12:0 - Type: CLIENT_CONNECTED Details: Client connected!
+15:12:0: Request made15:18:45: Type: ERROR | Details: There was an error when trying to start a server on port 8082! ERROR: java.lang.StringIndexOutOfBoundsException: Index 0 out of bounds for length 0
+15:18:50: Type: SERVER_START | Details: Server started on port 8082!
+15:18:52 - Type: CLIENT_CONNECTED Details: Client connected!
+15:18:52: Request made15:18:52 - Type: CLIENT_CONNECTED Details: Client connected!
+15:18:52: Request made15:24:10: Type: ERROR | Details: There was an error when trying to start a server on port 8082! ERROR: java.lang.StringIndexOutOfBoundsException: Index 0 out of bounds for length 0
+15:29:15: Type: SERVER_START | Details: Server started on port 8082!
+15:29:17 - Type: CLIENT_CONNECTED Details: Client connected!
+15:29:17: Request made15:29:17 - Type: CLIENT_CONNECTED Details: Client connected!
+15:29:17: Request made15:29:40: Type: ERROR | Details: There was an error when trying to start a server on port 8082! ERROR: java.lang.StringIndexOutOfBoundsException: Index 0 out of bounds for length 0
+15:29:53: Type: SERVER_START | Details: Server started on port 8082!
+15:29:56 - Type: CLIENT_CONNECTED Details: Client connected!
+15:29:56: Request made15:29:56 - Type: CLIENT_CONNECTED Details: Client connected!
+15:29:56: Request made15:32:4: Type: ERROR | Details: There was an error when trying to start a server on port 8082! ERROR: java.lang.StringIndexOutOfBoundsException: Index 0 out of bounds for length 0
+15:33:36: Type: SERVER_START | Details: Server started on port 8082!
+15:34:19: Type: SERVER_START | Details: Server started on port 8082!
+9:25:54: Type: SERVER_START | Details: Server started on port 8082!
+9:26:50: Type: SERVER_START | Details: Server started on port 8082!
+9:26:54 - Type: CLIENT_CONNECTED Details: Client connected!
+9:26:54: Request made9:26:54 - Type: CLIENT_CONNECTED Details: Client connected!
+9:26:54: Request made9:35:24: Type: ERROR | Details: There was an error when trying to start a server on port 8082! ERROR: java.lang.StringIndexOutOfBoundsException: Index 0 out of bounds for length 0
+9:35:42: Type: SERVER_START | Details: Server started on port 8082!
+9:35:50 - Type: CLIENT_CONNECTED Details: Client connected!
+9:35:50: Request made9:35:50 - Type: CLIENT_CONNECTED Details: Client connected!
+9:35:50: Request made9:40:56: Type: ERROR | Details: There was an error when trying to start a server on port 8082! ERROR: java.lang.StringIndexOutOfBoundsException: Index 0 out of bounds for length 0
+9:43:28: Type: SERVER_START | Details: Server started on port 8082!
+9:43:32 - Type: CLIENT_CONNECTED Details: Client connected!
+9:43:32: Request made9:43:32 - Type: CLIENT_CONNECTED Details: Client connected!
+9:43:32: Request made9:56:58: Type: SERVER_START | Details: Server started on port 8082!
+10:10:35 - Type: CLIENT_CONNECTED Details: Client connected!
+10:10:35: Request made10:10:35 - Type: CLIENT_CONNECTED Details: Client connected!
+10:10:35: Request made10:10:51 - Type: CLIENT_CONNECTED Details: Client connected!
+10:10:51: Request made10:10:51 - Type: CLIENT_CONNECTED Details: Client connected!
+10:10:51: Request made10:28:14: Type: SERVER_START | Details: Server started on port 8082!
+10:28:17 - Type: CLIENT_CONNECTED Details: Client connected!
+10:28:17: Request made10:28:17 - Type: CLIENT_CONNECTED Details: Client connected!
+10:28:17: Request made10:28:17: Type: ERROR | Details: There was an error when trying to start a server on port 8082! ERROR: java.lang.IllegalArgumentException: Can not set java.lang.String field test_classes.Person.name to java.lang.Class
+10:30:19: Type: SERVER_START | Details: Server started on port 8082!
+10:30:27 - Type: CLIENT_CONNECTED Details: Client connected!
+10:30:27: Request made10:30:27 - Type: CLIENT_CONNECTED Details: Client connected!
+10:30:27: Request made10:32:0: Type: ERROR | Details: There was an error when trying to start a server on port 8082! ERROR: java.lang.IllegalArgumentException: Can not set java.lang.String field test_classes.Person.name to java.lang.Class
+10:34:5: Type: SERVER_START | Details: Server started on port 8082!
+10:34:18 - Type: CLIENT_CONNECTED Details: Client connected!
+10:34:18: Request made10:34:18 - Type: CLIENT_CONNECTED Details: Client connected!
+10:34:18: Request made10:34:25: Type: ERROR | Details: There was an error when trying to start a server on port 8082! ERROR: java.lang.IllegalArgumentException: Can not set java.lang.String field test_classes.Person.name to java.lang.Class
+10:34:37: Type: SERVER_START | Details: Server started on port 8082!
+10:34:41 - Type: CLIENT_CONNECTED Details: Client connected!
+10:34:41: Request made10:34:41 - Type: CLIENT_CONNECTED Details: Client connected!
+10:34:41: Request made10:39:32: Type: ERROR | Details: There was an error when trying to start a server on port 8082! ERROR: java.lang.IllegalArgumentException: Can not set java.lang.String field test_classes.Person.name to java.lang.Class
+10:39:35: Type: SERVER_START | Details: Server started on port 8082!
+10:39:38 - Type: CLIENT_CONNECTED Details: Client connected!
+10:39:38: Request made10:39:38 - Type: CLIENT_CONNECTED Details: Client connected!
+10:39:38: Request made10:40:36: Type: ERROR | Details: There was an error when trying to start a server on port 8082! ERROR: java.lang.IllegalArgumentException: Can not set java.lang.String field test_classes.Person.name to java.lang.Class
+10:41:29: Type: SERVER_START | Details: Server started on port 8082!
+10:41:32 - Type: CLIENT_CONNECTED Details: Client connected!
+10:41:32: Request made10:41:32 - Type: CLIENT_CONNECTED Details: Client connected!
+10:41:32: Request made10:42:31: Type: ERROR | Details: There was an error when trying to start a server on port 8082! ERROR: java.lang.IllegalArgumentException: Can not set java.util.List field test_classes.Person.interests to java.lang.String
+10:58:30: Type: SERVER_START | Details: Server started on port 8082!
+10:58:44 - Type: CLIENT_CONNECTED Details: Client connected!
+10:58:44: Request made10:58:44 - Type: CLIENT_CONNECTED Details: Client connected!
+10:58:44: Request made10:59:19 - Type: CLIENT_CONNECTED Details: Client connected!
+10:59:19: Request made10:59:19 - Type: CLIENT_CONNECTED Details: Client connected!
+10:59:19: Request made10:59:40 - Type: CLIENT_CONNECTED Details: Client connected!
+10:59:40: Request made10:59:40 - Type: CLIENT_CONNECTED Details: Client connected!
+10:59:40: Request made11:3:9: Type: SERVER_START | Details: Server started on port 8082!
+11:3:11 - Type: CLIENT_CONNECTED Details: Client connected!
+11:3:12: Request made11:3:12 - Type: CLIENT_CONNECTED Details: Client connected!
+11:3:12: Request made11:3:37: Type: SERVER_START | Details: Server started on port 8082!
+11:3:40 - Type: CLIENT_CONNECTED Details: Client connected!
+11:3:40: Request made11:3:40 - Type: CLIENT_CONNECTED Details: Client connected!
+11:3:40: Request made10:17:57: Type: SERVER_START | Details: Server started on port 8082!
+10:18:3 - Type: CLIENT_CONNECTED Details: Client connected!
+10:18:3: Request made10:18:3 - Type: CLIENT_CONNECTED Details: Client connected!
+10:18:3: Request made

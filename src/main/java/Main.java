@@ -1,12 +1,15 @@
 import models.RequestMethod;
 import server.config.CORSConfig;
 import server.Server;
+import test_classes.Person;
+import utility.json.JSON;
 
 import java.util.Arrays;
+import java.util.List;
 
 public class Main {
     public static void main( String[] args ) throws Exception {
-        Server server = new Server(8080, false);
+        Server server = new Server(8082, false);
 
         server.corsConfig.setAllowOrigins(Arrays.asList("http://localhost:8080", "http://localhost:3000"));
         server.corsConfig.setAllowMethods(Arrays.asList("GET", "POST", "PUT", "DELETE"));
@@ -21,6 +24,10 @@ public class Main {
                 Arrays.asList("Content-Type"));
 
         server.addRoute("/test", RequestMethod.POST, config, ((req, res) -> {
+            List<StringBuilder> bodyParams = JSON.toListOfJSONObjects(req.body);
+            for(StringBuilder param : bodyParams) {
+                JSON.toObject(param, Person.class);
+            }
             return res.send("200 OK", "index.html");
         }));
 
