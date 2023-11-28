@@ -2,10 +2,16 @@ package server.routing;
 
 import exceptions.RoutingException;
 import models.ParamKey;
+import models.RoutableFromBody;
 import models.RoutableFromParams;
+import utility.json.JSON;
+import utility.json.object.JSONObject;
+import utility.json.JSONUtils;
+import utility.json.types.JSONRoot;
 
-import java.lang.reflect.Field;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Map;
 
 public class ParamsRouter {
@@ -35,7 +41,23 @@ public class ParamsRouter {
         }
     }
 
-    public static <T> T routeFromBody(Map<String, String> params, Class<T> object) {
-        return null;
+    public static <T> T routeFromBody(String body, Class<T> object) throws RoutingException {
+        try {
+            T instance = object.newInstance();
+            if(instance.getClass().isAnnotationPresent(RoutableFromBody.class)) {
+                if(JSONUtils.isArray(body)) {
+                    List<StringBuilder> objects = JSON.toListOfObjects(body);
+                    List<JSONObject> instanceObjects = new ArrayList<>();
+                    for (StringBuilder jsonStringObject : objects) {
+                        instanceObjects.add(JSON.toJSONObject(jsonStringObject, JSONRoot.class));
+                    }
+                }
+            } else {
+                throw new RoutingException("Class is not routable");
+            }
+            return instance;
+        } catch (Exception e) {
+            throw new RoutingException("Could not instantiate object");
+        }
     }
 }

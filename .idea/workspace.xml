@@ -5,20 +5,18 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a5281412-b623-4d1d-80f0-0256ec10c029" name="Changes" comment="workspace update">
-      <change afterPath="$PROJECT_DIR$/src/main/java/models/RoutableFromBody.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/utility/Tuple.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/utility/json/JSONField.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/utility/json/JSONFieldType.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/utility/json/JSONObject.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/utility/json/JSONUtils.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/utility/json/object/JSONObject.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/utility/json/types/JSONChild.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/utility/json/types/JSONRoot.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/server_logs.txt" beforeDir="false" afterPath="$PROJECT_DIR$/server_logs.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/server/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/server/Server.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/test_classes/Person.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/test_classes/Person.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/server/routing/ParamsRouter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/server/routing/ParamsRouter.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/utility/json/JSON.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/utility/json/JSON.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/utility/json/nodes/ChildNode.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/utility/json/nodes/Node.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/utility/json/nodes/ParentNode.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/utility/json/JSONField.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/utility/json/object/JSONField.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/utility/json/JSONFieldType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/utility/json/object/JSONFieldType.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/utility/json/JSONObject.java" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -31,8 +29,8 @@
         <option value="JavaScript File" />
         <option value="HTML File" />
         <option value="Enum" />
-        <option value="Class" />
         <option value="Interface" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -87,6 +85,7 @@
       <workItem from="1699958145333" duration="12695000" />
       <workItem from="1700056156396" duration="11183000" />
       <workItem from="1700728047077" duration="1448000" />
+      <workItem from="1701168207657" duration="8522000" />
     </task>
     <task id="LOCAL-00001" summary="Added logger">
       <option name="closed" value="true" />
@@ -172,5 +171,16 @@
     <MESSAGE value="CORS now works, can add custom CORS to routes or apply server specific CORS for all routes" />
     <MESSAGE value="workspace update" />
     <option name="LAST_COMMIT_MESSAGE" value="workspace update" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/utility/json/JSON.java</url>
+          <line>73</line>
+          <option name="timeStamp" value="4" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

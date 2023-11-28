@@ -1,99 +1,91 @@
 package utility.json;
 
-import models.ParamKey;
-import models.RoutableFromBody;
-import test_classes.Person;
 import utility.Tuple;
+import utility.json.object.JSONField;
+import utility.json.object.JSONFieldType;
+import utility.json.object.JSONObject;
+import utility.json.types.JSONChild;
+import utility.json.types.JSONRoot;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
 
 public class JSON {
-    public static <T> List<StringBuilder> toListOfJSONObjects(final String json) {
+    public static <T> List<StringBuilder> toListOfObjects(final String json) {
         StringBuilder jsonBuilder = new StringBuilder(json);
         List<StringBuilder> objects = new ArrayList<>();
-        if(isArray(jsonBuilder) != -1) {
+        if(JSONUtils.isArray(json)) {
             removeArrayBrackets(jsonBuilder);
             objects = getObjectsInJsonArray(jsonBuilder);
         }
         return objects;
     }
 
-    public static <T> T toObject(final StringBuilder jsonObject, final Class<T> object) throws InstantiationException, IllegalAccessException {
-        removeObjectBrackets(jsonObject);
-        List<JSONField> jsonFields = JSONObjectToListOfFields(jsonObject);
-        T instance;
-        if(object.isAnnotationPresent(RoutableFromBody.class)) {
-            instance = object.newInstance();
-            Arrays.stream(object.getDeclaredFields())
-                    .filter(field -> field.isAnnotationPresent(ParamKey.class))
-                    .forEach(field -> {
-                        ParamKey paramKey = field.getAnnotation(ParamKey.class);
-                        String key = paramKey.field();
-                        jsonFields.stream()
-                                .filter(jsonField -> jsonField.name.equals(key))
-                                .findFirst()
-                                .ifPresent(jsonField -> {
-                                    try {
-                                        System.out.println(field.getType());
-                                        System.out.println("Petar");
-                                        field.set(instance, jsonField.field);
-                                    } catch (Exception e) {
-                                        e.printStackTrace();
-                                    }
-                                });
-                    });
-            System.out.println(instance);
-        } else {
-            instance = null;
-            System.out.println("Class is not routable");
-        }
-        return null;
+//    public static <T> T toListOfJSONObjects(final List<StringBuilder> objects, final Class<T> object) throws InstantiationException, IllegalAccessException {
+//        List<JSONField> jsonFields = JSONObjectToListOfFields(removeObjectBrackets(objects));
+//
+//        T instance;
+//        if(object.isAnnotationPresent(RoutableFromBody.class)) {
+//            instance = object.newInstance();
+//            Arrays.stream(object.getDeclaredFields())
+//                    .filter(field -> field.isAnnotationPresent(ParamKey.class))
+//                    .forEach(field -> {
+//                        ParamKey paramKey = field.getAnnotation(ParamKey.class);
+//                        String key = paramKey.field();
+//                        jsonFields.stream()
+//                                .filter(jsonField -> jsonField.name.equals(key))
+//                                .findFirst()
+//                                .ifPresent(jsonField -> {
+//                                    try {
+//                                        field.set(instance, parseJSONFieldTypeBasedOnClassFieldType(field, jsonField.field));
+//                                    } catch (Exception e) {
+//                                        System.out.println("PETAR");
+//                                        e.printStackTrace();
+//                                    }
+//                                });
+//                    });
+//            return instance;
+//        } else {
+//            instance = null;
+//            System.out.println("Class is not routable");
+//        }
+//        return null;
+//    }
+
+    protected static <T> Object parseJSONFieldTypeBasedOnClassFieldType(final Field field, final String value) {
+        if(field.getType().equals(String.class)) return value;
+        if(field.getType().equals(Integer.class)) return Integer.parseInt(value);
+        if(field.getType().equals(Double.class)) return Double.parseDouble(value);
+        if(field.getType().equals(List.class)) return Arrays.asList(value.split(","));
+        return value;
     }
 
-    private static List<JSONField> JSONObjectToListOfFields(final StringBuilder object) {
-        List<JSONField> jsonFields = new ArrayList<>();
-        while (getFieldLengthAndType(object) != null) {
-            Tuple<String, String> parsedField = null;
-            Tuple<Integer, JSONFieldType> fieldLengthAndType = getFieldLengthAndType(object);
-            String field = object.substring(0, fieldLengthAndType.first);
-            if(fieldLengthAndType.second == JSONFieldType.OBJECT) {
-                String[] fieldParts = field.split(":", 2);
-                parsedField = new Tuple<String, String>(removeApostrophe(fieldParts[0].trim()), fieldParts[1].trim().substring(1, fieldParts[1].trim().length() - 1));
-                jsonFields.add(new JSONField(parsedField.first, parsedField.second, fieldLengthAndType.second));
-            } else {
-                parsedField = toKeyAndValue(field);
-                jsonFields.add(new JSONField(parsedField.first, parsedField.second, fieldLengthAndType.second));
+    public static <T> JSONObject toJSONObject(final StringBuilder object, final Class<T> type) {
+        try {
+            JSONUtils.removeObjectBrackets(object);
+            JSONObject jsonObject = new JSONObject(type);
+            while (JSONUtils.getFieldLengthAndType(object) != null) {
+                Tuple<String, String> parsedField = null;
+                Tuple<Integer, JSONFieldType> fieldLengthAndType = JSONUtils.getFieldLengthAndType(object);
+                String field = object.substring(0, fieldLengthAndType.first);
+                if (fieldLengthAndType.second == JSONFieldType.OBJECT) {
+                    String[] fieldParts = field.split(":", 2);
+                    parsedField = new Tuple<String, String>(removeApostrophe(fieldParts[0].trim()), fieldParts[1].trim().substring(1, fieldParts[1].trim().length() - 1));
+//                    JSONObject lala = toJSONObject(new StringBuilder(parsedField.second), JSONChild.class);
+//                    jsonObject.addObject(toJSONObject(new StringBuilder(parsedField.second), JSONChild.class));
+                } else {
+                    parsedField = toKeyAndValue(field);
+                    jsonObject.addField(new JSONField(parsedField.first, parsedField.second, fieldLengthAndType.second));
+                }
+                object.delete(0, fieldLengthAndType.first + 1);
             }
-            object.delete(0, fieldLengthAndType.first + 1);
+            return jsonObject;
+        } catch (Exception e) {
+            System.out.println("Erorr: " + e.getMessage());
+            return null;
         }
-        return jsonFields;
-    }
-
-    private static Tuple getFieldLengthAndType(final StringBuilder object) {
-        if (object.toString().equals("")) return null;
-        int objectSplitPosition = object.indexOf(":");
-        if(objectSplitPosition == -1) return null;
-        objectSplitPosition++;
-        if(object.charAt(objectSplitPosition) == '\"') {
-            return new Tuple<Integer, JSONFieldType>(object.indexOf("\"", objectSplitPosition + 1) + 1, JSONFieldType.STRING);
-        }
-        if(object.charAt(objectSplitPosition) == '[') {
-            return new Tuple<Integer, JSONFieldType>(object.indexOf("]", objectSplitPosition + 1) + 1, JSONFieldType.ARRAY);
-        }
-        if(object.charAt(objectSplitPosition) == '{') {
-            return new Tuple<Integer, JSONFieldType>(object.indexOf("}", objectSplitPosition + 1) + 1, JSONFieldType.OBJECT);
-        }
-        if(Character.isDigit(object.charAt(objectSplitPosition))) {
-            if(object.substring(objectSplitPosition).contains(".")) {
-                return new Tuple<Integer, JSONFieldType>(object.indexOf(",", objectSplitPosition + 1), JSONFieldType.DOUBLE);
-            }
-            return new Tuple<Integer, JSONFieldType>(object.indexOf(",", objectSplitPosition + 1) + 1, JSONFieldType.INTEGER);
-        }
-        return null;
     }
 
     private static Tuple toKeyAndValue(final String field) {
@@ -104,16 +96,6 @@ public class JSON {
     private static String removeApostrophe(final String field) {
         if(field.contains("\"")) return field.substring(1, field.length() - 1);
         return field;
-    }
-
-    private static int isArray(StringBuilder json) {
-        return json.indexOf("[");
-    }
-
-    private static StringBuilder removeObjectBrackets(final StringBuilder object) {
-        object.deleteCharAt(object.indexOf("{"));
-        object.deleteCharAt(object.lastIndexOf("}"));
-        return object;
     }
 
     private static void removeArrayBrackets(StringBuilder json) {
