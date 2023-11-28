@@ -476,4 +476,138 @@
 11:3:40: Request made10:17:57: Type: SERVER_START | Details: Server started on port 8082!
 10:18:3 - Type: CLIENT_CONNECTED Details: Client connected!
 10:18:3: Request made10:18:3 - Type: CLIENT_CONNECTED Details: Client connected!
-10:18:3: Request made
+10:18:3: Request made10:46:14: Type: SERVER_START | Details: Server started on port 8082!
+10:46:24 - Type: CLIENT_CONNECTED Details: Client connected!
+10:46:24: Request made10:46:24 - Type: CLIENT_CONNECTED Details: Client connected!
+10:46:24: Request made10:47:2: Type: SERVER_START | Details: Server started on port 8082!
+10:47:4 - Type: CLIENT_CONNECTED Details: Client connected!
+10:47:4: Request made10:47:4 - Type: CLIENT_CONNECTED Details: Client connected!
+10:47:4: Request made10:53:15: Type: SERVER_START | Details: Server started on port 8082!
+10:53:17 - Type: CLIENT_CONNECTED Details: Client connected!
+10:53:17: Request made10:53:17 - Type: CLIENT_CONNECTED Details: Client connected!
+10:53:17: Request made11:3:11: Type: SERVER_START | Details: Server started on port 8082!
+11:3:14 - Type: CLIENT_CONNECTED Details: Client connected!
+11:3:14: Request made11:3:14 - Type: CLIENT_CONNECTED Details: Client connected!
+11:3:14: Request made11:3:31: Type: SERVER_START | Details: Server started on port 8082!
+11:3:33 - Type: CLIENT_CONNECTED Details: Client connected!
+11:3:33: Request made11:3:33 - Type: CLIENT_CONNECTED Details: Client connected!
+11:3:33: Request made11:3:46 - Type: CLIENT_CONNECTED Details: Client connected!
+11:3:46: Request made11:3:46 - Type: CLIENT_CONNECTED Details: Client connected!
+11:3:46: Request made11:3:55: Type: SERVER_START | Details: Server started on port 8082!
+11:3:59 - Type: CLIENT_CONNECTED Details: Client connected!
+11:3:59: Request made11:3:59 - Type: CLIENT_CONNECTED Details: Client connected!
+11:3:59: Request made11:4:45 - Type: CLIENT_CONNECTED Details: Client connected!
+11:4:45: Request made11:4:45 - Type: CLIENT_CONNECTED Details: Client connected!
+11:4:45: Request made11:5:3: Type: SERVER_START | Details: Server started on port 8082!
+11:5:7 - Type: CLIENT_CONNECTED Details: Client connected!
+11:5:7: Request made11:5:7 - Type: CLIENT_CONNECTED Details: Client connected!
+11:5:7: Request made11:6:37 - Type: CLIENT_CONNECTED Details: Client connected!
+11:6:37: Request made11:6:37 - Type: CLIENT_CONNECTED Details: Client connected!
+11:6:37: Request made11:9:1 - Type: CLIENT_CONNECTED Details: Client connected!
+11:9:1: Request made11:9:1 - Type: CLIENT_CONNECTED Details: Client connected!
+11:9:1: Request made11:12:32: Type: SERVER_START | Details: Server started on port 8082!
+11:12:34 - Type: CLIENT_CONNECTED Details: Client connected!
+11:12:34: Request made11:12:34 - Type: CLIENT_CONNECTED Details: Client connected!
+11:12:34: Request made11:13:16 - Type: CLIENT_CONNECTED Details: Client connected!
+11:13:16: Request made11:13:16 - Type: CLIENT_CONNECTED Details: Client connected!
+11:13:17: Request made11:14:22 - Type: CLIENT_CONNECTED Details: Client connected!
+11:14:22: Request made11:14:22 - Type: CLIENT_CONNECTED Details: Client connected!
+11:14:22: Request made11:15:35 - Type: CLIENT_CONNECTED Details: Client connected!
+11:15:35: Request made11:15:35 - Type: CLIENT_CONNECTED Details: Client connected!
+11:15:35: Request made11:17:3 - Type: CLIENT_CONNECTED Details: Client connected!
+11:17:3: Request made11:17:3 - Type: CLIENT_CONNECTED Details: Client connected!
+11:17:3: Request made11:18:10 - Type: CLIENT_CONNECTED Details: Client connected!
+11:18:10: Request made11:18:10 - Type: CLIENT_CONNECTED Details: Client connected!
+11:18:10: Request made11:20:23: Type: SERVER_START | Details: Server started on port 8082!
+11:20:25 - Type: CLIENT_CONNECTED Details: Client connected!
+11:20:26: Request made11:20:26 - Type: CLIENT_CONNECTED Details: Client connected!
+11:20:26: Request made11:20:26: Type: ERROR | Details: There was an error when trying to start a server on port 8082! ERROR: java.lang.StringIndexOutOfBoundsException: Index -1 out of bounds for length 0
+11:23:34: Type: SERVER_START | Details: Server started on port 8082!
+11:25:30 - Type: CLIENT_CONNECTED Details: Client connected!
+11:25:30: Request made11:25:30 - Type: CLIENT_CONNECTED Details: Client connected!
+11:25:30: Request made11:25:30: Type: ERROR | Details: There was an error when trying to start a server on port 8082! ERROR: java.lang.StringIndexOutOfBoundsException: Index -1 out of bounds for length 0
+11:26:16: Type: SERVER_START | Details: Server started on port 8082!
+11:26:19 - Type: CLIENT_CONNECTED Details: Client connected!
+11:26:19: Request made11:26:19 - Type: CLIENT_CONNECTED Details: Client connected!
+11:26:19: Request made11:26:24 - Type: CLIENT_CONNECTED Details: Client connected!
+11:26:24: Request made11:26:24 - Type: CLIENT_CONNECTED Details: Client connected!
+11:26:24: Request made11:26:24 - Type: CLIENT_CONNECTED Details: Client connected!
+11:26:24: Request made11:26:24 - Type: CLIENT_CONNECTED Details: Client connected!
+11:26:24: Request made11:26:24 - Type: CLIENT_CONNECTED Details: Client connected!
+11:26:24: Request made11:26:24 - Type: CLIENT_CONNECTED Details: Client connected!
+11:26:24: Request made13:10:4: Type: SERVER_START | Details: Server started on port 8082!
+13:10:6 - Type: CLIENT_CONNECTED Details: Client connected!
+13:10:6: Request made13:10:6 - Type: CLIENT_CONNECTED Details: Client connected!
+13:10:6: Request made12:2:26: Type: SERVER_START | Details: Server started on port 8082!
+12:3:12 - Type: CLIENT_CONNECTED Details: Client connected!
+12:3:12: Request made12:3:12 - Type: CLIENT_CONNECTED Details: Client connected!
+12:3:12: Request made12:4:12: Type: SERVER_START | Details: Server started on port 8082!
+12:4:14 - Type: CLIENT_CONNECTED Details: Client connected!
+12:4:14: Request made12:4:14 - Type: CLIENT_CONNECTED Details: Client connected!
+12:4:14: Request made12:4:49: Type: SERVER_START | Details: Server started on port 8082!
+12:4:51 - Type: CLIENT_CONNECTED Details: Client connected!
+12:4:51: Request made12:4:51 - Type: CLIENT_CONNECTED Details: Client connected!
+12:4:51: Request made13:13:9: Type: SERVER_START | Details: Server started on port 8082!
+13:13:14 - Type: CLIENT_CONNECTED Details: Client connected!
+13:13:14: Request made13:13:14 - Type: CLIENT_CONNECTED Details: Client connected!
+13:13:14: Request made13:13:14: Type: ERROR | Details: There was an error when trying to start a server on port 8082! ERROR: exceptions.RoutingException: Could not instantiate object
+13:14:22: Type: SERVER_START | Details: Server started on port 8082!
+13:14:25 - Type: CLIENT_CONNECTED Details: Client connected!
+13:14:25: Request made13:14:25 - Type: CLIENT_CONNECTED Details: Client connected!
+13:14:25: Request made13:15:46: Type: SERVER_START | Details: Server started on port 8082!
+13:15:48 - Type: CLIENT_CONNECTED Details: Client connected!
+13:15:48: Request made13:15:49 - Type: CLIENT_CONNECTED Details: Client connected!
+13:15:49: Request made13:16:32: Type: SERVER_START | Details: Server started on port 8082!
+13:19:48 - Type: CLIENT_CONNECTED Details: Client connected!
+13:19:48: Request made13:19:48 - Type: CLIENT_CONNECTED Details: Client connected!
+13:19:48: Request made13:27:31: Type: SERVER_START | Details: Server started on port 8082!
+13:27:33 - Type: CLIENT_CONNECTED Details: Client connected!
+13:27:33: Request made13:27:34 - Type: CLIENT_CONNECTED Details: Client connected!
+13:27:34: Request made13:27:45 - Type: CLIENT_CONNECTED Details: Client connected!
+13:27:45: Request made13:27:45 - Type: CLIENT_CONNECTED Details: Client connected!
+13:27:45: Request made13:28:9: Type: SERVER_START | Details: Server started on port 8082!
+13:28:11 - Type: CLIENT_CONNECTED Details: Client connected!
+13:28:11: Request made13:28:11 - Type: CLIENT_CONNECTED Details: Client connected!
+13:28:11: Request made13:29:55: Type: SERVER_START | Details: Server started on port 8082!
+13:29:56 - Type: CLIENT_CONNECTED Details: Client connected!
+13:29:56: Request made13:29:57 - Type: CLIENT_CONNECTED Details: Client connected!
+13:29:57: Request made13:31:4: Type: SERVER_START | Details: Server started on port 8082!
+13:31:6 - Type: CLIENT_CONNECTED Details: Client connected!
+13:31:6: Request made13:31:6 - Type: CLIENT_CONNECTED Details: Client connected!
+13:31:6: Request made13:34:28: Type: SERVER_START | Details: Server started on port 8082!
+13:34:30 - Type: CLIENT_CONNECTED Details: Client connected!
+13:34:31: Request made13:34:31 - Type: CLIENT_CONNECTED Details: Client connected!
+13:34:31: Request made13:35:34: Type: SERVER_START | Details: Server started on port 8082!
+13:35:36 - Type: CLIENT_CONNECTED Details: Client connected!
+13:35:36: Request made13:35:36 - Type: CLIENT_CONNECTED Details: Client connected!
+13:35:36: Request made13:58:22: Type: SERVER_START | Details: Server started on port 8082!
+13:58:24 - Type: CLIENT_CONNECTED Details: Client connected!
+13:58:24: Request made13:58:24 - Type: CLIENT_CONNECTED Details: Client connected!
+13:58:24: Request made14:2:54: Type: SERVER_START | Details: Server started on port 8082!
+14:2:56 - Type: CLIENT_CONNECTED Details: Client connected!
+14:2:56: Request made14:2:57 - Type: CLIENT_CONNECTED Details: Client connected!
+14:2:57: Request made14:4:38: Type: SERVER_START | Details: Server started on port 8082!
+14:4:40 - Type: CLIENT_CONNECTED Details: Client connected!
+14:4:40: Request made14:4:40 - Type: CLIENT_CONNECTED Details: Client connected!
+14:4:40: Request made14:9:5: Type: SERVER_START | Details: Server started on port 8082!
+14:9:8 - Type: CLIENT_CONNECTED Details: Client connected!
+14:9:8: Request made14:9:8 - Type: CLIENT_CONNECTED Details: Client connected!
+14:9:8: Request made14:10:37: Type: SERVER_START | Details: Server started on port 8082!
+14:10:39 - Type: CLIENT_CONNECTED Details: Client connected!
+14:10:39: Request made14:10:39 - Type: CLIENT_CONNECTED Details: Client connected!
+14:10:39: Request made14:12:6: Type: SERVER_START | Details: Server started on port 8082!
+14:12:15 - Type: CLIENT_CONNECTED Details: Client connected!
+14:12:15: Request made14:12:15 - Type: CLIENT_CONNECTED Details: Client connected!
+14:12:15: Request made14:14:37: Type: SERVER_START | Details: Server started on port 8082!
+14:14:40 - Type: CLIENT_CONNECTED Details: Client connected!
+14:14:40: Request made14:14:41 - Type: CLIENT_CONNECTED Details: Client connected!
+14:14:41: Request made14:16:8: Type: SERVER_START | Details: Server started on port 8082!
+14:16:13 - Type: CLIENT_CONNECTED Details: Client connected!
+14:16:13: Request made14:16:13 - Type: CLIENT_CONNECTED Details: Client connected!
+14:16:13: Request made14:19:5: Type: SERVER_START | Details: Server started on port 8082!
+14:19:18 - Type: CLIENT_CONNECTED Details: Client connected!
+14:19:18: Request made14:19:18 - Type: CLIENT_CONNECTED Details: Client connected!
+14:19:18: Request made14:19:54: Type: SERVER_START | Details: Server started on port 8082!
+14:19:56 - Type: CLIENT_CONNECTED Details: Client connected!
+14:19:56: Request made14:19:56 - Type: CLIENT_CONNECTED Details: Client connected!
+14:19:56: Request made

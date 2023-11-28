@@ -1,4 +1,4 @@
-package utility.json;
+package utility.json.object;
 
 public class JSONField {
     final public String name;

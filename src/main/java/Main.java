@@ -1,6 +1,7 @@
 import models.RequestMethod;
 import server.config.CORSConfig;
 import server.Server;
+import server.routing.ParamsRouter;
 import test_classes.Person;
 import utility.json.JSON;
 
@@ -24,10 +25,12 @@ public class Main {
                 Arrays.asList("Content-Type"));
 
         server.addRoute("/test", RequestMethod.POST, config, ((req, res) -> {
-            List<StringBuilder> bodyParams = JSON.toListOfJSONObjects(req.body);
-            for(StringBuilder param : bodyParams) {
-                JSON.toObject(param, Person.class);
-            }
+            Person per = ParamsRouter.routeFromBody(req.body, Person.class);
+//            List<StringBuilder> bodyParams = JSON.toListOfJSONObjects(req.body);
+//            for(StringBuilder param : bodyParams) {
+//                Person p = JSON.toObject(param, Person.class);
+//                System.out.println(p.address);
+//            }
             return res.send("200 OK", "index.html");
         }));
 

@@ -1,4 +1,4 @@
-package utility.json;
+package utility.json.object;
 
 import java.util.HashMap;
 import java.util.List;
