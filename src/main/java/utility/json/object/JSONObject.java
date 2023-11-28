@@ -7,14 +7,28 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class JSONObject {
-    List<Object> fields;
-    public JSONObject(Class<?> type) {
-        if(type.getClass().equals(JSONRoot.class)) {
-            System.out.println("CLASS IS ROOT");
+    public String identifier;
+    public List<Object> fields;
+    public JSONObject(final Class<?> type) {
+        if(JSONRoot.class.isAssignableFrom(type)) {
+            this.identifier = null;
+        } else {
+            throw new RuntimeException("Class is not a JSON object");
         }
-        if(type.getClass().equals(JSONChild.class)) {
-            System.out.println("CLASS IS ROOT");
+
+        this.fields = new ArrayList<>();
+    }
+
+    public JSONObject(final Class<?> type, final String identifier) {
+        if(JSONRoot.class.isAssignableFrom(type)) {
+            this.identifier = null;
+        }else if(JSONChild.class.isAssignableFrom(type)) {
+            assert identifier != null;
+            this.identifier = identifier;
+        } else {
+            throw new RuntimeException("Class is not a JSON object");
         }
+
         this.fields = new ArrayList<>();
     }
 

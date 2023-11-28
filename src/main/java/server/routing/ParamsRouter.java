@@ -49,8 +49,9 @@ public class ParamsRouter {
                     List<StringBuilder> objects = JSON.toListOfObjects(body);
                     List<JSONObject> instanceObjects = new ArrayList<>();
                     for (StringBuilder jsonStringObject : objects) {
-                        instanceObjects.add(JSON.toJSONObject(jsonStringObject, JSONRoot.class));
+                        instanceObjects.add(JSON.toJSONObject(jsonStringObject, JSONRoot.class, null));
                     }
+                    System.out.println("BREAKPOINT");
                 }
             } else {
                 throw new RoutingException("Class is not routable");
