@@ -25,7 +25,7 @@ public class Main {
                 Arrays.asList("Content-Type"));
 
         server.addRoute("/test", RequestMethod.POST, config, ((req, res) -> {
-            Person per = ParamsRouter.routeFromBody(req.body, Person.class);
+            List<Person> per = ParamsRouter.routeFromBody(req.body, Person.class);
 //            List<StringBuilder> bodyParams = JSON.toListOfJSONObjects(req.body);
 //            for(StringBuilder param : bodyParams) {
 //                Person p = JSON.toObject(param, Person.class);

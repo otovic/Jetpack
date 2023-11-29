@@ -9,6 +9,7 @@ import java.util.List;
 public class JSONObject {
     public String identifier;
     public List<Object> fields;
+    
     public JSONObject(final Class<?> type) {
         if(JSONRoot.class.isAssignableFrom(type)) {
             this.identifier = null;

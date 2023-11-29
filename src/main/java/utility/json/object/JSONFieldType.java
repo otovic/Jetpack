@@ -10,7 +10,7 @@ public enum JSONFieldType {
     OBJECT,
     ARRAY;
 
-    public static Class<?> getFieldType(final JSONFieldType field) {
+    public static Class<?> getFieldClass(final JSONFieldType field) {
         if(field == INTEGER) return Integer.class;
         if(field == DOUBLE) return Double.class;
         if(field == STRING) return String.class;
