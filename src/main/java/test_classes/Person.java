@@ -4,6 +4,7 @@ import models.ParamKey;
 import models.RoutableFromBody;
 import models.RoutableFromParams;
 
+import java.util.HashMap;
 import java.util.List;
 
 @RoutableFromParams
@@ -16,5 +17,5 @@ public class Person {
     @ParamKey(field = "interests")
     public List<String> interests;
     @ParamKey(field = "address")
-    public List<String> address;
+    public HashMap<String, String> address;
 }

@@ -4,14 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a5281412-b623-4d1d-80f0-0256ec10c029" name="Changes" comment="workspace update">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+    <list default="true" id="a5281412-b623-4d1d-80f0-0256ec10c029" name="Changes" comment="creating JSONObject tree now working">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server_logs.txt" beforeDir="false" afterPath="$PROJECT_DIR$/server_logs.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/server/routing/ParamsRouter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/server/routing/ParamsRouter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/utility/json/JSON.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/utility/json/JSON.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/utility/json/JSONUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/utility/json/JSONUtils.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/utility/json/object/JSONObject.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/utility/json/object/JSONObject.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/test_classes/Person.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/test_classes/Person.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -81,6 +77,7 @@
       <workItem from="1700056156396" duration="11183000" />
       <workItem from="1700728047077" duration="1448000" />
       <workItem from="1701168207657" duration="8522000" />
+      <workItem from="1701257205820" duration="2926000" />
     </task>
     <task id="LOCAL-00001" summary="Added logger">
       <option name="closed" value="true" />
@@ -130,7 +127,14 @@
       <option name="project" value="LOCAL" />
       <updated>1698922894406</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="creating JSONObject tree now working">
+      <created>1701197361872</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1701197361872</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -165,17 +169,7 @@
     <MESSAGE value="Restructured server component, Response now works" />
     <MESSAGE value="CORS now works, can add custom CORS to routes or apply server specific CORS for all routes" />
     <MESSAGE value="workspace update" />
-    <option name="LAST_COMMIT_MESSAGE" value="workspace update" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/server/routing/ParamsRouter.java</url>
-          <line>53</line>
-          <option name="timeStamp" value="21" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
+    <MESSAGE value="creating JSONObject tree now working" />
+    <option name="LAST_COMMIT_MESSAGE" value="creating JSONObject tree now working" />
   </component>
 </project>

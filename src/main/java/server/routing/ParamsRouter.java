@@ -5,6 +5,7 @@ import models.ParamKey;
 import models.RoutableFromBody;
 import models.RoutableFromParams;
 import utility.json.JSON;
+import utility.json.object.JSONField;
 import utility.json.object.JSONObject;
 import utility.json.JSONUtils;
 import utility.json.types.JSONRoot;
@@ -18,7 +19,7 @@ public class ParamsRouter {
     public static <T> T routeFromParams(Map<String, String> params, Class<T> object) throws RoutingException {
         try {
             T instance = object.newInstance();
-            if(instance.getClass().isAnnotationPresent(RoutableFromParams.class)) {
+            if (instance.getClass().isAnnotationPresent(RoutableFromParams.class)) {
                 Arrays.stream(instance.getClass().getFields())
                         .filter(field -> field.isAnnotationPresent(ParamKey.class))
                         .forEach(field -> {
@@ -41,22 +42,42 @@ public class ParamsRouter {
         }
     }
 
-    public static <T> T routeFromBody(String body, Class<T> object) throws RoutingException {
+    public static <T> List<T> routeFromBody(String body, Class<T> object) throws RoutingException {
         try {
-            T instance = object.newInstance();
-            if(instance.getClass().isAnnotationPresent(RoutableFromBody.class)) {
-                if(JSONUtils.isArray(body)) {
-                    List<StringBuilder> objects = JSON.toListOfObjects(body);
-                    List<JSONObject> instanceObjects = new ArrayList<>();
-                    for (StringBuilder jsonStringObject : objects) {
-                        instanceObjects.add(JSON.toJSONObject(jsonStringObject, JSONRoot.class, null));
+            List<T> instances = new ArrayList<>();
+            if (object.newInstance().getClass().isAnnotationPresent(RoutableFromBody.class)) {
+                List<StringBuilder> objects = JSON.toListOfObjects(body);
+                for (StringBuilder jsonStringObject : objects) {
+                    JSONObject jsonObject = JSON.toJSONObject(jsonStringObject, JSONRoot.class, null);
+                    T instance = object.newInstance();
+                    for (Object field : jsonObject.fields) {
+                        Arrays.stream(instance.getClass().getFields())
+                                .filter(f -> {
+                                    if(field instanceof JSONField) {
+                                        JSONField jsonField = (JSONField) field;
+                                        return jsonField.name.equals(f.getName());
+                                    } else {
+                                        return false;
+                                    }
+                                }).findFirst().ifPresent(f -> {
+                                    try {
+                                        f.set(instance, ((JSONField) field).field);
+                                    } catch (IllegalAccessException e) {
+                                        e.printStackTrace();
+                                    }
+                                });
+                        if (field instanceof JSONObject) {
+                            JSONObject objectField = (JSONObject) field;
+                            instances.add((T) routeFromBody(objectField.fields.get(0).toString(), object));
+                        } else {
+
+                        }
                     }
-                    System.out.println("BREAKPOINT");
                 }
+
             } else {
                 throw new RoutingException("Class is not routable");
             }
-            return instance;
         } catch (Exception e) {
             throw new RoutingException("Could not instantiate object");
         }
