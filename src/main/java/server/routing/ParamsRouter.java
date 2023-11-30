@@ -100,6 +100,24 @@ public class ParamsRouter {
                                                     keyType = typeArguments[0];
                                                     valueType = typeArguments[1];
                                                 }
+                                                HashMap<Object, Object> hashM = new HashMap<Object, Object>();
+                                                for (Object hashField : jsonObjectO.fields) {
+                                                    if (hashField instanceof JSONObject) {
+                                                        throw new Exception("Object cannot be routed to primitive type");
+                                                    } else if (hashField instanceof JSONField) {
+                                                        JSONField fld = (JSONField) hashField;
+                                                        Class<?> cls = (Class<?>) keyType;
+                                                        if(String.class.isAssignableFrom(cls)) {
+                                                            System.out.println(fld.field.toString());
+                                                        }
+                                                        if (Integer.class.isAssignableFrom(cls)) {
+                                                            System.out.println(Integer.parseInt(fld.name));
+                                                        }
+                                                        if (Double.class.isAssignableFrom(cls)) {
+                                                            
+                                                        }
+                                                    }
+                                                }
                                             }
                                         }
                                     } catch (ClassCastException e) {

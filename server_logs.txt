@@ -99,4 +99,47 @@
 20:53:5: Request made21:7:32: Type: SERVER_START | Details: Server started on port 8082!
 21:7:35 - Type: CLIENT_CONNECTED Details: Client connected!
 21:7:35: Request made21:7:35 - Type: CLIENT_CONNECTED Details: Client connected!
-21:7:35: Request made
+21:7:35: Request made10:8:21: Type: SERVER_START | Details: Server started on port 8082!
+10:8:53: Type: ERROR | Details: There was an error when trying to start a server on port 8082! ERROR: Address already in use: bind
+10:9:13 - Type: CLIENT_CONNECTED Details: Client connected!
+10:9:13: Request made10:9:14 - Type: CLIENT_CONNECTED Details: Client connected!
+10:9:14: Request made10:9:14: Type: ERROR | Details: Field age, in class test_classes.Person, of type java.lang.Integer is not compatible with JSONField type class java.lang.Double
+10:10:36: Type: SERVER_START | Details: Server started on port 8080!
+10:11:8 - Type: CLIENT_CONNECTED Details: Client connected!
+10:11:8: Request made10:11:8 - Type: CLIENT_CONNECTED Details: Client connected!
+10:11:8: Request made10:11:8: Type: ERROR | Details: Field age, in class test_classes.Person, of type java.lang.Integer is not compatible with JSONField type class java.lang.Double
+10:13:11 - Type: CLIENT_CONNECTED Details: Client connected!
+10:13:11: Request made10:13:11 - Type: CLIENT_CONNECTED Details: Client connected!
+10:13:11: Request made10:13:11: Type: ERROR | Details: Field age, in class test_classes.Person, of type java.lang.Integer is not compatible with JSONField type class java.lang.Double
+10:14:15 - Type: CLIENT_CONNECTED Details: Client connected!
+10:14:15: Request made10:14:15 - Type: CLIENT_CONNECTED Details: Client connected!
+10:14:15: Request made10:17:5: Type: SERVER_START | Details: Server started on port 8080!
+10:17:8 - Type: CLIENT_CONNECTED Details: Client connected!
+10:17:8: Request made10:17:8 - Type: CLIENT_CONNECTED Details: Client connected!
+10:17:8: Request made10:45:52: Type: SERVER_START | Details: Server started on port 8080!
+10:45:57 - Type: CLIENT_CONNECTED Details: Client connected!
+10:45:57: Request made10:45:57 - Type: CLIENT_CONNECTED Details: Client connected!
+10:45:57: Request made10:49:42: Type: SERVER_START | Details: Server started on port 8080!
+10:49:47 - Type: CLIENT_CONNECTED Details: Client connected!
+10:49:47: Request made10:49:47 - Type: CLIENT_CONNECTED Details: Client connected!
+10:49:47: Request made10:50:18: Type: SERVER_START | Details: Server started on port 8080!
+10:50:22 - Type: CLIENT_CONNECTED Details: Client connected!
+10:50:22: Request made10:50:23 - Type: CLIENT_CONNECTED Details: Client connected!
+10:50:23: Request made10:51:47: Type: SERVER_START | Details: Server started on port 8080!
+10:52:52 - Type: CLIENT_CONNECTED Details: Client connected!
+10:52:53: Request made10:52:53 - Type: CLIENT_CONNECTED Details: Client connected!
+10:52:53: Request made10:56:50: Type: SERVER_START | Details: Server started on port 8080!
+10:56:53 - Type: CLIENT_CONNECTED Details: Client connected!
+10:56:53: Request made10:56:53 - Type: CLIENT_CONNECTED Details: Client connected!
+10:56:53: Request made10:59:12: Type: SERVER_START | Details: Server started on port 8080!
+10:59:53 - Type: CLIENT_CONNECTED Details: Client connected!
+10:59:53: Request made10:59:53 - Type: CLIENT_CONNECTED Details: Client connected!
+10:59:53: Request made11:2:20: Type: SERVER_START | Details: Server started on port 8080!
+11:2:33 - Type: CLIENT_CONNECTED Details: Client connected!
+11:2:33: Request made11:2:33 - Type: CLIENT_CONNECTED Details: Client connected!
+11:2:33: Request made11:2:42 - Type: CLIENT_CONNECTED Details: Client connected!
+11:2:42: Request made11:2:42 - Type: CLIENT_CONNECTED Details: Client connected!
+11:2:42: Request made11:3:42: Type: SERVER_START | Details: Server started on port 8080!
+11:3:45 - Type: CLIENT_CONNECTED Details: Client connected!
+11:3:45: Request made11:3:45 - Type: CLIENT_CONNECTED Details: Client connected!
+11:3:45: Request made
