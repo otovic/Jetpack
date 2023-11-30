@@ -53,9 +53,10 @@ public class ParamsRouter {
 
     public static <T> List<T> routeFromBody(String body, Class<T> object) throws RoutingException {
         try {
-            List<T> instances = new ArrayList<>();
-            if (object.newInstance().getClass().isAnnotationPresent(RoutableFromBody.class)) {
+            List<T> instances = new ArrayList<T>();
+            if (object.getDeclaredConstructor().newInstance().getClass().isAnnotationPresent(RoutableFromBody.class)) {
                 List<StringBuilder> objects = JSON.toListOfObjects(body);
+                System.out.println("here");
                 for (StringBuilder jsonStringObject : objects) {
                     JSONObject jsonObject = JSON.toJSONObject(jsonStringObject, JSONRoot.class, null);
                     T instance = object.getDeclaredConstructor().newInstance();
@@ -108,16 +109,18 @@ public class ParamsRouter {
                                                         JSONField fld = (JSONField) hashField;
                                                         Class<?> cls = (Class<?>) keyType;
                                                         if(String.class.isAssignableFrom(cls)) {
-                                                            System.out.println(fld.field.toString());
+                                                            hashM.put(fld.name.toString(), fld.field.toString());
                                                         }
                                                         if (Integer.class.isAssignableFrom(cls)) {
                                                             System.out.println(Integer.parseInt(fld.name));
+                                                            hashM.put(Integer.parseInt(fld.name), fld.field.toString());
                                                         }
                                                         if (Double.class.isAssignableFrom(cls)) {
-                                                            
+                                                            hashM.put(Double.parseDouble(fld.name), fld.field.toString());
                                                         }
                                                     }
                                                 }
+                                                f.set(instance, hashM);
                                             }
                                         }
                                     } catch (ClassCastException e) {
@@ -128,11 +131,12 @@ public class ParamsRouter {
                                     }
                                 });
                     }
+                    instances.add(instance);
                 }
-                return instances;
             } else {
                 throw new RoutingException("Class is not routable");
             }
+            return instances;
         } catch (Exception e) {
             throw new RoutingException("Could not instantiate object");
         }

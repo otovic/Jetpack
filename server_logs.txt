@@ -142,4 +142,170 @@
 11:2:42: Request made11:3:42: Type: SERVER_START | Details: Server started on port 8080!
 11:3:45 - Type: CLIENT_CONNECTED Details: Client connected!
 11:3:45: Request made11:3:45 - Type: CLIENT_CONNECTED Details: Client connected!
-11:3:45: Request made
+11:3:45: Request made19:1:35: Type: SERVER_START | Details: Server started on port 8080!
+22:28:53: Type: SERVER_START | Details: Server started on port 8080!
+22:29:22: Type: SERVER_START | Details: Server started on port 8082!
+22:29:25 - Type: CLIENT_CONNECTED Details: Client connected!
+22:29:25: Request made22:29:25 - Type: CLIENT_CONNECTED Details: Client connected!
+22:29:25: Request made22:30:15: Type: SERVER_START | Details: Server started on port 8082!
+22:30:19 - Type: CLIENT_CONNECTED Details: Client connected!
+22:30:19: Request made22:30:19: Type: ERROR | Details: There was an error when trying to start a server on port 8082! ERROR: java.lang.IndexOutOfBoundsException: Index 0 out of bounds for length 0
+22:33:35: Type: SERVER_START | Details: Server started on port 8082!
+22:33:38 - Type: CLIENT_CONNECTED Details: Client connected!
+22:33:38: Request made22:33:38: Type: ERROR | Details: There was an error when trying to start a server on port 8082! ERROR: java.lang.IndexOutOfBoundsException: Index 0 out of bounds for length 0
+22:34:11: Type: SERVER_START | Details: Server started on port 8082!
+22:34:14 - Type: CLIENT_CONNECTED Details: Client connected!
+22:34:14: Request made22:34:14: Type: ERROR | Details: There was an error when trying to start a server on port 8082! ERROR: java.lang.IndexOutOfBoundsException: Index 0 out of bounds for length 0
+22:34:30: Type: SERVER_START | Details: Server started on port 8082!
+22:34:32 - Type: CLIENT_CONNECTED Details: Client connected!
+22:34:32: Request made22:34:32: Type: ERROR | Details: There was an error when trying to start a server on port 8082! ERROR: java.lang.IndexOutOfBoundsException: Index 0 out of bounds for length 0
+22:34:50: Type: SERVER_START | Details: Server started on port 8082!
+22:34:52 - Type: CLIENT_CONNECTED Details: Client connected!
+22:34:52: Request made22:34:52: Type: ERROR | Details: There was an error when trying to start a server on port 8082! ERROR: java.lang.IndexOutOfBoundsException: Index 0 out of bounds for length 0
+22:35:10: Type: SERVER_START | Details: Server started on port 8082!
+22:35:12 - Type: CLIENT_CONNECTED Details: Client connected!
+22:35:12: Request made22:35:12 - Type: CLIENT_CONNECTED Details: Client connected!
+22:35:12: Request made22:36:13: Type: SERVER_START | Details: Server started on port 8082!
+22:36:15 - Type: CLIENT_CONNECTED Details: Client connected!
+22:36:15: Request made22:36:15 - Type: CLIENT_CONNECTED Details: Client connected!
+22:36:15: Request made22:37:38: Type: SERVER_START | Details: Server started on port 8082!
+22:37:40 - Type: CLIENT_CONNECTED Details: Client connected!
+22:37:40: Request made22:37:40 - Type: CLIENT_CONNECTED Details: Client connected!
+22:37:40: Request made22:39:27: Type: SERVER_START | Details: Server started on port 8082!
+22:39:30 - Type: CLIENT_CONNECTED Details: Client connected!
+22:39:31: Request made22:39:31 - Type: CLIENT_CONNECTED Details: Client connected!
+22:39:31: Request made22:45:36: Type: SERVER_START | Details: Server started on port 8082!
+22:45:38 - Type: CLIENT_CONNECTED Details: Client connected!
+22:45:38: Request made22:45:38 - Type: CLIENT_CONNECTED Details: Client connected!
+22:45:38: Request made22:46:47: Type: SERVER_START | Details: Server started on port 8082!
+22:46:49 - Type: CLIENT_CONNECTED Details: Client connected!
+22:46:49: Request made22:46:49 - Type: CLIENT_CONNECTED Details: Client connected!
+22:46:49: Request made22:49:10: Type: SERVER_START | Details: Server started on port 8082!
+22:49:12 - Type: CLIENT_CONNECTED Details: Client connected!
+22:49:12: Request made22:49:12 - Type: CLIENT_CONNECTED Details: Client connected!
+22:49:12: Request made22:49:33: Type: SERVER_START | Details: Server started on port 8082!
+22:49:35 - Type: CLIENT_CONNECTED Details: Client connected!
+22:49:35: Request made22:49:35: Type: ERROR | Details: There was an error when trying to start a server on port 8082! ERROR: java.lang.IndexOutOfBoundsException: Index 0 out of bounds for length 0
+22:49:45: Type: SERVER_START | Details: Server started on port 8082!
+22:49:48 - Type: CLIENT_CONNECTED Details: Client connected!
+22:49:48: Request made22:49:48: Type: ERROR | Details: There was an error when trying to start a server on port 8082! ERROR: java.lang.IndexOutOfBoundsException: Index 0 out of bounds for length 0
+22:49:59: Type: SERVER_START | Details: Server started on port 8082!
+22:50:14 - Type: CLIENT_CONNECTED Details: Client connected!
+22:50:14: Request made22:50:14: Type: ERROR | Details: There was an error when trying to start a server on port 8082! ERROR: java.lang.IndexOutOfBoundsException: Index 0 out of bounds for length 0
+22:50:23: Type: SERVER_START | Details: Server started on port 8082!
+22:50:26 - Type: CLIENT_CONNECTED Details: Client connected!
+22:50:26: Request made22:50:26: Type: ERROR | Details: There was an error when trying to start a server on port 8082! ERROR: java.lang.IndexOutOfBoundsException: Index 0 out of bounds for length 0
+22:50:40: Type: SERVER_START | Details: Server started on port 8082!
+22:50:42 - Type: CLIENT_CONNECTED Details: Client connected!
+22:50:42: Request made22:50:42: Type: ERROR | Details: There was an error when trying to start a server on port 8082! ERROR: java.lang.IndexOutOfBoundsException: Index 0 out of bounds for length 0
+22:50:57: Type: SERVER_START | Details: Server started on port 8082!
+22:51:0 - Type: CLIENT_CONNECTED Details: Client connected!
+22:51:0: Request made22:51:0: Type: ERROR | Details: There was an error when trying to start a server on port 8082! ERROR: java.lang.IndexOutOfBoundsException: Index 0 out of bounds for length 0
+22:51:16: Type: SERVER_START | Details: Server started on port 8082!
+22:51:18 - Type: CLIENT_CONNECTED Details: Client connected!
+22:51:18: Request made22:51:18 - Type: CLIENT_CONNECTED Details: Client connected!
+22:51:18: Request made22:51:47: Type: SERVER_START | Details: Server started on port 8082!
+22:51:48 - Type: CLIENT_CONNECTED Details: Client connected!
+22:51:48: Request made22:51:48 - Type: CLIENT_CONNECTED Details: Client connected!
+22:51:48: Request made22:52:53: Type: SERVER_START | Details: Server started on port 8082!
+22:52:55 - Type: CLIENT_CONNECTED Details: Client connected!
+22:52:55: Request made22:52:55: Type: ERROR | Details: There was an error when trying to start a server on port 8082! ERROR: java.lang.IndexOutOfBoundsException: Index 0 out of bounds for length 0
+22:53:19: Type: SERVER_START | Details: Server started on port 8082!
+22:53:20 - Type: CLIENT_CONNECTED Details: Client connected!
+22:53:20: Request made22:54:6: Type: SERVER_START | Details: Server started on port 8082!
+22:54:10 - Type: CLIENT_CONNECTED Details: Client connected!
+22:54:10: Request made22:55:22: Type: SERVER_START | Details: Server started on port 8082!
+22:55:24 - Type: CLIENT_CONNECTED Details: Client connected!
+22:55:24: Request made22:55:24: Type: ERROR | Details: There was an error when trying to start a server on port 8082! ERROR: java.lang.IndexOutOfBoundsException: Index 0 out of bounds for length 0
+22:56:20: Type: SERVER_START | Details: Server started on port 8082!
+22:56:22 - Type: CLIENT_CONNECTED Details: Client connected!
+22:56:22: Request made22:56:22: Type: ERROR | Details: There was an error when trying to start a server on port 8082! ERROR: java.lang.IndexOutOfBoundsException: Index 0 out of bounds for length 0
+22:58:36: Type: SERVER_START | Details: Server started on port 8082!
+22:58:40 - Type: CLIENT_CONNECTED Details: Client connected!
+22:58:40: Request made22:58:40: Type: ERROR | Details: There was an error when trying to start a server on port 8082! ERROR: java.lang.IndexOutOfBoundsException: Index 0 out of bounds for length 0
+22:59:10: Type: SERVER_START | Details: Server started on port 8082!
+22:59:12 - Type: CLIENT_CONNECTED Details: Client connected!
+22:59:12: Request made22:59:12: Type: ERROR | Details: There was an error when trying to start a server on port 8082! ERROR: java.lang.IndexOutOfBoundsException: Index 0 out of bounds for length 0
+22:59:32: Type: SERVER_START | Details: Server started on port 8082!
+22:59:33 - Type: CLIENT_CONNECTED Details: Client connected!
+22:59:33: Request made22:59:33: Type: ERROR | Details: There was an error when trying to start a server on port 8082! ERROR: java.lang.IndexOutOfBoundsException: Index 0 out of bounds for length 0
+22:59:42: Type: SERVER_START | Details: Server started on port 8082!
+22:59:43 - Type: CLIENT_CONNECTED Details: Client connected!
+22:59:43: Request made22:59:43: Type: ERROR | Details: There was an error when trying to start a server on port 8082! ERROR: java.lang.IndexOutOfBoundsException: Index 0 out of bounds for length 0
+22:59:53: Type: SERVER_START | Details: Server started on port 8082!
+22:59:55 - Type: CLIENT_CONNECTED Details: Client connected!
+22:59:55: Request made22:59:55: Type: ERROR | Details: There was an error when trying to start a server on port 8082! ERROR: java.lang.IndexOutOfBoundsException: Index 0 out of bounds for length 0
+23:0:18: Type: SERVER_START | Details: Server started on port 8082!
+23:0:19 - Type: CLIENT_CONNECTED Details: Client connected!
+23:0:19: Request made23:0:19: Type: ERROR | Details: There was an error when trying to start a server on port 8082! ERROR: java.lang.IndexOutOfBoundsException: Index 0 out of bounds for length 0
+23:0:50: Type: SERVER_START | Details: Server started on port 8082!
+23:0:51 - Type: CLIENT_CONNECTED Details: Client connected!
+23:0:51: Request made23:0:51: Type: ERROR | Details: There was an error when trying to start a server on port 8082! ERROR: java.lang.IndexOutOfBoundsException: Index 0 out of bounds for length 0
+23:1:23: Type: SERVER_START | Details: Server started on port 8082!
+23:1:25 - Type: CLIENT_CONNECTED Details: Client connected!
+23:1:25: Request made23:1:25: Type: ERROR | Details: There was an error when trying to start a server on port 8082! ERROR: java.lang.IndexOutOfBoundsException: Index 0 out of bounds for length 0
+23:1:38: Type: SERVER_START | Details: Server started on port 8082!
+23:1:40 - Type: CLIENT_CONNECTED Details: Client connected!
+23:1:40: Request made23:1:40: Type: ERROR | Details: There was an error when trying to start a server on port 8082! ERROR: java.lang.IndexOutOfBoundsException: Index 0 out of bounds for length 0
+23:1:59: Type: SERVER_START | Details: Server started on port 8082!
+23:2:1 - Type: CLIENT_CONNECTED Details: Client connected!
+23:2:1: Request made23:2:1: Type: ERROR | Details: There was an error when trying to start a server on port 8082! ERROR: java.lang.IndexOutOfBoundsException: Index 0 out of bounds for length 0
+23:2:23: Type: SERVER_START | Details: Server started on port 8082!
+23:2:26 - Type: CLIENT_CONNECTED Details: Client connected!
+23:2:26: Request made23:2:26: Type: ERROR | Details: There was an error when trying to start a server on port 8082! ERROR: java.lang.IndexOutOfBoundsException: Index 0 out of bounds for length 0
+23:5:5: Type: SERVER_START | Details: Server started on port 8082!
+23:5:7 - Type: CLIENT_CONNECTED Details: Client connected!
+23:5:7: Request made23:5:7: Type: ERROR | Details: There was an error when trying to start a server on port 8082! ERROR: java.lang.IndexOutOfBoundsException: Index 0 out of bounds for length 0
+23:6:9: Type: SERVER_START | Details: Server started on port 8082!
+23:6:11 - Type: CLIENT_CONNECTED Details: Client connected!
+23:6:11: Request made23:6:11: Type: ERROR | Details: There was an error when trying to start a server on port 8082! ERROR: java.lang.IndexOutOfBoundsException: Index 0 out of bounds for length 0
+23:11:30: Type: SERVER_START | Details: Server started on port 8082!
+23:11:33 - Type: CLIENT_CONNECTED Details: Client connected!
+23:11:33: Request made23:11:33: Type: ERROR | Details: There was an error when trying to start a server on port 8082! ERROR: java.lang.IndexOutOfBoundsException: Index 0 out of bounds for length 0
+23:12:9: Type: SERVER_START | Details: Server started on port 8082!
+23:12:10 - Type: CLIENT_CONNECTED Details: Client connected!
+23:12:10: Request made23:12:10: Type: ERROR | Details: There was an error when trying to start a server on port 8082! ERROR: java.lang.IndexOutOfBoundsException: Index 0 out of bounds for length 0
+23:12:49: Type: SERVER_START | Details: Server started on port 8082!
+23:12:51 - Type: CLIENT_CONNECTED Details: Client connected!
+23:12:51: Request made23:12:51: Type: ERROR | Details: There was an error when trying to start a server on port 8082! ERROR: java.lang.IndexOutOfBoundsException: Index 0 out of bounds for length 0
+23:13:14: Type: SERVER_START | Details: Server started on port 8082!
+23:13:16 - Type: CLIENT_CONNECTED Details: Client connected!
+23:13:16: Request made23:13:16: Type: ERROR | Details: There was an error when trying to start a server on port 8082! ERROR: java.lang.IndexOutOfBoundsException: Index 0 out of bounds for length 0
+23:14:8: Type: SERVER_START | Details: Server started on port 8082!
+23:14:10 - Type: CLIENT_CONNECTED Details: Client connected!
+23:14:10: Request made23:14:10: Type: ERROR | Details: There was an error when trying to start a server on port 8082! ERROR: java.lang.IndexOutOfBoundsException: Index 0 out of bounds for length 0
+23:14:32: Type: SERVER_START | Details: Server started on port 8082!
+23:14:35 - Type: CLIENT_CONNECTED Details: Client connected!
+23:14:35: Request made23:14:35: Type: ERROR | Details: There was an error when trying to start a server on port 8082! ERROR: java.lang.IndexOutOfBoundsException: Index 0 out of bounds for length 0
+23:14:51: Type: SERVER_START | Details: Server started on port 8082!
+23:14:54 - Type: CLIENT_CONNECTED Details: Client connected!
+23:14:54: Request made23:14:54: Type: ERROR | Details: There was an error when trying to start a server on port 8082! ERROR: java.lang.IndexOutOfBoundsException: Index 0 out of bounds for length 0
+23:17:29: Type: SERVER_START | Details: Server started on port 8082!
+23:17:32 - Type: CLIENT_CONNECTED Details: Client connected!
+23:17:32: Request made23:17:32: Type: ERROR | Details: There was an error when trying to start a server on port 8082! ERROR: java.lang.IndexOutOfBoundsException: Index 0 out of bounds for length 0
+23:17:51: Type: SERVER_START | Details: Server started on port 8082!
+23:17:53 - Type: CLIENT_CONNECTED Details: Client connected!
+23:17:53: Request made23:17:53: Type: ERROR | Details: There was an error when trying to start a server on port 8082! ERROR: java.lang.IndexOutOfBoundsException: Index 0 out of bounds for length 0
+23:18:23: Type: SERVER_START | Details: Server started on port 8082!
+23:18:24 - Type: CLIENT_CONNECTED Details: Client connected!
+23:18:24: Request made23:18:24: Type: ERROR | Details: There was an error when trying to start a server on port 8082! ERROR: java.lang.IndexOutOfBoundsException: Index 0 out of bounds for length 0
+23:19:12: Type: SERVER_START | Details: Server started on port 8082!
+23:19:13 - Type: CLIENT_CONNECTED Details: Client connected!
+23:19:13: Request made23:19:13: Type: ERROR | Details: There was an error when trying to start a server on port 8082! ERROR: java.lang.IndexOutOfBoundsException: Index 0 out of bounds for length 0
+23:19:28: Type: SERVER_START | Details: Server started on port 8082!
+23:19:30 - Type: CLIENT_CONNECTED Details: Client connected!
+23:19:30: Request made23:19:30: Type: ERROR | Details: There was an error when trying to start a server on port 8082! ERROR: java.lang.IndexOutOfBoundsException: Index 0 out of bounds for length 0
+23:19:42: Type: SERVER_START | Details: Server started on port 8082!
+23:19:45 - Type: CLIENT_CONNECTED Details: Client connected!
+23:19:45: Request made23:19:45: Type: ERROR | Details: There was an error when trying to start a server on port 8082! ERROR: java.lang.IndexOutOfBoundsException: Index 0 out of bounds for length 0
+23:20:15: Type: SERVER_START | Details: Server started on port 8082!
+23:20:17 - Type: CLIENT_CONNECTED Details: Client connected!
+23:20:17: Request made23:20:17: Type: ERROR | Details: There was an error when trying to start a server on port 8082! ERROR: java.lang.IndexOutOfBoundsException: Index 0 out of bounds for length 0
+23:25:24: Type: SERVER_START | Details: Server started on port 8082!
+23:25:26 - Type: CLIENT_CONNECTED Details: Client connected!
+23:25:26: Request made23:25:26: Type: ERROR | Details: There was an error when trying to start a server on port 8082! ERROR: Cannot read field "routeSpecificCORSConfig" because "route" is null
+23:28:51: Type: SERVER_START | Details: Server started on port 8082!
+23:29:0: Type: SERVER_START | Details: Server started on port 8082!
+23:29:3 - Type: CLIENT_CONNECTED Details: Client connected!
+23:29:3: Request made23:29:3 - Type: CLIENT_CONNECTED Details: Client connected!
+23:29:3: Request made

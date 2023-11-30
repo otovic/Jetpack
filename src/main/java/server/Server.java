@@ -61,19 +61,27 @@ public class Server {
         this.updateSnapshot("Client Info: " + client.toString() + " | Request: " + req.toString() + " | Headers: " + req.headers.toString() + "");
         Logger.logRequest(req, true, this.currentEvent);
 
-        if(req.method.equals("POST") || req.method.equals("PUT")) {
-            if(req.headers.contains("Content-Length: 0")) {
-                req.body = "";
-            } else {
-                req.body = this.parseBody(req.headers, br).toString();
-            }
-        } else {
-            req.body = "";
-        }
-
         this.router.routes.forEach((routePath, route) -> {
             if(routePath.equals(req.path)) {
                 try {
+                    if(req.method.equals("OPTIONS")) {
+                        Response res = new Response(client, req, route, this.corsConfig);
+                        try {
+                            res.send("200 OK", "");
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                        return;
+                    }
+                    if(req.method.equals("POST") || req.method.equals("PUT")) {
+                        if(req.headers.contains("Content-Length: 0")) {
+                            req.body = "";
+                        } else {
+                            req.body = this.parseBody(req.headers, br).toString();
+                        }
+                    } else {
+                        req.body = "";
+                    }
                     route.callback.exe(req, new Response(client, req, route, this.corsConfig));
                 } catch (Exception e) {
                     throw new RuntimeException(e);

@@ -10,7 +10,7 @@ import java.util.List;
 
 public class Main {
     public static void main( String[] args ) throws Exception {
-        Server server = new Server(8080, false);
+        Server server = new Server(8082, false);
 
         server.corsConfig.setAllowOrigins(Arrays.asList("http://localhost:8080", "http://localhost:3000"));
         server.corsConfig.setAllowMethods(Arrays.asList("GET", "POST", "PUT", "DELETE"));
@@ -26,7 +26,7 @@ public class Main {
 
         server.addRoute("/test", RequestMethod.POST, config, ((req, res) -> {
             List<Person> per = ParamsRouter.routeFromBody(req.body, Person.class);
-//            List<StringBuilder> bodyParams = JSON.toListOfJSONObjects(req.body);
+            System.out.println(per.get(0));
 //            for(StringBuilder param : bodyParams) {
 //                Person p = JSON.toObject(param, Person.class);
 //                System.out.println(p.address);
