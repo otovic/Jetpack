@@ -116,7 +116,7 @@ public class JSONUtils {
         return false;
     }
 
-    public static List<String> parseListFieldType(final String value) {
+    public static List<String> parseList(final String value) {
         return List.of(value.split(","));
     }
 }

@@ -26,7 +26,7 @@ public class Main {
 
         server.addRoute("/test", RequestMethod.POST, config, ((req, res) -> {
             List<Person> per = ParamsRouter.routeFromBody(req.body, Person.class);
-            System.out.println(per.get(0));
+            System.out.println(per.get(0).address);
 //            for(StringBuilder param : bodyParams) {
 //                Person p = JSON.toObject(param, Person.class);
 //                System.out.println(p.address);

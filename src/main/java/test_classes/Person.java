@@ -17,5 +17,5 @@ public class Person {
     @ParamKey(field = "interests")
     public List<String> interests;
     @ParamKey(field = "address")
-    public HashMap<String, String> address;
+    public Address address;
 }
