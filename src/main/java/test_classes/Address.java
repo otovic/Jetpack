@@ -1,11 +1,12 @@
 package test_classes;
 
-public class Address {
-    public String zip;
-    public String street;
+import models.ParamKey;
+import models.RoutableFromBody;
 
-    public Address(String zip, String street) {
-        this.zip = zip;
-        this.street = street;
-    }
+@RoutableFromBody
+public class Address {
+    @ParamKey(field = "zip")
+    public String zip;
+    @ParamKey(field = "street")
+    public String street;
 }

@@ -72,7 +72,7 @@ public class ParamsRouter {
                     Arrays.stream(instance.getClass().getFields())
                             .filter(f -> {
                                 try {
-                                    return checkIfCorrespondingFieldExists(f, jsonObject, instance.getClass().getName());
+                                    return checkIfCorrespondingFieldExists(f, field, instance.getClass().getName());
                                 } catch (LoggerException e) {
                                     return false;
                                 }
@@ -85,8 +85,6 @@ public class ParamsRouter {
                                     } else {
                                         handleJSONObject(f, field, instance);
                                     }
-                                } catch (ClassCastException e) {
-
                                 } catch (Exception e) {
                                     e.printStackTrace();
                                 }
@@ -136,7 +134,6 @@ public class ParamsRouter {
                     + " in class: " + instance.getClass().getName());
         }
 
-
         List<?> list = new ArrayList();
         for (Object field : jsonObject.fields) {
             if (field instanceof JSONObject) {
@@ -152,7 +149,7 @@ public class ParamsRouter {
 
     private static HashMap handleHashMap(Field f, JSONObject object) throws Exception {
         Tuple genericTypes = getHashMapGenericTypes(f);
-        HashMap<Object, Object> hashM = new HashMap<Object, Object>();
+        HashMap<?, ?> hashM = new HashMap();
         for (Object hashField : object.fields) {
             if (hashField instanceof JSONObject) {
                 throw new Exception("Object cannot be routed to primitive type");
@@ -161,7 +158,7 @@ public class ParamsRouter {
                 Class<?> keyClass = (Class<?>) genericTypes.first;
                 Class<?> valueClass = (Class<?>) genericTypes.second;
                 hashM.put(parseAccordingToClass(jsonField.name, keyClass),
-                        parseAccordingToClass(jsonField.field.toString(), valueClass));
+                        parseAccordingToClass(jsonField.field, valueClass));
             }
         }
         return hashM;
@@ -186,7 +183,8 @@ public class ParamsRouter {
         return null;
     }
 
-    private static void handleJSONField(Field f, Object field, Object instance) throws LoggerException, NumberFormatException, IllegalArgumentException, IllegalAccessException {
+    private static void handleJSONField(Field f, Object field, Object instance)
+            throws LoggerException, NumberFormatException, IllegalArgumentException, IllegalAccessException {
         JSONField jsonField = (JSONField) field;
         if (JSONUtils.areFieldTypesCompatible(f.getType(), jsonField.type)) {
             setClassFieldFromJSONField(f, jsonField, instance);
@@ -214,37 +212,34 @@ public class ParamsRouter {
     private static boolean checkIfCorrespondingFieldExists(Field f, Object jsonObject, String instanceName)
             throws LoggerException {
         if (jsonObject instanceof JSONField) {
-            if (f.getName().equals(((JSONField) jsonObject).name)) {
-                if (f.getClass().isAnnotationPresent(ParamKey.class)) {
-                    return f.getAnnotation(ParamKey.class).field()
-                            .equals(((JSONField) jsonObject).name);
-                } else {
-                    Log.log(LogType.ERROR, true, "Found a field: " + f.getName()
-                            + " in a class: " + instanceName
-                            + " that is not annotated with @ParamKey, therefore it cannot be routed");
-                    return false;
-                }
+            if (!f.getName().equals(((JSONField) jsonObject).name))
+                return false;
+            if (f.isAnnotationPresent(ParamKey.class)) {
+                return f.getAnnotation(ParamKey.class).field()
+                        .equals(((JSONField) jsonObject).name);
             }
+            Log.log(LogType.ERROR, true, "Found a field: " + f.getName()
+                    + " in a class: " + instanceName
+                    + " with a corresponding name that is not annotated with @ParamKey, therefore it cannot be routed");
             return false;
         }
         if (jsonObject instanceof JSONObject) {
-            if (f.getName().equals(((JSONObject) jsonObject).identifier)) {
-                if (f.getClass().isAnnotationPresent(ParamKey.class)) {
-                    return f.getAnnotation(ParamKey.class).field()
-                            .equals(((JSONObject) jsonObject).identifier);
-                } else {
-                    Log.log(LogType.ERROR, true, "Found a field: " + f.getName()
-                            + " in a class: " + instanceName
-                            + " that is not annotated with @ParamKey, therefore it cannot be routed");
-                    return false;
-                }
+            if (!f.getName().equals(((JSONObject) jsonObject).identifier))
+                return false;
+            if (f.isAnnotationPresent(ParamKey.class)) {
+                return f.getAnnotation(ParamKey.class).field()
+                        .equals(((JSONObject) jsonObject).identifier);
             }
+            Log.log(LogType.ERROR, true, "Found a field: " + f.getName()
+                    + " in a class: " + instanceName
+                    + " with a corresponding name that is not annotated with @ParamKey, therefore it cannot be routed");
             return false;
         }
         return false;
     }
 
-    private static void setClassFieldFromJSONField(Field classField, JSONField jsonField, Object instance) throws NumberFormatException, IllegalArgumentException, IllegalAccessException, LoggerException {
+    private static void setClassFieldFromJSONField(Field classField, JSONField jsonField, Object instance)
+            throws NumberFormatException, IllegalArgumentException, IllegalAccessException, LoggerException {
         if (JSONUtils.areFieldTypesCompatible(classField.getType(), jsonField.type)) {
             if (JSONFieldType.getFieldClass(jsonField.type) == Integer.class) {
                 classField.set(instance, Integer.parseInt(jsonField.field.toString()));
@@ -279,23 +274,36 @@ public class ParamsRouter {
 
     public static <T> T routeToClass(JSONObject object, Class<T> desiredClass) throws Exception {
         try {
-            if (!desiredClass.getClass().isAnnotationPresent(RoutableFromBody.class)) {
-                throw new Exception("Class is not routable");
+            if (desiredClass.getClass().isAnnotationPresent(RoutableFromBody.class)) {
+                throw new RoutingException("Class is not routable");
             }
+
             T instance = desiredClass.getDeclaredConstructor().newInstance();
+            for (Object field : object.fields) {
+                Arrays.stream(instance.getClass().getFields())
+                        .filter(f -> {
+                            try {
+                                return checkIfCorrespondingFieldExists(f, field, instance.getClass().getName());
+                            } catch (LoggerException e) {
+                                return false;
+                            }
+                        })
+                        .findFirst()
+                        .ifPresent(f -> {
+                            try {
+                                if (field instanceof JSONField) {
+                                    handleJSONField(f, field, instance);
+                                } else {
+                                    handleJSONObject(f, field, instance);
+                                }
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+                        });
+            }
             return instance;
-        } catch (InstantiationException e) {
-            return null;
-        } catch (IllegalAccessException e) {
-            return null;
-        } catch (IllegalArgumentException e) {
-            return null;
-        } catch (InvocationTargetException e) {
-            return null;
-        } catch (NoSuchMethodException e) {
-            return null;
-        } catch (SecurityException e) {
-            return null;
+        } catch (Exception e) {
+            throw new RoutingException("Could not instantiate object");
         }
     }
 }
