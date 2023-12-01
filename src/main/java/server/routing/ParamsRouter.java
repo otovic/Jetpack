@@ -8,6 +8,7 @@ import models.ParamKey;
 import models.RoutableFromBody;
 import models.RoutableFromParams;
 import test_classes.Person;
+import utility.Tuple;
 import utility.json.JSON;
 import utility.json.object.JSONField;
 import utility.json.object.JSONFieldType;
@@ -55,7 +56,7 @@ public class ParamsRouter {
         }
     }
 
-    public static <T> List<T> routeFromBody(String body, Class<T> object) throws RoutingException {
+    public static <T> List<T> routeFromBody(String body, Class<T> object) throws RoutingException, LoggerException {
         try {
             List<T> instances = new ArrayList<T>();
 
@@ -70,75 +71,19 @@ public class ParamsRouter {
                 for (Object field : jsonObject.fields) {
                     Arrays.stream(instance.getClass().getFields())
                             .filter(f -> {
-                                return checkIfCorrespondingFieldExists(f, jsonObject, instance.getClass().getName());
+                                try {
+                                    return checkIfCorrespondingFieldExists(f, jsonObject, instance.getClass().getName());
+                                } catch (LoggerException e) {
+                                    return false;
+                                }
                             })
                             .findFirst()
                             .ifPresent(f -> {
                                 try {
                                     if (field instanceof JSONField) {
                                         handleJSONField(f, field, instance);
-                                    } else if (field instanceof JSONObject) {
-                                        JSONObject jsonObjectO = (JSONObject) field;
-                                        if (f.getType() == HashMap.class) {
-                                            Type fieldType = f.getGenericType();
-                                            Type keyType = null;
-                                            Type valueType = null;
-                                            if (fieldType instanceof ParameterizedType) {
-                                                ParameterizedType parameterizedType = (ParameterizedType) fieldType;
-                                                Type[] typeArguments = parameterizedType.getActualTypeArguments();
-                                                keyType = typeArguments[0];
-                                                valueType = typeArguments[1];
-                                            }
-                                            HashMap<Object, Object> hashM = new HashMap<Object, Object>();
-                                            for (Object hashField : jsonObjectO.fields) {
-                                                if (hashField instanceof JSONObject) {
-                                                    throw new Exception("Object cannot be routed to primitive type");
-                                                } else if (hashField instanceof JSONField) {
-                                                    JSONField fld = (JSONField) hashField;
-                                                    Class<?> cls = (Class<?>) keyType;
-                                                    if (String.class.isAssignableFrom(cls)) {
-                                                        hashM.put(fld.name.toString(), fld.field.toString());
-                                                    }
-                                                    if (Integer.class.isAssignableFrom(cls)) {
-                                                        hashM.put(Integer.parseInt(fld.name), fld.field.toString());
-                                                    }
-                                                    if (Double.class.isAssignableFrom(cls)) {
-                                                        hashM.put(Double.parseDouble(fld.name), fld.field.toString());
-                                                    }
-                                                }
-                                            }
-                                            f.set(instance, hashM);
-                                        }
-                                        if (f.getType() == List.class) {
-                                            Type cls = f.getGenericType();
-                                            if (cls instanceof ParameterizedType) {
-                                                ParameterizedType parameterizedType = (ParameterizedType) cls;
-                                                Type[] typeArguments = parameterizedType.getActualTypeArguments();
-                                                if (typeArguments.length > 0) {
-                                                    if (typeArguments[0] == String.class) {
-                                                        List<String> list = new ArrayList<String>();
-                                                        for (Object hashField : jsonObjectO.fields) {
-                                                            if (hashField instanceof JSONObject) {
-                                                                throw new Exception(
-                                                                        "Object cannot be routed to primitive type");
-                                                            } else if (hashField instanceof JSONField) {
-                                                                JSONField fld = (JSONField) hashField;
-                                                                list.add(fld.field.toString());
-                                                            }
-                                                        }
-                                                        f.set(instance, list);
-                                                    }
-                                                }
-                                            }
-                                        }
-                                        if (!f.getType().isPrimitive()) {
-                                            if (commonClasses.contains(f.getType())) {
-                                                throw new Exception("Object cannot be routed to primitive type");
-                                            } else {
-                                                f.set(instance, routeToClass(jsonObjectO, f.getType()));
-                                            }
-                                            System.out.println("Object");
-                                        }
+                                    } else {
+                                        handleJSONObject(f, field, instance);
                                     }
                                 } catch (ClassCastException e) {
 
@@ -155,7 +100,93 @@ public class ParamsRouter {
         }
     }
 
-    private static void handleJSONField(Field f, Object field, Object instance) throws LoggerException {
+    private static void handleJSONObject(Field f, Object field, Object instance) throws Exception {
+        JSONObject jsonObject = (JSONObject) field;
+        if (f.getType() == HashMap.class) {
+            f.set(instance, handleHashMap(f, jsonObject));
+        }
+        if (f.getType() == List.class) {
+            f.set(instance, handleList(f, jsonObject, instance));
+        }
+        if (!f.getType().isPrimitive()) {
+            if (isDefaultClass(f.getType())) {
+                throw new Exception("Object cannot be routed to primitive type");
+            } else {
+                f.set(instance, routeToClass(jsonObject, f.getType()));
+            }
+        }
+    }
+
+    private static List handleList(Field f, JSONObject jsonObject, Object instance) throws Exception {
+        Type genericType = f.getGenericType();
+        if (!(genericType instanceof ParameterizedType)) {
+            Log.log(LogType.ERROR, false, "Error while trying to get generic type of field: " + f.getName()
+                    + " in class: " + instance.getClass().getName());
+            throw new Exception("Error while trying to get generic type of field: " + f.getName()
+                    + " in class: " + instance.getClass().getName());
+        }
+
+        ParameterizedType parameterizedType = (ParameterizedType) genericType;
+        Type[] typeArguments = parameterizedType.getActualTypeArguments();
+
+        if (typeArguments.length == 0) {
+            Log.log(LogType.ERROR, false, "Error while trying to get generic type of field: " + f.getName()
+                    + " in class: " + instance.getClass().getName());
+            throw new Exception("Error while trying to get generic type of field: " + f.getName()
+                    + " in class: " + instance.getClass().getName());
+        }
+
+
+        List<?> list = new ArrayList();
+        for (Object field : jsonObject.fields) {
+            if (field instanceof JSONObject) {
+                throw new Exception(
+                        "Object cannot be routed to primitive type");
+            } else {
+                JSONField jsonField = (JSONField) field;
+                list.add(parseAccordingToClass(jsonField.field, (Class<?>) typeArguments[0]));
+            }
+        }
+        return list;
+    }
+
+    private static HashMap handleHashMap(Field f, JSONObject object) throws Exception {
+        Tuple genericTypes = getHashMapGenericTypes(f);
+        HashMap<Object, Object> hashM = new HashMap<Object, Object>();
+        for (Object hashField : object.fields) {
+            if (hashField instanceof JSONObject) {
+                throw new Exception("Object cannot be routed to primitive type");
+            } else {
+                JSONField jsonField = (JSONField) hashField;
+                Class<?> keyClass = (Class<?>) genericTypes.first;
+                Class<?> valueClass = (Class<?>) genericTypes.second;
+                hashM.put(parseAccordingToClass(jsonField.name, keyClass),
+                        parseAccordingToClass(jsonField.field.toString(), valueClass));
+            }
+        }
+        return hashM;
+    }
+
+    private static <T> T parseAccordingToClass(final String value, final Class<?> clazz) {
+        if (clazz == String.class) {
+            return (T) value;
+        }
+        if (clazz == Integer.class) {
+            return (T) Integer.valueOf(value);
+        }
+        if (clazz == Double.class) {
+            return (T) Double.valueOf(value);
+        }
+        if (clazz == Boolean.class) {
+            return (T) Boolean.valueOf(value);
+        }
+        if (clazz == List.class) {
+            return (T) JSONUtils.parseList(value);
+        }
+        return null;
+    }
+
+    private static void handleJSONField(Field f, Object field, Object instance) throws LoggerException, NumberFormatException, IllegalArgumentException, IllegalAccessException {
         JSONField jsonField = (JSONField) field;
         if (JSONUtils.areFieldTypesCompatible(f.getType(), jsonField.type)) {
             setClassFieldFromJSONField(f, jsonField, instance);
@@ -165,6 +196,19 @@ public class ParamsRouter {
                     + f.getType().getName() + " is not compatible with JSONField type "
                     + JSONFieldType.getFieldClass(jsonField.type));
         }
+    }
+
+    private static Tuple<?, ?> getHashMapGenericTypes(Field f) {
+        Type fieldType = f.getGenericType();
+        Type keyType = null;
+        Type valueType = null;
+        if (fieldType instanceof ParameterizedType) {
+            ParameterizedType parameterizedType = (ParameterizedType) fieldType;
+            Type[] typeArguments = parameterizedType.getActualTypeArguments();
+            keyType = typeArguments[0];
+            valueType = typeArguments[1];
+        }
+        return new Tuple(keyType, valueType);
     }
 
     private static boolean checkIfCorrespondingFieldExists(Field f, Object jsonObject, String instanceName)
@@ -200,8 +244,8 @@ public class ParamsRouter {
         return false;
     }
 
-    private static void setClassFieldFromJSONField(Field classField, JSONField jsonField, Object instance) {
-        if (JSONUtils.areFieldTypesCompatible(f.getType(), jsonField.type)) {
+    private static void setClassFieldFromJSONField(Field classField, JSONField jsonField, Object instance) throws NumberFormatException, IllegalArgumentException, IllegalAccessException, LoggerException {
+        if (JSONUtils.areFieldTypesCompatible(classField.getType(), jsonField.type)) {
             if (JSONFieldType.getFieldClass(jsonField.type) == Integer.class) {
                 classField.set(instance, Integer.parseInt(jsonField.field.toString()));
                 return;
@@ -230,6 +274,7 @@ public class ParamsRouter {
         commonClasses.add(Double.class);
         commonClasses.add(List.class);
         commonClasses.add(HashMap.class);
+        return commonClasses.contains(desiredClass);
     }
 
     public static <T> T routeToClass(JSONObject object, Class<T> desiredClass) throws Exception {
