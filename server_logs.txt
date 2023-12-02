@@ -463,4 +463,7 @@
 21:16:38: Request made21:16:47: Type: SERVER_START | Details: Server started on port 8082!
 21:16:48 - Type: CLIENT_CONNECTED Details: Client connected!
 21:16:48: Request made21:16:48 - Type: CLIENT_CONNECTED Details: Client connected!
-21:16:48: Request made
+21:16:48: Request made10:56:58: Type: SERVER_START | Details: Server started on port 8082!
+10:57:20 - Type: CLIENT_CONNECTED Details: Client connected!
+10:57:20: Request made10:57:20 - Type: CLIENT_CONNECTED Details: Client connected!
+10:57:20: Request made

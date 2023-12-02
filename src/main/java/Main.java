@@ -1,7 +1,6 @@
 import models.RequestMethod;
 import server.config.CORSConfig;
 import server.Server;
-import server.routing.ParamsRouter;
 import test_classes.Person;
 import utility.json.JSON;
 
@@ -25,7 +24,7 @@ public class Main {
                 Arrays.asList("Content-Type"));
 
         server.addRoute("/test", RequestMethod.POST, config, ((req, res) -> {
-            List<Person> per = ParamsRouter.routeFromBody(req.body, Person.class);
+            List<Person> per = JSON.routeFromBody(req.body, Person.class);
             System.out.println(per.get(0).address.zip);
 //            for(StringBuilder param : bodyParams) {
 //                Person p = JSON.toObject(param, Person.class);

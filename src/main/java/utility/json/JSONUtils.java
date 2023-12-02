@@ -2,12 +2,16 @@ package utility.json;
 
 import java.lang.reflect.Array;
 import java.util.List;
+import java.util.Arrays;
 
 import utility.Tuple;
 import utility.json.object.JSONFieldType;
 import utility.json.object.JSONObject;
 import utility.json.types.JSONChild;
 import utility.json.types.JSONRoot;
+import java.lang.reflect.Field;
+import java.lang.reflect.ParameterizedType;
+import java.lang.reflect.Type;
 
 public class JSONUtils {
     public static boolean isArray(final String body) {
@@ -118,5 +122,42 @@ public class JSONUtils {
 
     public static List<String> parseList(final String value) {
         return List.of(value.split(","));
+    }
+
+    public static Tuple<?, ?> getHashMapGenericTypes(Field f) {
+        Type fieldType = f.getGenericType();
+        Type keyType = null;
+        Type valueType = null;
+        if (fieldType instanceof ParameterizedType) {
+            ParameterizedType parameterizedType = (ParameterizedType) fieldType;
+            Type[] typeArguments = parameterizedType.getActualTypeArguments();
+            keyType = typeArguments[0];
+            valueType = typeArguments[1];
+        }
+        return new Tuple(keyType, valueType);
+    }
+
+    public static <T> T parseBasedOnClass(final String value, final Class<?> clazz) {
+        if (clazz == String.class) {
+            return (T) value;
+        }
+        if (clazz == Integer.class) {
+            return (T) Integer.valueOf(value);
+        }
+        if (clazz == Double.class) {
+            return (T) Double.valueOf(value);
+        }
+        if (clazz == Boolean.class) {
+            return (T) Boolean.valueOf(value);
+        }
+        if (clazz == List.class) {
+            return (T) JSONUtils.parseList(value);
+        }
+        return null;
+    }
+
+    public static boolean isDefaultClass(Class<?> desiredClass) {
+        List<Class<?>> defaultClasses = Arrays.asList(String.class, Integer.class, Double.class, Boolean.class);
+        return defaultClasses.contains(desiredClass);
     }
 }
