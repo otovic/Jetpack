@@ -112,16 +112,16 @@ public class JSON {
         JSONObject jsonObject = (JSONObject) field;
         if (f.getType() == HashMap.class) {
             f.set(instance, handleHashMap(f, jsonObject));
+            return;
         }
         if (f.getType() == List.class) {
             f.set(instance, handleList(f, jsonObject, instance));
+            return;
         }
-        if (!f.getType().isPrimitive()) {
-            if (JSONUtils.isDefaultClass(f.getType())) {
-                throw new Exception("Object cannot be routed to primitive type");
-            } else {
-                f.set(instance, routeToClass(jsonObject, f.getType()));
-            }
+        if (JSONUtils.isDefaultClass(f.getType())) {
+            throw new Exception("Object cannot be routed to primitive type");
+        } else {
+            f.set(instance, routeToClass(jsonObject, f.getType()));
         }
     }
 
@@ -265,28 +265,35 @@ public class JSON {
     public static <T> List<StringBuilder> toListOfObjects(final String json) {
         StringBuilder jsonBuilder = new StringBuilder(json);
         List<StringBuilder> objects = new ArrayList<>();
-        if(JSONUtils.isArray(json)) {
+        if (JSONUtils.isArray(json)) {
             JSONUtils.removeArrayBrackets(jsonBuilder);
+            objects = getObjectsInJsonArray(jsonBuilder);
+        } else {
             objects = getObjectsInJsonArray(jsonBuilder);
         }
         return objects;
     }
 
     protected static <T> Object parseJSONFieldTypeBasedOnClassFieldType(final Field field, final String value) {
-        if(field.getType().equals(String.class)) return value;
-        if(field.getType().equals(Integer.class)) return Integer.parseInt(value);
-        if(field.getType().equals(Double.class)) return Double.parseDouble(value);
-        if(field.getType().equals(List.class)) return Arrays.asList(value.split(","));
+        if (field.getType().equals(String.class))
+            return value;
+        if (field.getType().equals(Integer.class))
+            return Integer.parseInt(value);
+        if (field.getType().equals(Double.class))
+            return Double.parseDouble(value);
+        if (field.getType().equals(List.class))
+            return Arrays.asList(value.split(","));
         return value;
     }
 
     public static JSONObject toJSONObject(final StringBuilder object, final Class<?> type, String identifier) {
         try {
             JSONObject jsonObject;
-            if(JSONChild.class.isAssignableFrom(type)) {
-                if (identifier == null) identifier = "";
+            if (JSONChild.class.isAssignableFrom(type)) {
+                if (identifier == null)
+                    identifier = "";
                 jsonObject = new JSONObject(type, identifier);
-            } else if(JSONRoot.class.isAssignableFrom(type)) {
+            } else if (JSONRoot.class.isAssignableFrom(type)) {
                 JSONUtils.removeObjectBrackets(object);
                 jsonObject = new JSONObject(type);
             } else {
@@ -299,11 +306,14 @@ public class JSON {
                 String field = object.substring(0, fieldLengthAndType.first);
                 if (fieldLengthAndType.second == JSONFieldType.OBJECT) {
                     String[] fieldParts = field.split(":", 2);
-                    parsedField = new Tuple<String, String>(JSONUtils.removeApostrophe(fieldParts[0].trim()), fieldParts[1].trim().substring(1, fieldParts[1].trim().length() - 1));
-                    jsonObject.addObject(toJSONObject(new StringBuilder(parsedField.second), JSONChild.class, parsedField.first));
+                    parsedField = new Tuple<String, String>(JSONUtils.removeApostrophe(fieldParts[0].trim()),
+                            fieldParts[1].trim().substring(1, fieldParts[1].trim().length() - 1));
+                    jsonObject.addObject(
+                            toJSONObject(new StringBuilder(parsedField.second), JSONChild.class, parsedField.first));
                 } else {
                     parsedField = JSONUtils.toKeyAndValue(field);
-                    jsonObject.addField(new JSONField(parsedField.first, parsedField.second, fieldLengthAndType.second));
+                    jsonObject
+                            .addField(new JSONField(parsedField.first, parsedField.second, fieldLengthAndType.second));
                 }
                 object.delete(0, fieldLengthAndType.first + 1);
             }
@@ -321,10 +331,12 @@ public class JSON {
             StringBuilder object = null;
             int startPosition = json.indexOf("{");
             int endPosition = json.indexOf("} {");
-            if(startPosition == -1) return objects;
-            if(endPosition == -1) lastObject = true;
+            if (startPosition == -1)
+                return objects;
+            if (endPosition == -1)
+                lastObject = true;
 
-            if(lastObject) {
+            if (lastObject) {
                 object = new StringBuilder(json.toString());
                 objects.add(object);
                 return objects;

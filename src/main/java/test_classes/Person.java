@@ -13,7 +13,7 @@ public class Person {
     @ParamKey(field = "name")
     public String name;
     @ParamKey(field = "age")
-    public Integer age;
+    public double age;
     @ParamKey(field = "interests")
     public List<String> interests;
     @ParamKey(field = "address")

@@ -466,4 +466,113 @@
 21:16:48: Request made10:56:58: Type: SERVER_START | Details: Server started on port 8082!
 10:57:20 - Type: CLIENT_CONNECTED Details: Client connected!
 10:57:20: Request made10:57:20 - Type: CLIENT_CONNECTED Details: Client connected!
-10:57:20: Request made
+10:57:20: Request made11:14:25: Type: SERVER_START | Details: Server started on port 8082!
+11:14:28 - Type: CLIENT_CONNECTED Details: Client connected!
+11:14:28: Request made11:14:28 - Type: CLIENT_CONNECTED Details: Client connected!
+11:14:28: Request made11:14:50: Type: SERVER_START | Details: Server started on port 8082!
+11:14:51 - Type: CLIENT_CONNECTED Details: Client connected!
+11:14:51: Request made11:14:51 - Type: CLIENT_CONNECTED Details: Client connected!
+11:14:51: Request made11:15:50: Type: SERVER_START | Details: Server started on port 8082!
+11:15:52 - Type: CLIENT_CONNECTED Details: Client connected!
+11:15:52: Request made11:15:52 - Type: CLIENT_CONNECTED Details: Client connected!
+11:15:52: Request made11:15:52: Type: ERROR | Details: Field age, in class test_classes.Person, of type java.lang.Integer is not compatible with JSONField type class java.lang.Double
+11:16:14: Type: SERVER_START | Details: Server started on port 8082!
+11:16:15 - Type: CLIENT_CONNECTED Details: Client connected!
+11:16:15: Request made11:16:16 - Type: CLIENT_CONNECTED Details: Client connected!
+11:16:16: Request made11:16:16: Type: ERROR | Details: Field age, in class test_classes.Person, of type java.lang.Integer is not compatible with JSONField type class java.lang.Double
+11:18:0: Type: SERVER_START | Details: Server started on port 8082!
+11:18:2 - Type: CLIENT_CONNECTED Details: Client connected!
+11:18:2: Request made11:18:2 - Type: CLIENT_CONNECTED Details: Client connected!
+11:18:2: Request made11:18:2: Type: ERROR | Details: Field age, in class test_classes.Person, of type java.lang.Integer is not compatible with JSONField type class java.lang.Double
+11:19:19: Type: SERVER_START | Details: Server started on port 8082!
+11:19:26: Type: SERVER_START | Details: Server started on port 8082!
+11:19:27 - Type: CLIENT_CONNECTED Details: Client connected!
+11:19:27: Request made11:19:27 - Type: CLIENT_CONNECTED Details: Client connected!
+11:19:27: Request made11:19:27: Type: ERROR | Details: Field age, in class test_classes.Person, of type java.lang.Integer is not compatible with JSONField type class java.lang.Double
+11:19:35 - Type: CLIENT_CONNECTED Details: Client connected!
+11:19:35: Request made11:19:35 - Type: CLIENT_CONNECTED Details: Client connected!
+11:19:35: Request made11:20:35: Type: SERVER_START | Details: Server started on port 8082!
+11:20:37 - Type: CLIENT_CONNECTED Details: Client connected!
+11:20:37: Request made11:20:37 - Type: CLIENT_CONNECTED Details: Client connected!
+11:20:37: Request made11:22:45: Type: SERVER_START | Details: Server started on port 8082!
+11:22:47 - Type: CLIENT_CONNECTED Details: Client connected!
+11:22:47: Request made11:22:47 - Type: CLIENT_CONNECTED Details: Client connected!
+11:22:47: Request made11:25:13: Type: SERVER_START | Details: Server started on port 8082!
+11:25:15 - Type: CLIENT_CONNECTED Details: Client connected!
+11:25:15: Request made11:25:15 - Type: CLIENT_CONNECTED Details: Client connected!
+11:25:15: Request made11:25:59: Type: SERVER_START | Details: Server started on port 8082!
+11:26:0 - Type: CLIENT_CONNECTED Details: Client connected!
+11:26:0: Request made11:26:0 - Type: CLIENT_CONNECTED Details: Client connected!
+11:26:0: Request made11:26:31: Type: SERVER_START | Details: Server started on port 8082!
+11:26:33 - Type: CLIENT_CONNECTED Details: Client connected!
+11:26:33: Request made11:26:33 - Type: CLIENT_CONNECTED Details: Client connected!
+11:26:33: Request made11:28:7: Type: SERVER_START | Details: Server started on port 8082!
+11:28:9 - Type: CLIENT_CONNECTED Details: Client connected!
+11:28:9: Request made11:28:9 - Type: CLIENT_CONNECTED Details: Client connected!
+11:28:9: Request made11:28:31: Type: SERVER_START | Details: Server started on port 8082!
+11:28:34 - Type: CLIENT_CONNECTED Details: Client connected!
+11:28:34: Request made11:28:34 - Type: CLIENT_CONNECTED Details: Client connected!
+11:28:34: Request made11:28:34: Type: ERROR | Details: Field age, in class test_classes.Person, of type double is not compatible with JSONField type class java.lang.Integer
+11:29:15: Type: SERVER_START | Details: Server started on port 8082!
+11:29:17 - Type: CLIENT_CONNECTED Details: Client connected!
+11:29:17: Request made11:29:17 - Type: CLIENT_CONNECTED Details: Client connected!
+11:29:17: Request made11:29:17: Type: ERROR | Details: Field age, in class test_classes.Person, of type double is not compatible with JSONField type class java.lang.Integer
+11:29:31: Type: SERVER_START | Details: Server started on port 8082!
+11:29:33 - Type: CLIENT_CONNECTED Details: Client connected!
+11:29:33: Request made11:29:33 - Type: CLIENT_CONNECTED Details: Client connected!
+11:29:33: Request made11:30:41: Type: SERVER_START | Details: Server started on port 8082!
+11:30:43 - Type: CLIENT_CONNECTED Details: Client connected!
+11:30:43: Request made11:30:43 - Type: CLIENT_CONNECTED Details: Client connected!
+11:30:43: Request made11:31:24: Type: SERVER_START | Details: Server started on port 8082!
+11:31:26 - Type: CLIENT_CONNECTED Details: Client connected!
+11:31:26: Request made11:31:26 - Type: CLIENT_CONNECTED Details: Client connected!
+11:31:26: Request made11:32:30: Type: SERVER_START | Details: Server started on port 8082!
+11:32:34 - Type: CLIENT_CONNECTED Details: Client connected!
+11:32:34: Request made11:32:34 - Type: CLIENT_CONNECTED Details: Client connected!
+11:32:34: Request made11:33:47: Type: SERVER_START | Details: Server started on port 8082!
+11:33:49 - Type: CLIENT_CONNECTED Details: Client connected!
+11:33:49: Request made11:33:49 - Type: CLIENT_CONNECTED Details: Client connected!
+11:33:49: Request made11:40:46: Type: SERVER_START | Details: Server started on port 8082!
+11:40:49 - Type: CLIENT_CONNECTED Details: Client connected!
+11:40:49: Request made11:40:49 - Type: CLIENT_CONNECTED Details: Client connected!
+11:40:49: Request made11:47:8: Type: SERVER_START | Details: Server started on port 8082!
+11:47:10 - Type: CLIENT_CONNECTED Details: Client connected!
+11:47:11: Request made11:47:11 - Type: CLIENT_CONNECTED Details: Client connected!
+11:47:11: Request made11:47:29: Type: ERROR | Details: There was an error when trying to start a server on port 8082! ERROR: Address already in use: bind
+11:47:37: Type: SERVER_START | Details: Server started on port 8082!
+11:47:39 - Type: CLIENT_CONNECTED Details: Client connected!
+11:47:39: Request made11:47:39 - Type: CLIENT_CONNECTED Details: Client connected!
+11:47:39: Request made11:53:44: Type: SERVER_START | Details: Server started on port 8082!
+11:53:46 - Type: CLIENT_CONNECTED Details: Client connected!
+11:53:46: Request made11:53:46 - Type: CLIENT_CONNECTED Details: Client connected!
+11:53:46: Request made11:54:58: Type: SERVER_START | Details: Server started on port 8082!
+11:54:59 - Type: CLIENT_CONNECTED Details: Client connected!
+11:54:59: Request made11:54:59 - Type: CLIENT_CONNECTED Details: Client connected!
+11:54:59: Request made11:55:11: Type: SERVER_START | Details: Server started on port 8082!
+11:55:12 - Type: CLIENT_CONNECTED Details: Client connected!
+11:55:12: Request made11:55:12 - Type: CLIENT_CONNECTED Details: Client connected!
+11:55:12: Request made11:56:7: Type: SERVER_START | Details: Server started on port 8082!
+11:56:13 - Type: CLIENT_CONNECTED Details: Client connected!
+11:56:13: Request made11:56:13 - Type: CLIENT_CONNECTED Details: Client connected!
+11:56:13: Request made11:56:27: Type: SERVER_START | Details: Server started on port 8082!
+11:56:29 - Type: CLIENT_CONNECTED Details: Client connected!
+11:56:29: Request made11:56:29 - Type: CLIENT_CONNECTED Details: Client connected!
+11:56:29: Request made11:56:39: Type: SERVER_START | Details: Server started on port 8082!
+11:56:40 - Type: CLIENT_CONNECTED Details: Client connected!
+11:56:40: Request made11:56:40 - Type: CLIENT_CONNECTED Details: Client connected!
+11:56:40: Request made11:57:23: Type: SERVER_START | Details: Server started on port 8082!
+11:57:24 - Type: CLIENT_CONNECTED Details: Client connected!
+11:57:24: Request made11:57:24 - Type: CLIENT_CONNECTED Details: Client connected!
+11:57:24: Request made11:57:49: Type: SERVER_START | Details: Server started on port 8082!
+11:57:50 - Type: CLIENT_CONNECTED Details: Client connected!
+11:57:50: Request made11:57:50 - Type: CLIENT_CONNECTED Details: Client connected!
+11:57:50: Request made11:58:5: Type: SERVER_START | Details: Server started on port 8082!
+11:58:7 - Type: CLIENT_CONNECTED Details: Client connected!
+11:58:7: Request made11:58:7 - Type: CLIENT_CONNECTED Details: Client connected!
+11:58:7: Request made11:58:18: Type: SERVER_START | Details: Server started on port 8082!
+11:58:19 - Type: CLIENT_CONNECTED Details: Client connected!
+11:58:19: Request made11:58:19 - Type: CLIENT_CONNECTED Details: Client connected!
+11:58:19: Request made11:58:35: Type: SERVER_START | Details: Server started on port 8082!
+11:58:36 - Type: CLIENT_CONNECTED Details: Client connected!
+11:58:36: Request made11:58:36 - Type: CLIENT_CONNECTED Details: Client connected!
+11:58:36: Request made11:58:36: Type: ERROR | Details: Field zip, in class test_classes.Address, of type java.lang.Double is not compatible with JSONField type class java.lang.String

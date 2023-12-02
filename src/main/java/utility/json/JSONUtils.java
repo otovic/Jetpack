@@ -46,12 +46,17 @@ public class JSONUtils {
                     JSONFieldType.OBJECT);
         }
         if (Character.isDigit(object.charAt(objectSplitPosition))) {
-            if (object.substring(objectSplitPosition).contains(".")) {
+            int endPosition = object.indexOf(",", objectSplitPosition) + 1;
+            if (endPosition == 0) {
+                if (object.substring(objectSplitPosition).contains(".")) {
+                    return new Tuple<Integer, JSONFieldType>(object.length(),
+                        JSONFieldType.DOUBLE);
+                }
+                return new Tuple<Integer, JSONFieldType>(object.length(), JSONFieldType.INTEGER);
+            }
+            if (object.substring(objectSplitPosition, endPosition).contains(".")) {
                 return new Tuple<Integer, JSONFieldType>(object.indexOf(",", objectSplitPosition + 1),
                         JSONFieldType.DOUBLE);
-            }
-            if (object.indexOf(",", objectSplitPosition + 1) == -1) {
-                return new Tuple<Integer, JSONFieldType>(object.length(), JSONFieldType.INTEGER);
             }
             return new Tuple<Integer, JSONFieldType>(object.indexOf(",", objectSplitPosition + 1),
                     JSONFieldType.INTEGER);
