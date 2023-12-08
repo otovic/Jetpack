@@ -9,7 +9,7 @@ import java.util.List;
 
 public class Main {
     public static void main( String[] args ) throws Exception {
-        Server server = new Server(8082, false);
+        Server server = new Server(8082, false, 0, 20);
 
         server.corsConfig.setAllowOrigins(Arrays.asList("http://localhost:8080", "http://localhost:3000"));
         server.corsConfig.setAllowMethods(Arrays.asList("GET", "POST", "PUT", "DELETE"));

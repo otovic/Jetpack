@@ -1,5 +1,5 @@
 package models;
 
-public interface HookCallback {
+public interface HookTask {
     void call() throws Exception;
 }

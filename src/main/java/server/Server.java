@@ -9,7 +9,8 @@ import models.RequestMethod;
 import server.client.Request;
 import server.client.Response;
 import server.config.CORSConfig;
-import server.hook.Hook;
+import server.config.ServerConfig;
+import server.multithreading.Hook;
 import server.routing.Router;
 import test_classes.Person;
 import utility.json.JSON;
@@ -23,14 +24,16 @@ import java.util.*;
 
 public class Server {
     public int socket;
-    public boolean allowClientConnections = false;
     private Router router = new Router();
     public CORSConfig corsConfig = new CORSConfig();
     private Snapshot currentEvent = new Snapshot();
+    private ServerConfig serverConfig = new ServerConfig();
+    private Hook hook;
 
-    public Server(int socket, boolean allowClientConnections) {
+    public Server(int socket, boolean allowClientConnections, int maxNumberOfConnections, int maxNumberOfThreads) {
         this.socket = socket;
-        this.allowClientConnections = allowClientConnections;
+        this.serverConfig = new ServerConfig(allowClientConnections, maxNumberOfConnections, false);
+        this.hook = new Hook(maxNumberOfThreads, this.serverConfig);
     }
 
     private void updateSnapshot(String event) {
@@ -43,15 +46,19 @@ public class Server {
             Logger.logMessage(LogType.SERVER_START, true, this.currentEvent);
             while (true) {
                 try {
-                    Socket clientSocket = serverSocket.accept();
-                    new Hook(clientSocket, () -> {
+                    hook.submitTask(() -> {
                         try {
-                            this.handleIncomingRequest(clientSocket);
+                            Socket client = serverSocket.accept();
+                            this.handleIncomingRequest(client);
                         } catch (Exception e) {
-                            this.updateSnapshot("There was an error when trying to start a server on port " + this.socket + "! ERROR: " + e.getMessage());
-                            Logger.logMessage(LogType.ERROR, true, this.currentEvent);
-                        }
-                    }).start();
+                            this.updateSnapshot("There was an error when trying to handle an incoming request! ERROR: " + e.getMessage());
+                            try {
+                                Logger.logMessage(LogType.ERROR, true, this.currentEvent);
+                            } catch (LoggerException e1) {
+                                e1.printStackTrace();
+                            }
+                        }         
+                    });
                 } catch (Exception e) {
                     this.updateSnapshot("There was an error when trying to start a server on port " + this.socket + "! ERROR: " + e.getMessage());
                     Logger.logMessage(LogType.ERROR, true, this.currentEvent);
@@ -71,6 +78,8 @@ public class Server {
 
         this.updateSnapshot("Client Info: " + client.toString() + " | Request: " + req.toString() + " | Headers: " + req.headers.toString() + "");
         Logger.logRequest(req, true, this.currentEvent);
+
+        System.out.println(req.method);
 
         this.router.routes.forEach((routePath, route) -> {
             if(routePath.equals(req.path)) {
