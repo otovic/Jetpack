@@ -95,6 +95,69 @@ public class JSON {
         }
     }
 
+    public static <T> T routeCLassFromBody(final String body, Class<T> object) throws Exception {
+        JSONObject jsonObject = JSON.toJSONObject(new StringBuilder(body), JSONRoot.class, null);
+        return routeToClass(jsonObject, object);
+    }
+
+    public static JSONObject deserialize(final String body) {
+        try {
+            return JSON.toJSONObject(new StringBuilder(body), JSONRoot.class, null);
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
+    public static <T> String serialize(final Object object) {
+        try {
+            StringBuilder json = new StringBuilder("{");
+            Arrays.stream(object.getClass().getFields()).forEach(f -> {
+                try {
+                    if (f.getType() == String.class) {
+                        json.append("\"" + f.getName() + "\":\"" + f.get(object) + "\",");
+                        return;
+                    }
+                    if (f.getType() == Integer.class || f.getType() == Double.class || f.getType() == Boolean.class
+                            || f.getType() == double.class || f.getType() == int.class
+                            || f.getType() == boolean.class) {
+                        json.append("\"" + f.getName() + "\":" + f.get(object) + ",");
+                        return;
+                    }
+                    if (f.getType() == List.class) {
+                        json.append("\"" + f.getName() + "\":[");
+                        List<?> list = (List<?>) f.get(object);
+                        list.forEach(l -> {
+                            json.append("" + l + ",");
+                        });
+                        json.deleteCharAt(json.length() - 1);
+                        json.append("],");
+                        return;
+                    }
+                    if (f.getType() == HashMap.class) {
+                        json.append("\"" + f.getName() + "\":{");
+                        HashMap<?, ?> hashM = (HashMap<?, ?>) f.get(object);
+                        hashM.forEach((k, v) -> {
+                            json.append("\"" + k + "\":\"" + v + "\",");
+                        });
+                        json.deleteCharAt(json.length() - 1);
+                        json.append("},");
+                        return;
+                    } else {
+                        json.append("\"" + f.getName() + "\":" + serialize(f.get(object)) + ",");
+                    }
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            });
+            json.deleteCharAt(json.length() - 1);
+            json.append("}");
+            return json.toString();
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
     protected static void handleJSONField(Field f, Object field, Object instance)
             throws LoggerException, NumberFormatException, IllegalArgumentException, IllegalAccessException {
         JSONField jsonField = (JSONField) field;

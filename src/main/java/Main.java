@@ -3,7 +3,10 @@ import server.config.CORSConfig;
 import server.Server;
 import test_classes.Person;
 import utility.json.JSON;
+import utility.json.object.JSONObject;
 
+import java.lang.management.ManagementFactory;
+import java.lang.management.ThreadMXBean;
 import java.util.Arrays;
 import java.util.List;
 
@@ -24,12 +27,11 @@ public class Main {
                 Arrays.asList("Content-Type"));
 
         server.addRoute("/test", RequestMethod.POST, config, ((req, res) -> {
+            System.out.println(req.body);
             List<Person> per = JSON.routeFromBody(req.body, Person.class);
-            System.out.println(per.get(0).address.street);
-//            for(StringBuilder param : bodyParams) {
-//                Person p = JSON.toObject(param, Person.class);
-//                System.out.println(p.address);
-//            }
+            Person p = JSON.routeCLassFromBody(req.body, Person.class);
+            String ser = JSON.serialize(p);
+            System.out.println(ser);
             return res.send("200 OK", "index.html");
         }));
 

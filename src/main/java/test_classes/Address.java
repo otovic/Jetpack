@@ -6,7 +6,7 @@ import models.RoutableFromBody;
 @RoutableFromBody
 public class Address {
     @ParamKey(field = "zip")
-    public Double zip;
+    public String zip;
     @ParamKey(field = "street")
     public String street;
 }
