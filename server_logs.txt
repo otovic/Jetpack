@@ -24788,3 +24788,13 @@
 20:0:15: Request made20:0:15: Request made20:0:15: Type: ERROR | Details: Field age, in class test_classes.Person, of type java.lang.Integer is not compatible with JSONField type class java.lang.Double
 20:0:17: Request made20:0:17: Request made20:0:17: Type: ERROR | Details: Field age, in class test_classes.Person, of type java.lang.Integer is not compatible with JSONField type class java.lang.Double
 >>>>>>> multithreading
+20:39:28: Type: SERVER_START | Details: Server started on port 8082!
+20:41:33: Type: SERVER_START | Details: Server started on port 8082!
+20:55:36: Type: SERVER_START | Details: Server started on port 8082!
+20:55:41: Request made20:55:41: Type: ERROR | Details: There was an error when trying to handle an incoming request! ERROR: java.lang.StringIndexOutOfBoundsException: Index 62 out of bounds for length 62
+20:56:6: Type: SERVER_START | Details: Server started on port 8082!
+20:56:6: Request made20:56:6: Type: ERROR | Details: There was an error when trying to handle an incoming request! ERROR: java.lang.StringIndexOutOfBoundsException: Index 62 out of bounds for length 62
+20:56:16: Type: SERVER_START | Details: Server started on port 8082!
+20:56:17: Request made20:56:17: Request made20:56:23: Request made20:56:23: Request made20:56:31: Request made20:56:31: Request made20:56:31: Request made20:56:31: Request made20:56:32: Request made20:56:32: Type: ERROR | Details: There was an error when trying to handle an incoming request! ERROR: java.lang.StringIndexOutOfBoundsException: Index 62 out of bounds for length 62
+20:56:48: Type: SERVER_START | Details: Server started on port 8082!
+20:56:48: Request made20:56:48: Request made20:56:51: Request made20:56:51: Request made20:56:52: Request made20:56:52: Request made20:56:53: Request made20:56:53: Request made20:56:54: Request made20:56:54: Request made20:56:54: Request made20:56:55: Request made20:56:55: Request made20:56:55: Request made20:56:56: Request made20:56:56: Request made20:56:57: Request made20:56:57: Request made

@@ -18,6 +18,7 @@ import utility.json.JSON;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.*;
@@ -46,6 +47,13 @@ public class Server {
             Logger.logMessage(LogType.SERVER_START, true, this.currentEvent);
             while (true) {
                 try {
+                    // Socket client = serverSocket.accept();
+                    // BufferedReader br = new BufferedReader(new InputStreamReader(client.getInputStream()));
+                    // PrintWriter pr = new PrintWriter(client.getOutputStream(), true);
+                    // while (true) {
+                    //     System.out.println(br.readLine());
+                    //     pr.println("ODGOVOR SA SERVERA");
+                    // }
                     hook.submitTask(() -> {
                         try {
                             Socket client = serverSocket.accept();

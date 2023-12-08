@@ -1,6 +1,7 @@
 import models.RequestMethod;
 import server.config.CORSConfig;
 import server.Server;
+import server.authentication.FuseID;
 import test_classes.Person;
 import utility.json.JSON;
 import utility.json.object.JSONObject;
@@ -19,6 +20,8 @@ public class Main {
         server.corsConfig.setAllowHeaders(Arrays.asList("Content-Type"));
 
         server.addRoute("/", RequestMethod.GET, ((req, res) -> {
+            FuseID fid = new FuseID("petar");
+            fid.generateToken();
             return res.send("200 OK", "index.html");
         }));
 
