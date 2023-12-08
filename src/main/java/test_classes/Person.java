@@ -13,9 +13,9 @@ public class Person {
     @ParamKey(field = "name")
     public String name;
     @ParamKey(field = "age")
-    public double age;
+    public Integer age;
     @ParamKey(field = "interests")
     public List<String> interests;
     @ParamKey(field = "address")
-    public Address address;
+    public List<String> address;
 }

@@ -9,6 +9,7 @@ import models.RequestMethod;
 import server.client.Request;
 import server.client.Response;
 import server.config.CORSConfig;
+import server.hook.Hook;
 import server.routing.Router;
 import test_classes.Person;
 import utility.json.JSON;
@@ -41,10 +42,19 @@ public class Server {
             this.updateSnapshot("Server started on port " + this.socket + "!");
             Logger.logMessage(LogType.SERVER_START, true, this.currentEvent);
             while (true) {
-                try (Socket client = serverSocket.accept()) {
-                    this.updateSnapshot("Client connected!");
-                    Logger.logMessage(LogType.CLIENT_CONNECTED, true, this.currentEvent);
-                    handleIncomingRequest(client);
+                try {
+                    Socket clientSocket = serverSocket.accept();
+                    new Hook(clientSocket, () -> {
+                        try {
+                            this.handleIncomingRequest(clientSocket);
+                        } catch (Exception e) {
+                            this.updateSnapshot("There was an error when trying to start a server on port " + this.socket + "! ERROR: " + e.getMessage());
+                            Logger.logMessage(LogType.ERROR, true, this.currentEvent);
+                        }
+                    }).start();
+                } catch (Exception e) {
+                    this.updateSnapshot("There was an error when trying to start a server on port " + this.socket + "! ERROR: " + e.getMessage());
+                    Logger.logMessage(LogType.ERROR, true, this.currentEvent);
                 }
             }
         } catch (Exception e) {
@@ -54,6 +64,7 @@ public class Server {
     }
 
     private void handleIncomingRequest(Socket client) throws IOException, LoggerException {
+        System.out.println("Handling request from client: " + client.toString());
         final BufferedReader br = new BufferedReader(new InputStreamReader(client.getInputStream()));
         final StringBuilder requestBuilder = this.buildRequest(br);
         final Request req = parseRequest(requestBuilder.toString());
