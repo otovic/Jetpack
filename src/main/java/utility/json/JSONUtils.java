@@ -113,11 +113,11 @@ public class JSONUtils {
     }
 
     public static boolean areFieldTypesCompatible(Class<?> classField, JSONFieldType jsonField) {
-        if(classField.getName() == "int") {
+        if(classField.getName().equals("int")) {
             if(jsonField == JSONFieldType.INTEGER) return true;
             return false;
         }
-        if(classField.getName() == "double") {
+        if(classField.getName().equals("double")) {
             if(jsonField == JSONFieldType.DOUBLE) return true;
             return false;
         }

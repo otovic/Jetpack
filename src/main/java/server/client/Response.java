@@ -79,7 +79,6 @@ public class Response {
     }
 
     private void writeClientOutput(OutputStream stream, String status, String contentType, byte[] content) throws IOException {
-        System.out.println(status);
         stream.write(("HTTP/1.1 " + status + "\r\n").getBytes());
         stream.write(("Content-Type: " + contentType + "\r\n").getBytes());
         stream.write(("Access-Control-Allow-Origin: " + allowedOrigins + "\r\n").getBytes());
@@ -99,6 +98,17 @@ public class Response {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    public void serverBusy(OutputStream stream) throws IOException {
+        stream.write(("HTTP/1.1 409 \r\n").getBytes());
+        stream.write(("Access-Control-Allow-Origin: " + allowedOrigins + "\r\n").getBytes());
+        stream.write(("Access-Control-Allow-Methods: " + allowedMethods + "\r\n").getBytes());
+        stream.write(("Access-Control-Allow-Headers: " + allowedHeaders + "\r\n").getBytes());
+        stream.write(("Content-Length: 0\r\n").getBytes());
+        stream.write("\r\n".getBytes());
+        stream.flush();
+        this.client.close();
     }
 
     public static void json() {
