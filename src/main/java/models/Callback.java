@@ -4,5 +4,5 @@ import server.client.Request;
 import server.client.Response;
 
 public interface Callback {
-    boolean exe(Request req, Response res) throws Exception;
+    void exe(Request req, Response res) throws Exception;
 }

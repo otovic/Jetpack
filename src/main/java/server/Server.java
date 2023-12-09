@@ -11,6 +11,8 @@ import server.client.Response;
 import server.config.CORSConfig;
 import server.config.ServerConfig;
 import server.multithreading.Hook;
+import server.networking.sessions.SessionManager;
+import server.networking.sessions.player.Player;
 import server.routing.Router;
 import test_classes.Person;
 import utility.json.JSON;
@@ -18,7 +20,6 @@ import utility.json.JSON;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.*;
@@ -30,11 +31,21 @@ public class Server {
     private Snapshot currentEvent = new Snapshot();
     private ServerConfig serverConfig = new ServerConfig();
     private Hook hook;
+    private SessionManager manager;
 
     public Server(int socket, boolean allowClientConnections, int maxNumberOfConnections, int maxNumberOfThreads) {
         this.socket = socket;
         this.serverConfig = new ServerConfig(allowClientConnections, maxNumberOfConnections, false);
         this.hook = new Hook(maxNumberOfThreads, this.serverConfig);
+        this.manager = null;
+    }
+
+    public Server(int socket, boolean allowClientConnections, int maxNumberOfConnections, int maxNumberOfThreads,
+            SessionManager manager) {
+        this.socket = socket;
+        this.serverConfig = new ServerConfig(allowClientConnections, maxNumberOfConnections, false);
+        this.hook = new Hook(maxNumberOfThreads, this.serverConfig);
+        this.manager = manager;
     }
 
     private void updateSnapshot(String event) {
@@ -48,74 +59,80 @@ public class Server {
             while (true) {
                 try {
                     // Socket client = serverSocket.accept();
-                    // BufferedReader br = new BufferedReader(new InputStreamReader(client.getInputStream()));
+                    // BufferedReader br = new BufferedReader(new
+                    // InputStreamReader(client.getInputStream()));
                     // PrintWriter pr = new PrintWriter(client.getOutputStream(), true);
                     // while (true) {
-                    //     System.out.println(br.readLine());
-                    //     pr.println("ODGOVOR SA SERVERA");
+                    // System.out.println(br.readLine());
+                    // pr.println("ODGOVOR SA SERVERA");
                     // }
                     hook.submitTask(() -> {
                         try {
                             Socket client = serverSocket.accept();
                             this.handleIncomingRequest(client);
                         } catch (Exception e) {
-                            this.updateSnapshot("There was an error when trying to handle an incoming request! ERROR: " + e.getMessage());
+                            this.updateSnapshot("There was an error when trying to handle an incoming request! ERROR: "
+                                    + e.getMessage());
                             try {
                                 Logger.logMessage(LogType.ERROR, true, this.currentEvent);
                             } catch (LoggerException e1) {
                                 e1.printStackTrace();
                             }
-                        }         
+                        }
                     });
                 } catch (Exception e) {
-                    this.updateSnapshot("There was an error when trying to start a server on port " + this.socket + "! ERROR: " + e.getMessage());
+                    this.updateSnapshot("There was an error when trying to start a server on port " + this.socket
+                            + "! ERROR: " + e.getMessage());
                     Logger.logMessage(LogType.ERROR, true, this.currentEvent);
                 }
             }
         } catch (Exception e) {
-            this.updateSnapshot("There was an error when trying to start a server on port " + this.socket + "! ERROR: " + e.getMessage());
+            this.updateSnapshot("There was an error when trying to start a server on port " + this.socket + "! ERROR: "
+                    + e.getMessage());
             Logger.logMessage(LogType.ERROR, true, this.currentEvent);
         }
     }
 
     private void handleIncomingRequest(Socket client) throws IOException, LoggerException {
-        System.out.println("Handling request from client: " + client.toString());
-        final BufferedReader br = new BufferedReader(new InputStreamReader(client.getInputStream()));
-        final StringBuilder requestBuilder = this.buildRequest(br);
-        final Request req = parseRequest(requestBuilder.toString());
+        try {
+            System.out.println("Handling request from client: " + client.toString());
+            final BufferedReader br = new BufferedReader(new InputStreamReader(client.getInputStream()));
+            final StringBuilder requestBuilder = this.buildRequest(br);
+            final Request req = parseRequest(requestBuilder.toString());
 
-        this.updateSnapshot("Client Info: " + client.toString() + " | Request: " + req.toString() + " | Headers: " + req.headers.toString() + "");
-        Logger.logRequest(req, true, this.currentEvent);
-
-        System.out.println(req.method);
-
-        this.router.routes.forEach((routePath, route) -> {
-            if(routePath.equals(req.path)) {
-                try {
-                    if(req.method.equals("OPTIONS")) {
-                        Response res = new Response(client, req, route, this.corsConfig);
-                        try {
-                            res.send("200 OK", "");
-                        } catch (Exception e) {
-                            e.printStackTrace();
+            this.updateSnapshot("Client Info: " + client.toString() + " | Request: " + req.toString() + " | Headers: "
+                    + req.headers.toString() + "");
+            Logger.logRequest(req, true, this.currentEvent);
+            this.router.routes.forEach((routePath, route) -> {
+                if (routePath.equals(req.path)) {
+                    try {
+                        if (req.method.equals("OPTIONS")) {
+                            Response res = new Response(client, req, route, this.corsConfig);
+                            try {
+                                res.send("200 OK", "");
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+                            return;
                         }
-                        return;
-                    }
-                    if(req.method.equals("POST") || req.method.equals("PUT")) {
-                        if(req.headers.contains("Content-Length: 0")) {
-                            req.body = "";
+                        if (req.method.equals("POST") || req.method.equals("PUT")) {
+                            if (req.headers.contains("Content-Length: 0")) {
+                                req.body = "";
+                            } else {
+                                req.body = this.parseBody(req.headers, br).toString();
+                            }
                         } else {
-                            req.body = this.parseBody(req.headers, br).toString();
+                            req.body = "";
                         }
-                    } else {
-                        req.body = "";
+                        route.callback.exe(req, new Response(client, req, route, this.corsConfig));
+                    } catch (Exception e) {
+                        throw new RuntimeException(e);
                     }
-                    route.callback.exe(req, new Response(client, req, route, this.corsConfig));
-                } catch (Exception e) {
-                    throw new RuntimeException(e);
                 }
-            }
-        });
+            });
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     private StringBuilder parseBody(List<String> headers, BufferedReader br) throws IOException {
@@ -135,9 +152,9 @@ public class Server {
         StringBuilder requestBuilder = new StringBuilder();
         String line;
         while (!(line = br.readLine()).isBlank()) {
+            System.out.println(line);
             requestBuilder.append(line + "\r\n");
         }
-
         return requestBuilder;
     }
 
@@ -151,7 +168,7 @@ public class Server {
         String host = reqLines[1].split(" ")[1];
         Map<String, String> params = new HashMap<>();
 
-        if(reqLine[1].split("\\?").length > 1) {
+        if (reqLine[1].split("\\?").length > 1) {
             params = this.router.getURLParams(reqLine[1].split("\\?")[1]);
         }
 
@@ -169,5 +186,20 @@ public class Server {
 
     public void addRoute(String route, RequestMethod reqMethod, Callback callback) {
         this.router.registerRoute(route, reqMethod, null, callback);
+    }
+
+    public void addRoute(String route, Callback callback) {
+        this.router.registerRoute(route, RequestMethod.GET, null, callback);
+    }
+
+    public <T> boolean registerNewPlayer(Class<T> type, final String name, final String email, final Response res) {
+        try {
+            Player<T> p = Player.generateNewPlayer(this.manager, name, email, res.getSocket(),
+                    res.getSocket().getOutputStream());
+            this.manager.addPlayer(p);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
     }
 }

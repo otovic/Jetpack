@@ -19,7 +19,7 @@ public class Hook {
         for (int i = 0; i < this.taskPool; i++) {
             TaskThread taskThread = new TaskThread();
             taskThread.start();
-            this.threads.add(new TaskThread());
+            this.threads.add(taskThread);
         }
     }
 
