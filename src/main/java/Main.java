@@ -1,25 +1,23 @@
 import models.RequestMethod;
 import server.config.CORSConfig;
+import server.networking.sessions.SessionManager;
 import server.Server;
 import test_classes.Person;
 import utility.json.JSON;
-import utility.json.object.JSONObject;
-
-import java.lang.management.ManagementFactory;
-import java.lang.management.ThreadMXBean;
 import java.util.Arrays;
 import java.util.List;
 
 public class Main {
     public static void main( String[] args ) throws Exception {
-        Server server = new Server(8082, false, 0, 20);
+        Server server = new Server(8082, false, 20, 20, new SessionManager<Integer, Integer>());
 
         server.corsConfig.setAllowOrigins(Arrays.asList("http://localhost:8080", "http://localhost:3000"));
         server.corsConfig.setAllowMethods(Arrays.asList("GET", "POST", "PUT", "DELETE"));
         server.corsConfig.setAllowHeaders(Arrays.asList("Content-Type"));
 
-        server.addRoute("/", RequestMethod.GET, ((req, res) -> {
-            return res.send("200 OK", "index.html");
+        server.addRoute("/", ((req, res) -> {  
+            server.registerNewPlayer(Integer.class, "Petar", "oto@gmail.com", res);
+            res.echo();
         }));
 
         CORSConfig config = new CORSConfig(Arrays.asList("*"),
@@ -34,7 +32,7 @@ public class Main {
 //                Person p = JSON.toObject(param, Person.class);
 //                System.out.println(p.address);
 //            }
-            return res.send("200 OK", "index.html");
+            res.send("200 OK", "index.html");
         }));
 
         server.start();

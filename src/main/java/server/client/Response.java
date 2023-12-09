@@ -7,6 +7,7 @@ import utility.UtilityService;
 
 import java.io.IOException;
 import java.io.OutputStream;
+import java.io.PrintWriter;
 import java.net.Socket;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -39,37 +40,46 @@ public class Response {
         }
     }
 
-    public boolean send(String status, String file) throws Exception {
+    public Socket getSocket() { return this.client; }
+
+    public void send(String status, String file) throws Exception {
         Path filePath = Paths.get("src/main/resources/static/" + file);
         try {
             RequestMethod requestMethod = UtilityService.getRequestMethodFromString(req.method);
             assert requestMethod != null;
             if(requestMethod.equals(RequestMethod.OPTIONS)) {
                 this.sendResponse("200 OK", "text/html", "".getBytes());
-                return true;
             }
             if(requestMethod != route.method) {
                 System.out.println("Methods do not match! Expected: " + route.method + " | Actual: " + requestMethod);
                 this.send404("Methods do not match! Expected: " + route.method + " | Actual: " + requestMethod);
-                return false;
             }
             if(!serverCors.getAllowMethods().contains(req.method)) {
                 System.out.println("Method not allowed! Expected: " + this.allowedMethods + " | Actual: " + req.method);
                 this.send404("Method not allowed! Expected: " + this.allowedMethods + " | Actual: " + req.method);
-                return false;
             }
             if (Files.exists(filePath)) {
                 String contentType = guessContentType(filePath);
                 this.sendResponse(status, contentType, Files.readAllBytes(filePath));
-                return true;
             } else {
                 System.out.println("File not found!");
                 this.send404("File not found!");
-                return true;
             }
         } catch (Exception e) {
             System.out.println("Error: " + e.getMessage());
-            return false;
+        }
+    }
+
+    public void echo() {
+        try {
+            System.out.println("Printujem");
+            PrintWriter writer = new PrintWriter(this.client.getOutputStream(), true);
+            while(!this.client.isClosed()) {
+                writer.println("Napravljen igrac!");
+            }
+            System.out.println("CLOSED");
+        } catch (Exception e) {
+            System.out.println("GRESKA PRILIKOM ODGOVORA");
         }
     }
 
