@@ -20,6 +20,7 @@ import utility.json.JSON;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.*;
@@ -32,20 +33,13 @@ public class Server {
     private ServerConfig serverConfig = new ServerConfig();
     private Hook hook;
     private SessionManager manager;
+    private Class<?> playerDataType;
 
     public Server(int socket, boolean allowClientConnections, int maxNumberOfConnections, int maxNumberOfThreads) {
         this.socket = socket;
         this.serverConfig = new ServerConfig(allowClientConnections, maxNumberOfConnections, false);
         this.hook = new Hook(maxNumberOfThreads, this.serverConfig);
         this.manager = null;
-    }
-
-    public Server(int socket, boolean allowClientConnections, int maxNumberOfConnections, int maxNumberOfThreads,
-            SessionManager manager) {
-        this.socket = socket;
-        this.serverConfig = new ServerConfig(allowClientConnections, maxNumberOfConnections, false);
-        this.hook = new Hook(maxNumberOfThreads, this.serverConfig);
-        this.manager = manager;
     }
 
     private void updateSnapshot(String event) {
@@ -66,9 +60,9 @@ public class Server {
                     // System.out.println(br.readLine());
                     // pr.println("ODGOVOR SA SERVERA");
                     // }
+                    Socket client = serverSocket.accept();
                     hook.submitTask(() -> {
                         try {
-                            Socket client = serverSocket.accept();
                             this.handleIncomingRequest(client);
                         } catch (Exception e) {
                             this.updateSnapshot("There was an error when trying to handle an incoming request! ERROR: "
@@ -152,7 +146,6 @@ public class Server {
         StringBuilder requestBuilder = new StringBuilder();
         String line;
         while (!(line = br.readLine()).isBlank()) {
-            System.out.println(line);
             requestBuilder.append(line + "\r\n");
         }
         return requestBuilder;
@@ -192,14 +185,28 @@ public class Server {
         this.router.registerRoute(route, RequestMethod.GET, null, callback);
     }
 
-    public <T> boolean registerNewPlayer(Class<T> type, final String name, final String email, final Response res) {
+    public <T> Player registerNewPlayer(Class<T> type, final String name, final String email, final Response res) {
         try {
-            Player<T> p = Player.generateNewPlayer(this.manager, name, email, res.getSocket(),
+            Player<T> p = Player.generateNewPlayer(this.manager, name, email, res.getSocket().getInputStream(),
                     res.getSocket().getOutputStream());
-            this.manager.addPlayer(p);
-            return true;
+            this.manager.connectPlayer(p);
+            return p;
         } catch (Exception e) {
-            return false;
+            System.out.println(e.getMessage());
+            return null;
+        }
+    }
+
+    public <T> void setGamingDataTypes(final Class<T> playerDataType) {
+        this.playerDataType = playerDataType;
+        this.manager = new SessionManager<T>();
+    }
+
+    public void fireEvent(final Request req, final Response res) throws IOException {
+        try {
+            this.hook.fireEvent(req, res, this.manager);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
         }
     }
 }

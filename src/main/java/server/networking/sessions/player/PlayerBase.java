@@ -1,24 +1,27 @@
 package server.networking.sessions.player;
 
+import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.Socket;
 
+import models.Replicate;
 import server.authentication.FuseID;
 import server.networking.sessions.SessionManager;
 
-abstract class PlayerBase {
+public class PlayerBase {
+    @Replicate
     public String key;
     public String name;
     public String email;
-    public Socket socket;
-    public OutputStream stream;
+    public InputStream input;
+    public OutputStream output;
 
-    public  PlayerBase(final String key, final String name, final String email, final Socket socket, final OutputStream stream) {
+    public  PlayerBase(final String key, final String name, final String email, final InputStream input, final OutputStream output) {
         this.key = key;
         this.name = name;
         this.email = email;
-        this.socket = socket;
-        this.stream = stream;
+        this.input = input;
+        this.output = output;
     }
 
     protected static String generatePlayerID(SessionManager manager) {

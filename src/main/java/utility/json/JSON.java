@@ -17,6 +17,7 @@ import exceptions.RoutingException;
 import logger.Log;
 import logger.LogType;
 import models.ParamKey;
+import models.Replicate;
 import models.RoutableFromBody;
 import models.RoutableFromParams;
 import java.lang.reflect.InvocationTargetException;
@@ -108,6 +109,68 @@ public class JSON {
         }
     }
 
+    public static <T> String repSerialize(final Object object) {
+        try {
+            StringBuilder json = new StringBuilder("{");
+            Arrays.stream(object.getClass().getFields()).forEach(f -> {
+                try {
+                    if (f.isAnnotationPresent(Replicate.class)) {
+                        if (f.getType() == String.class) {
+                            json.append("\"" + f.getName() + "\":\"" + f.get(object) + "\",");
+                            return;
+                        }
+                        if (f.getType() == Integer.class || f.getType() == Double.class || f.getType() == Boolean.class
+                                || f.getType() == double.class || f.getType() == int.class
+                                || f.getType() == boolean.class) {
+                            json.append("\"" + f.getName() + "\":" + f.get(object) + ",");
+                            return;
+                        }
+                        if (f.getType() == List.class) {
+                            json.append("\"" + f.getName() + "\":[");
+                            List<?> list = (List<?>) f.get(object);
+                            list.forEach(l -> {
+                                json.append("" + l + ",");
+                            });
+                            json.deleteCharAt(json.length() - 1);
+                            json.append("],");
+                            return;
+                        }
+                        if (f.getType() == HashMap.class) {
+                            json.append("\"" + f.getName() + "\":{");
+                            HashMap<?, ?> hashM = (HashMap<?, ?>) f.get(object);
+                            if (hashM == null) {
+                                json.append("},");
+                                return;
+                            } else if (hashM.size() == 0) {
+                                json.append("},");
+                                return;
+                            } else {
+                                hashM.forEach((k, v) -> {
+                                    json.append("\"" + k + "\":\"" + v + "\",");
+                                });
+                                json.deleteCharAt(json.length() - 1);
+                                json.append("},");
+                                return;
+                            }
+                        }
+                        if (f.get(object) == null) {
+                            json.append("\"" + f.getName() + "\":" + f.get(object) + ",");
+                        } else {
+                            json.append("\"" + f.getName() + "\":" + serialize(f.get(object)) + ",");
+                        }
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            });
+            json.deleteCharAt(json.length() - 1);
+            json.append("}");
+            return json.toString();
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
     public static <T> String serialize(final Object object) {
         try {
             StringBuilder json = new StringBuilder("{");
@@ -134,14 +197,25 @@ public class JSON {
                         return;
                     }
                     if (f.getType() == HashMap.class) {
-                        json.append("\"" + f.getName() + "\":{");
-                        HashMap<?, ?> hashM = (HashMap<?, ?>) f.get(object);
-                        hashM.forEach((k, v) -> {
-                            json.append("\"" + k + "\":\"" + v + "\",");
-                        });
-                        json.deleteCharAt(json.length() - 1);
-                        json.append("},");
-                        return;
+                            json.append("\"" + f.getName() + "\":{");
+                            HashMap<?, ?> hashM = (HashMap<?, ?>) f.get(object);
+                            if (hashM == null) {
+                                json.append("},");
+                                return;
+                            } else if (hashM.size() == 0) {
+                                json.append("},");
+                                return;
+                            } else {
+                                hashM.forEach((k, v) -> {
+                                    json.append("\"" + k + "\":\"" + v + "\",");
+                                });
+                                json.deleteCharAt(json.length() - 1);
+                                json.append("},");
+                                return;
+                            }
+                        }
+                    if (f.get(object) == null) {
+                        json.append("\"" + f.getName() + "\":" + f.get(object) + ",");
                     } else {
                         json.append("\"" + f.getName() + "\":" + serialize(f.get(object)) + ",");
                     }
