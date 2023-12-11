@@ -5,6 +5,7 @@ import logger.LogType;
 import logger.Logger;
 import exceptions.LoggerException;
 import models.Callback;
+import models.EventTask;
 import models.RequestMethod;
 import server.client.Request;
 import server.client.Response;
@@ -199,7 +200,12 @@ public class Server {
 
     public <T> void setGamingDataTypes(final Class<T> playerDataType) {
         this.playerDataType = playerDataType;
-        this.manager = new SessionManager<T>();
+        this.manager = new SessionManager<T>(this.hook);
+
+    }
+
+    public void registerEvent(final String eventName, final EventTask event) {
+        this.manager.registerEvent(eventName, event);
     }
 
     public void fireEvent(final Request req, final Response res) throws IOException {

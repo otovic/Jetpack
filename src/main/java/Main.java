@@ -1,17 +1,9 @@
 import models.RequestMethod;
 import server.config.CORSConfig;
-import server.networking.sessions.SessionManager;
-import server.networking.sessions.player.Player;
 import server.Server;
 import test_classes.Person;
 import test_classes.PlayerR;
-import test_classes.RequestR;
 import utility.json.JSON;
-
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.PrintWriter;
 import java.util.Arrays;
 import java.util.List;
 
@@ -19,6 +11,10 @@ public class Main {
     public static void main(String[] args) throws Exception {
         Server server = new Server(8082, false, 20, 20);
         server.setGamingDataTypes(PlayerR.class);
+
+        server.registerEvent("PETAR", (data, manager) -> {
+            System.out.println("RADI EVENT");
+        });
 
         server.corsConfig.setAllowOrigins(Arrays.asList("http://localhost:8080", "http://localhost:3000"));
         server.corsConfig.setAllowMethods(Arrays.asList("GET", "POST", "PUT", "DELETE"));

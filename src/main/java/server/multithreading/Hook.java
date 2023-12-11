@@ -64,12 +64,10 @@ public class Hook {
                 if (message.equals("quit")) {
                     System.out.println("Received quit message. Closing connection.");
                 } else {
-                    System.out.println(((JSONField) obj.fields.get(0)).field);
-                    if (((JSONField) obj.fields.get(0)).field.equals("connectToServer")) {
-                        Player pl = Player.generateNewPlayer(manager, message, message,
-                                res.getSocket().getInputStream(), res.getSocket().getOutputStream());
-                        manager.connectPlayer(pl);
-                        this.addListener(pl, manager);
+                    System.out.println("FIJELD: " + ((JSONField) obj.fields.get(0)).field);
+                    String event = ((JSONField) obj.fields.get(0)).field;
+                    if(!manager.fireNativeEvent(event, (JSONObject) obj, res.getSocket().getInputStream(), res.getSocket().getOutputStream())) {
+                        manager.fireEvent(event, (JSONObject) obj);
                     }
                     // manager.activePlayers.forEach((key, value) -> {
                     // System.out.println("POCINJEM");
@@ -97,7 +95,10 @@ public class Hook {
             System.out.println("listen task added");
             try (BufferedReader br = new BufferedReader(new InputStreamReader(player.input))) {
                 while (true) {
+                    System.out.println("WAITING");
                     String message = br.readLine();
+                    System.out.println("STREAM OPENED");
+                    JSONObject obj = JSON.deserialize(message);
                     if (message == null) {
                         System.out.println("Client disconnected.");
                         break;
@@ -106,19 +107,17 @@ public class Hook {
                         System.out.println("Received quit message. Closing connection.");
                         break;
                     } else {
-                        System.out.println(message);
+                        String event = ((JSONField) obj.fields.get(0)).field;
+                        manager.fireEvent(event, (JSONObject) obj);
                         // manager.activePlayers.forEach((key, value) -> {
-                        // System.out.println("POCINJEM");
-                        // Player p = (Player) value;
-                        // try {
-                        // PrintWriter rr = new PrintWriter(p.output, true);
-                        // System.out.println("Stampam");
-                        // System.out.println(p.output);
-                        // rr.println(JSON.repSerialize(p));
-                        // System.out.println("Stampam123");
-                        // } catch (Exception e) {
-                        // System.out.println("GRESKA");
-                        // }
+                        //     System.out.println("POCINJEM");
+                        //     Player p = (Player) value;
+                        //     try {
+                        //         PrintWriter rr = new PrintWriter(p.output, true);
+                        //         rr.println(JSON.repSerialize(p));
+                        //     } catch (Exception e) {
+                        //         System.out.println("GRESKA");
+                        //     }
                         // });
                     }
                 }
