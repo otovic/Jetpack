@@ -11,14 +11,12 @@ import server.networking.sessions.SessionManager;
 public class PlayerBase {
     @Replicate
     public String key;
-    public String name;
     public String email;
     public InputStream input;
     public OutputStream output;
 
-    public  PlayerBase(final String key, final String name, final String email, final InputStream input, final OutputStream output) {
+    public  PlayerBase(final String key, final String email, final InputStream input, final OutputStream output) {
         this.key = key;
-        this.name = name;
         this.email = email;
         this.input = input;
         this.output = output;

@@ -1,7 +1,9 @@
 import models.RequestMethod;
 import server.config.CORSConfig;
+import server.networking.sessions.game.GameSession;
 import server.Server;
 import test_classes.Person;
+import test_classes.PlayerData;
 import test_classes.PlayerR;
 import utility.json.JSON;
 import java.util.Arrays;
@@ -10,7 +12,7 @@ import java.util.List;
 public class Main {
     public static void main(String[] args) throws Exception {
         Server server = new Server(8082, false, 20, 20);
-        server.setGamingDataTypes(PlayerR.class);
+        server.setGamingDataTypes(PlayerData.class, GameSession.class);
 
         server.registerEvent("PETAR", (data, manager) -> {
             System.out.println("RADI EVENT");

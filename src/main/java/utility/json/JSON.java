@@ -364,6 +364,42 @@ public class JSON {
         }
     }
 
+    public static <T> T routeToClass(JSONObject object, T desiredClass) throws Exception {
+        try {
+            if (desiredClass.getClass().isAnnotationPresent(RoutableFromBody.class)) {
+                throw new RoutingException("Class is not routable");
+            }
+
+            Field[] fields = desiredClass.getClass().getFields();
+
+            for (Object field : object.fields) {
+                Arrays.stream(fields)
+                        .filter(f -> {
+                            try {
+                                return checkIfCorrespondingFieldExists(f, field, desiredClass.getClass().getName());
+                            } catch (LoggerException e) {
+                                return false;
+                            }
+                        })
+                        .findFirst()
+                        .ifPresent(f -> {
+                            try {
+                                if (field instanceof JSONField) {
+                                    handleJSONField(f, field, desiredClass);
+                                } else {
+                                    handleJSONObject(f, field, desiredClass);
+                                }
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+                        });
+            }
+            return desiredClass;
+        } catch (Exception e) {
+            throw new RoutingException("Could not instantiate object");
+        }
+    }
+
     public static <T> T routeToClass(JSONObject object, Class<T> desiredClass) throws Exception {
         try {
             if (desiredClass.getClass().isAnnotationPresent(RoutableFromBody.class)) {

@@ -2,12 +2,17 @@ package test_classes;
 
 import java.util.HashMap;
 
-public class RequestR<T> {
-    public String event;
-    public HashMap<String, String> eventData;
-    public T data;
+import models.ParamKey;
 
-    public RequestR(String event, HashMap<String, String> eventData, T data) {
+public class RequestR {
+    @ParamKey(field = "event")
+    public String event = "";
+    @ParamKey(field = "eventData")
+    public HashMap<String, String> eventData = new HashMap<>();
+    @ParamKey(field = "data")
+    public PlayerData data;
+
+    public RequestR(String event, HashMap<String, String> eventData, PlayerData data) {
         this.eventData = eventData;
         this.event = event;
         this.data = data;

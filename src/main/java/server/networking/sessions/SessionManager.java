@@ -12,17 +12,21 @@ import server.multithreading.Hook;
 import server.networking.sessions.event.EventHandler;
 import server.networking.sessions.game.GameSession;
 import server.networking.sessions.player.Player;
+import test_classes.PlayerData;
+import test_classes.PlayerR;
 import utility.json.object.JSONObject;
 
-public class SessionManager<PS> implements PlayerSessionEvents<Player<?>> {
+public class SessionManager<PS, GS> implements PlayerSessionEvents<Player<?>> {
     public List<String> takenGSIDs = new ArrayList<>();
-    public HashMap<String, GameSession<PS>> gameSessions = new HashMap<>();
+    public HashMap<String, GameSession<GS>> gameSessions = new HashMap<>();
     public HashMap<String, Player<PS>> activePlayers = new HashMap<>();
-    private EventHandler<PS> eventHandler = new EventHandler<PS>(this);
+    private EventHandler<PS, GS> eventHandler = new EventHandler<PS, GS>(this);
+    private Class<PS> playerStateType;
     private Hook hook;
 
-    public SessionManager(Hook hook) {
+    public <T> SessionManager(Hook hook, Class<T> type) {
         this.hook = hook;
+        this.playerStateType = (Class<PS>) type;
         this.eventHandler.addDefaultEvents();
     }
 
@@ -43,9 +47,11 @@ public class SessionManager<PS> implements PlayerSessionEvents<Player<?>> {
         activePlayers.remove(player);
     }
 
-    @Override
-    public void updatePlayerData(Player player) {
-        activePlayers.replace(null, player);
+    public <T> void updatePlayerData(final String token, final T data) {
+        Player<PS> player = activePlayers.get(token);
+        player.updatePlayerData((PS) data);
+        activePlayers.replace(token, player);
+        System.out.println(player.state);
     }
 
     public boolean addGameSessionID(String id) {
@@ -71,15 +77,20 @@ public class SessionManager<PS> implements PlayerSessionEvents<Player<?>> {
         eventHandler.registerEvent(eventName, event);
     }
 
-    public void fireEvent(String eventName, JSONObject data) {
+    public void fireEvent(String eventName, String data) {
         eventHandler.fireEvent(eventName, data);
     }
 
-    public boolean fireNativeEvent(String eventName, JSONObject data, InputStream input, OutputStream output) {
+    public boolean fireNativeEvent(String eventName, String data, InputStream input, OutputStream output) {
         return eventHandler.fireNativeEvent(eventName, data, input, output);
     }
 
     public boolean checkIfPlayerIDisValid(String id) {
         return activePlayers.containsKey(id) ? true : false;
+    }
+
+    @Override
+    public void updatePlayerData(Player<?> param) {
+        throw new UnsupportedOperationException("Unimplemented method 'updatePlayerData'");
     }
 }

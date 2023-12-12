@@ -1,11 +1,11 @@
 package test_classes;
 
 public class PlayerData {
-    public int poeni;
-    public String oruzje;
+    public String name;
+    public String point;
 
-    public PlayerData(final int poeni, final String oruzje) {
-        this.poeni = poeni;
-        this.oruzje = oruzje;
+    public PlayerData(String name, String point) {
+        this.name = name;
+        this.point = point;
     }
 }

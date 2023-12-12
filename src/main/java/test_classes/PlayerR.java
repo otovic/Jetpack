@@ -1,13 +1,11 @@
 package test_classes;
 
 public class PlayerR {
-    public String key;
     public String name;
-    public String point;
+    public int points;
 
-    public PlayerR(String key, String name, String point) {
-        this.key = key;
+    public PlayerR(final String name, final int points) {
         this.name = name;
-        this.point = point;
+        this.points = points;
     }
 }

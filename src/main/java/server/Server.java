@@ -16,6 +16,7 @@ import server.networking.sessions.SessionManager;
 import server.networking.sessions.player.Player;
 import server.routing.Router;
 import test_classes.Person;
+import test_classes.PlayerR;
 import utility.json.JSON;
 
 import java.io.BufferedReader;
@@ -34,7 +35,8 @@ public class Server {
     private ServerConfig serverConfig = new ServerConfig();
     private Hook hook;
     private SessionManager manager;
-    private Class<?> playerDataType;
+    private Class<?> playerState;
+    private Class<?> gameState;
 
     public Server(int socket, boolean allowClientConnections, int maxNumberOfConnections, int maxNumberOfThreads) {
         this.socket = socket;
@@ -186,21 +188,22 @@ public class Server {
         this.router.registerRoute(route, RequestMethod.GET, null, callback);
     }
 
-    public <T> Player registerNewPlayer(Class<T> type, final String name, final String email, final Response res) {
-        try {
-            Player<T> p = Player.generateNewPlayer(this.manager, name, email, res.getSocket().getInputStream(),
-                    res.getSocket().getOutputStream());
-            this.manager.connectPlayer(p);
-            return p;
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-            return null;
-        }
-    }
+    // public <T> Player registerNewPlayer(Class<T> type, final String name, final String email, final Response res) {
+    //     try {
+    //         Player<T> p = Player.generateNewPlayer(this.manager, email, res.getSocket().getInputStream(),
+    //                 res.getSocket().getOutputStream());
+    //         this.manager.connectPlayer(p);
+    //         return p;
+    //     } catch (Exception e) {
+    //         System.out.println(e.getMessage());
+    //         return null;
+    //     }
+    // }
 
-    public <T> void setGamingDataTypes(final Class<T> playerDataType) {
-        this.playerDataType = playerDataType;
-        this.manager = new SessionManager<T>(this.hook);
+    public <P, G> void setGamingDataTypes(final Class<P> playerState, final Class<G> gameState) {
+        this.playerState = playerState;
+        this.gameState = gameState;
+        this.manager = new SessionManager<P, G>(this.hook, playerState);
 
     }
 

@@ -5,6 +5,9 @@ import server.client.Response;
 import server.config.ServerConfig;
 import server.networking.sessions.SessionManager;
 import server.networking.sessions.player.Player;
+import test_classes.PlayerData;
+import test_classes.PlayerR;
+import test_classes.RequestR;
 import utility.json.JSON;
 import utility.json.object.JSONField;
 import utility.json.object.JSONObject;
@@ -18,6 +21,9 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
 public class Hook {
     private int taskPool;
@@ -57,7 +63,9 @@ public class Hook {
             try {
                 BufferedReader br = new BufferedReader(new InputStreamReader(res.getSocket().getInputStream()));
                 String message = br.readLine();
+                System.out.println(message);
                 JSONObject obj = JSON.deserialize(message);
+
                 if (message == null) {
                     System.out.println("Client disconnected.");
                 }
@@ -66,8 +74,9 @@ public class Hook {
                 } else {
                     System.out.println("FIJELD: " + ((JSONField) obj.fields.get(0)).field);
                     String event = ((JSONField) obj.fields.get(0)).field;
-                    if(!manager.fireNativeEvent(event, (JSONObject) obj, res.getSocket().getInputStream(), res.getSocket().getOutputStream())) {
-                        manager.fireEvent(event, (JSONObject) obj);
+                    if (!manager.fireNativeEvent(event, message, res.getSocket().getInputStream(),
+                            res.getSocket().getOutputStream())) {
+                        manager.fireEvent(event, message);
                     }
                     // manager.activePlayers.forEach((key, value) -> {
                     // System.out.println("POCINJEM");
@@ -108,16 +117,16 @@ public class Hook {
                         break;
                     } else {
                         String event = ((JSONField) obj.fields.get(0)).field;
-                        manager.fireEvent(event, (JSONObject) obj);
+                        manager.fireEvent(event, message);
                         // manager.activePlayers.forEach((key, value) -> {
-                        //     System.out.println("POCINJEM");
-                        //     Player p = (Player) value;
-                        //     try {
-                        //         PrintWriter rr = new PrintWriter(p.output, true);
-                        //         rr.println(JSON.repSerialize(p));
-                        //     } catch (Exception e) {
-                        //         System.out.println("GRESKA");
-                        //     }
+                        // System.out.println("POCINJEM");
+                        // Player p = (Player) value;
+                        // try {
+                        // PrintWriter rr = new PrintWriter(p.output, true);
+                        // rr.println(JSON.repSerialize(p));
+                        // } catch (Exception e) {
+                        // System.out.println("GRESKA");
+                        // }
                         // });
                     }
                 }
