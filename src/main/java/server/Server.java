@@ -12,6 +12,7 @@ import server.client.Response;
 import server.config.CORSConfig;
 import server.config.ServerConfig;
 import server.multithreading.Hook;
+import server.networking.database.Database;
 import server.networking.sessions.SessionManager;
 import server.networking.sessions.player.Player;
 import server.routing.Router;
@@ -38,11 +39,17 @@ public class Server {
     private Class<?> playerState;
     private Class<?> gameState;
 
+    public Database database;
+
     public Server(int socket, boolean allowClientConnections, int maxNumberOfConnections, int maxNumberOfThreads) {
         this.socket = socket;
         this.serverConfig = new ServerConfig(allowClientConnections, maxNumberOfConnections, false);
         this.hook = new Hook(maxNumberOfThreads, this.serverConfig);
         this.manager = null;
+    }
+
+    public void setDatabase(final String url, final String username, final String password) {
+        this.database = new Database(url, username, password);
     }
 
     private void updateSnapshot(String event) {

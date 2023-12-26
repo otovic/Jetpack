@@ -121,7 +121,17 @@ public class Response {
         this.client.close();
     }
 
-    public static void json() {
+    public void json(OutputStream stream, String status, String contentType, String content) throws IOException {
+        stream.write(("HTTP/1.1 " + status + "\r\n").getBytes());
+        stream.write(("Content-Type: " + contentType + "\r\n").getBytes());
+        stream.write(("Access-Control-Allow-Origin: " + allowedOrigins + "\r\n").getBytes());
+        stream.write(("Access-Control-Allow-Methods: " + allowedMethods + "\r\n").getBytes());
+        stream.write(("Access-Control-Allow-Headers: " + allowedHeaders + "\r\n").getBytes());
+        stream.write(("Content-Length: " + content.getBytes().length + "\r\n").getBytes());
+        stream.write("\r\n".getBytes());
+        stream.write(content.getBytes());
+        stream.flush();
+        this.client.close();
     }
 
     private static String guessContentType(Path filePath) throws IOException {

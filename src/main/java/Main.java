@@ -6,13 +6,21 @@ import test_classes.Person;
 import test_classes.PlayerData;
 import test_classes.PlayerR;
 import utility.json.JSON;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.Statement;
 import java.util.Arrays;
 import java.util.List;
+import java.sql.ResultSet;
+
+import com.mysql.cj.jdbc.Driver;
 
 public class Main {
     public static void main(String[] args) throws Exception {
         Server server = new Server(8082, false, 20, 20);
         server.setGamingDataTypes(PlayerData.class, GameSession.class);
+        server.setDatabase("jdbc:mysql://localhost:3306/studentska", "root", "");
 
         server.registerEvent("PETAR", (data, manager) -> {
             System.out.println("RADI EVENT");
@@ -27,6 +35,25 @@ public class Main {
             server.fireEvent(req, res);
         }));
 
+        server.addRoute("/test", ((req, res) -> {
+            try {
+                server.database.connect();
+                ResultSet result = server.database.executeQueryWithResult("SELECT * FROM student");
+                while (result.next()) {
+                    System.out.println(result.getString("ime"));
+                }
+                server.database.disconnect();
+                res.send("200 OK", "index.html");
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }));
+
+        server.addRoute("/register", ((req, res) -> {
+            System.out.println(req.body);
+            res.send("200 OK", "index.html");
+        }));
+
         server.addRoute("/petar", ((req, res) -> {
             res.send("200 OK", "index.html");
         }));
@@ -34,12 +61,6 @@ public class Main {
         CORSConfig config = new CORSConfig(Arrays.asList("*"),
                 Arrays.asList("GET", "POST", "PUT", "DELETE"),
                 Arrays.asList("Content-Type"));
-
-        server.addRoute("/test", RequestMethod.POST, config, ((req, res) -> {
-            List<Person> per = JSON.routeFromBody(req.body, Person.class);
-            System.out.println(per.get(0).address);
-            res.send("200 OK", "index.html");
-        }));
 
         server.start();
     }
