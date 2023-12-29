@@ -13,6 +13,8 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
+import com.google.gson.Gson;
+
 public class Response {
     private final Socket client;
     private final Request req;
@@ -121,9 +123,15 @@ public class Response {
         this.client.close();
     }
 
-    public void json(OutputStream stream, String status, String contentType, String content) throws IOException {
-        stream.write(("HTTP/1.1 " + status + "\r\n").getBytes());
-        stream.write(("Content-Type: " + contentType + "\r\n").getBytes());
+    public void json(final Object content) throws IOException {
+        OutputStream clientOutput = this.client.getOutputStream();
+        Gson gson = new Gson();
+        this.sendJson(clientOutput, gson.toJson(content));
+    }
+
+    private void sendJson(OutputStream stream, String content) throws IOException {
+        stream.write(("HTTP/1.1 200 OK\r\n").getBytes());
+        stream.write(("Content-Type: application/json \r\n").getBytes());
         stream.write(("Access-Control-Allow-Origin: " + allowedOrigins + "\r\n").getBytes());
         stream.write(("Access-Control-Allow-Methods: " + allowedMethods + "\r\n").getBytes());
         stream.write(("Access-Control-Allow-Headers: " + allowedHeaders + "\r\n").getBytes());

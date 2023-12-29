@@ -20,7 +20,7 @@ public class Main {
     public static void main(String[] args) throws Exception {
         Server server = new Server(8082, false, 20, 20);
         server.setGamingDataTypes(PlayerData.class, GameSession.class);
-        server.setDatabase("jdbc:mysql://localhost:3306/studentska", "root", "");
+        server.setDatabase("jdbc:mysql://localhost:3306/ludofx", "root", "");
 
         server.registerEvent("PETAR", (data, manager) -> {
             System.out.println("RADI EVENT");
@@ -36,21 +36,16 @@ public class Main {
         }));
 
         server.addRoute("/test", ((req, res) -> {
-            try {
-                server.database.connect();
-                ResultSet result = server.database.executeQueryWithResult("SELECT * FROM student");
-                while (result.next()) {
-                    System.out.println(result.getString("ime"));
-                }
-                server.database.disconnect();
-                res.send("200 OK", "index.html");
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+            Person p = new Person("Petar", "20");
+            res.json(p);
         }));
 
         server.addRoute("/register", ((req, res) -> {
-            System.out.println(req.body);
+            String query = "INSERT INTO player (username, email, password) VALUES ('" + req.params.get("username") + "', '"
+                    + req.params.get("email") + "', '" + req.params.get("password") + "')";
+            server.database.connect();
+            server.database.executeQuery(query);
+            server.database.disconnect();
             res.send("200 OK", "index.html");
         }));
 

@@ -13,9 +13,10 @@ public class Person {
     @ParamKey(field = "name")
     public String name;
     @ParamKey(field = "age")
-    public Integer age;
-    @ParamKey(field = "interests")
-    public List<String> interests;
-    @ParamKey(field = "address")
-    public List<String> address;
+    public String age;
+
+    public Person(String name, String age) {
+        this.name = name;
+        this.age = age;
+    }
 }
