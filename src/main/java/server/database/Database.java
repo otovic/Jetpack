@@ -38,8 +38,14 @@ public class Database {
         this.connect();
     }
 
-    public void executeQuery(String query) throws SQLException {
-        this.connection.createStatement().execute(query);
+    public boolean executeQuery(String query) throws SQLException {
+        try {
+            this.connection.createStatement().execute(query);
+            return true;
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            return false;
+        }
     }
 
     public ResultSet executeQueryWithResult(String query) throws SQLException {

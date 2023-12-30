@@ -74,10 +74,10 @@ public class Hook {
                 } else {
                     System.out.println("FIJELD: " + ((JSONField) obj.fields.get(0)).field);
                     String event = ((JSONField) obj.fields.get(0)).field;
-                    if (!manager.fireNativeEvent(event, message, res.getSocket().getInputStream(),
-                            res.getSocket().getOutputStream())) {
-                        manager.fireEvent(event, message);
-                    }
+                    // if (!manager.fireNativeEvent(event, message, res.getSocket().getInputStream(),
+                    //         res.getSocket().getOutputStream())) {
+                    //     manager.fireEvent(event, message);
+                    // }
                     // manager.activePlayers.forEach((key, value) -> {
                     // System.out.println("POCINJEM");
                     // Player p = (Player) value;
@@ -117,7 +117,7 @@ public class Hook {
                         break;
                     } else {
                         String event = ((JSONField) obj.fields.get(0)).field;
-                        manager.fireEvent(event, message);
+                        // manager.fireEvent(event, message);
                         // manager.activePlayers.forEach((key, value) -> {
                         // System.out.println("POCINJEM");
                         // Player p = (Player) value;

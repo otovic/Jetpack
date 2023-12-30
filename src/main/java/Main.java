@@ -2,6 +2,7 @@ import models.RequestMethod;
 import server.config.CORSConfig;
 import server.networking.sessions.game.GameSession;
 import server.Server;
+import server.client.EventResponse;
 import test_classes.Person;
 import test_classes.PlayerData;
 import test_classes.PlayerR;
@@ -11,6 +12,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.Statement;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 import java.sql.ResultSet;
 
@@ -19,7 +21,6 @@ import com.mysql.cj.jdbc.Driver;
 public class Main {
     public static void main(String[] args) throws Exception {
         Server server = new Server(8082, false, 20, 20);
-        server.setGamingDataTypes(PlayerData.class, GameSession.class);
         server.setDatabase("jdbc:mysql://localhost:3306/ludofx", "root", "");
 
         server.registerEvent("PETAR", (data, manager) -> {
@@ -30,23 +31,26 @@ public class Main {
         server.corsConfig.setAllowMethods(Arrays.asList("GET", "POST", "PUT", "DELETE"));
         server.corsConfig.setAllowHeaders(Arrays.asList("Content-Type"));
 
-        server.addRoute("/", ((req, res) -> {
-            System.out.println("index route");
-            server.fireEvent(req, res);
-        }));
-
-        server.addRoute("/test", ((req, res) -> {
-            Person p = new Person("Petar", "20");
-            res.json(p);
+        server.addRoute("/connect", ((req, res) -> {
+            System.out.println("CONNECTED");
+            // server.fireEvent(req, res);
         }));
 
         server.addRoute("/register", ((req, res) -> {
-            String query = "INSERT INTO player (username, email, password) VALUES ('" + req.params.get("username") + "', '"
+            String query = "INSERT INTO players (username, email, password) VALUES ('" + req.params.get("username") + "', '"
                     + req.params.get("email") + "', '" + req.params.get("password") + "')";
             server.database.connect();
-            server.database.executeQuery(query);
-            server.database.disconnect();
-            res.send("200 OK", "index.html");
+            Boolean result = server.database.executeQuery(query);
+            
+            if(result) {
+                res.json(new EventResponse("register", new HashMap<>() {{
+                    put("result", result.toString());
+                }}, new HashMap<>()));
+            } else {
+                res.json(new EventResponse("register", new HashMap<>() {{
+                    put("result", result.toString());
+                }}, new HashMap<>()));
+            }
         }));
 
         server.addRoute("/petar", ((req, res) -> {

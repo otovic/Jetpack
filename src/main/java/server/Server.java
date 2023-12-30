@@ -36,8 +36,6 @@ public class Server {
     private ServerConfig serverConfig = new ServerConfig();
     private Hook hook;
     private SessionManager manager;
-    private Class<?> playerState;
-    private Class<?> gameState;
 
     public Database database;
 
@@ -195,27 +193,8 @@ public class Server {
         this.router.registerRoute(route, RequestMethod.GET, null, callback);
     }
 
-    // public <T> Player registerNewPlayer(Class<T> type, final String name, final String email, final Response res) {
-    //     try {
-    //         Player<T> p = Player.generateNewPlayer(this.manager, email, res.getSocket().getInputStream(),
-    //                 res.getSocket().getOutputStream());
-    //         this.manager.connectPlayer(p);
-    //         return p;
-    //     } catch (Exception e) {
-    //         System.out.println(e.getMessage());
-    //         return null;
-    //     }
-    // }
-
-    public <P, G> void setGamingDataTypes(final Class<P> playerState, final Class<G> gameState) {
-        this.playerState = playerState;
-        this.gameState = gameState;
-        this.manager = new SessionManager<P, G>(this.hook, playerState);
-
-    }
-
     public void registerEvent(final String eventName, final EventTask event) {
-        this.manager.registerEvent(eventName, event);
+        // this.manager.registerEvent(eventName, event);
     }
 
     public void fireEvent(final Request req, final Response res) throws IOException {

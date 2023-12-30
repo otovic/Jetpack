@@ -24,7 +24,7 @@ public class PlayerBase {
 
     protected static String generatePlayerID(SessionManager manager) {
         String token = FuseID.generateToken();
-        if (manager.checkIfPlayerIDisValid(token)) return generatePlayerID(manager);
+        // if (manager.checkIfPlayerIDisValid(token)) return generatePlayerID(manager);
         return token;
     }
 }
