@@ -8,6 +8,7 @@ import test_classes.PlayerData;
 import test_classes.PlayerR;
 import utility.json.JSON;
 
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.Statement;
@@ -16,6 +17,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.sql.ResultSet;
 
+import com.google.gson.Gson;
 import com.mysql.cj.jdbc.Driver;
 
 public class Main {
@@ -23,34 +25,32 @@ public class Main {
         Server server = new Server(8082, false, 20, 20);
         server.setDatabase("jdbc:mysql://localhost:3306/ludofx", "root", "");
 
-        server.registerEvent("PETAR", (data, manager) -> {
-            System.out.println("RADI EVENT");
-        });
-
         server.corsConfig.setAllowOrigins(Arrays.asList("http://localhost:8080", "http://localhost:3000"));
         server.corsConfig.setAllowMethods(Arrays.asList("GET", "POST", "PUT", "DELETE"));
         server.corsConfig.setAllowHeaders(Arrays.asList("Content-Type"));
 
-        server.addRoute("/connect", ((req, res) -> {
-            System.out.println("CONNECTED");
-            // server.fireEvent(req, res);
-        }));
+        server.registerEvent("connectPlayer", (controller) -> {
 
-        server.addRoute("/register", ((req, res) -> {
-            String query = "INSERT INTO players (username, email, password) VALUES ('" + req.params.get("username") + "', '"
-                    + req.params.get("email") + "', '" + req.params.get("password") + "')";
+        });
+
+        server.addRoute("/connect", ((req, res) -> {
+            EventResponse eventResponse = new Gson().fromJson(req.body, EventResponse.class);
+            String query = "INSERT INTO players (username, email, password) VALUES ('" + eventResponse.eventParams.get("username") + "', '"
+                    + eventResponse.eventParams.get("email") + "', '" + eventResponse.eventParams.get("password") + "')";
             server.database.connect();
             Boolean result = server.database.executeQuery(query);
             
             if(result) {
-                res.json(new EventResponse("register", new HashMap<>() {{
-                    put("result", result.toString());
-                }}, new HashMap<>()));
+                server.connectClient(req, res);
             } else {
-                res.json(new EventResponse("register", new HashMap<>() {{
+                res.json(new EventResponse("registerPlayer", new HashMap<>() {{
                     put("result", result.toString());
                 }}, new HashMap<>()));
-            }
+            } 
+        }));
+
+        server.addRoute("/register", ((req, res) -> {
+            
         }));
 
         server.addRoute("/petar", ((req, res) -> {

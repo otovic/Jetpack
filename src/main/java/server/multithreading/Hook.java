@@ -1,5 +1,6 @@
 package server.multithreading;
 
+import server.client.EventResponse;
 import server.client.Request;
 import server.client.Response;
 import server.config.ServerConfig;
@@ -14,7 +15,9 @@ import utility.json.object.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.net.Socket;
 import java.util.ArrayList;
@@ -24,6 +27,8 @@ import java.util.Map;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+
+import models.Event;
 
 public class Hook {
     private int taskPool;
@@ -99,7 +104,7 @@ public class Hook {
         });
     }
 
-    public void addListener(final Player<?> player, final SessionManager manager) throws IOException {
+    public void addListener(final Player player, final SessionManager manager) throws IOException {
         submitTask(() -> {
             System.out.println("listen task added");
             try (BufferedReader br = new BufferedReader(new InputStreamReader(player.input))) {
@@ -107,16 +112,16 @@ public class Hook {
                     System.out.println("WAITING");
                     String message = br.readLine();
                     System.out.println("STREAM OPENED");
-                    JSONObject obj = JSON.deserialize(message);
-                    if (message == null) {
+                    EventResponse eventResponse = new Gson().fromJson(message, EventResponse.class);
+                    if (eventResponse.eventName == null || eventResponse.eventName.equals("")) {
                         System.out.println("Client disconnected.");
                         break;
                     }
-                    if (message.equals("quit")) {
+                    if (eventResponse.eventName.equals("quit")) {
                         System.out.println("Received quit message. Closing connection.");
                         break;
                     } else {
-                        String event = ((JSONField) obj.fields.get(0)).field;
+                        manager.executeEvent(eventResponse.eventName, player, eventResponse);
                         // manager.fireEvent(event, message);
                         // manager.activePlayers.forEach((key, value) -> {
                         // System.out.println("POCINJEM");
@@ -132,8 +137,8 @@ public class Hook {
                 }
                 System.out.println("STREAM CLOSED");
             } catch (Exception e) {
-                System.out.println("NECE");
                 System.out.println(e.getMessage());
+                manager.disconnectPlayer(player);
             }
         });
     }

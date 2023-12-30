@@ -5,8 +5,10 @@ import logger.LogType;
 import logger.Logger;
 import exceptions.LoggerException;
 import models.Callback;
+import models.Event;
 import models.EventTask;
 import models.RequestMethod;
+import server.client.EventResponse;
 import server.client.Request;
 import server.client.Response;
 import server.config.CORSConfig;
@@ -20,6 +22,7 @@ import test_classes.Person;
 import test_classes.PlayerR;
 import utility.json.JSON;
 
+import java.beans.EventHandler;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -27,6 +30,8 @@ import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.*;
+
+import com.google.gson.Gson;
 
 public class Server {
     public int socket;
@@ -43,7 +48,7 @@ public class Server {
         this.socket = socket;
         this.serverConfig = new ServerConfig(allowClientConnections, maxNumberOfConnections, false);
         this.hook = new Hook(maxNumberOfThreads, this.serverConfig);
-        this.manager = null;
+        this.manager = new SessionManager(this.hook);
     }
 
     public void setDatabase(final String url, final String username, final String password) {
@@ -193,11 +198,20 @@ public class Server {
         this.router.registerRoute(route, RequestMethod.GET, null, callback);
     }
 
-    public void registerEvent(final String eventName, final EventTask event) {
-        // this.manager.registerEvent(eventName, event);
+    public void registerEvent(final String eventName, final Event event) {
+        this.manager.registerEvent(eventName, event);
     }
 
-    public void fireEvent(final Request req, final Response res) throws IOException {
+    // public void executeEvent(final Request req, final Response res) {
+    //     EventResponse eventResponse = new Gson().fromJson(req.body, EventResponse.class);
+    //     this.manager.executeEvent(eventResponse.eventName, eventResponse);
+    // }
+
+    public void connectClient(final Request req, final Response res) throws IOException {
+        this.manager.connectPlayer(req, res);
+    }
+
+    public void listen(final Request req, final Response res) throws IOException {
         try {
             this.hook.fireEvent(req, res, this.manager);
         } catch (Exception e) {
