@@ -31,19 +31,17 @@ public class SessionManager {
     }
 
     public void connectPlayer(final Request req, final Response res) throws IOException {
-        System.out.println("ADDING NEW PLAYER");
         EventResponse data = new Gson().fromJson(req.body, EventResponse.class);
         String key = generatePlayerID();
         Player player = new Player(key, data.eventParams.get("username"), data.eventParams.get("email"), res.getSocket().getInputStream(), res.getSocket().getOutputStream());
         this.playerSessions.put(player.key, player);
-        this.sendConnection(res.getSocket().getOutputStream());
+        this.sendConnection(res.getSocket().getOutputStream(), player.key);
         this.hook.addListener(player, this);
-        System.out.println(this.playerSessions.toString());
     }
 
     public void disconnectPlayer(final Player player) {
         this.playerSessions.remove(player.key);
-        System.out.println(this.playerSessions.toString());
+        System.out.println("DELETING: " + player.key + " | " + this.playerSessions.toString());
     }
 
     public void executeEvent(final String eventName, final Player p, final EventResponse eventResponse) {
@@ -58,11 +56,13 @@ public class SessionManager {
         return key;
     }
 
-    private void sendConnection(final OutputStream out) {
+    private void sendConnection(final OutputStream out, final String key) {
         try {
-            System.out.println("SENDING CONNECTION");
+            EventResponse response = new EventResponse("connectPlayer", new HashMap<String, String>() {{
+                put("key", key);
+            }}, new HashMap<>());
             PrintWriter writer = new PrintWriter(out);
-            writer.println("PETAR");
+            writer.println(new Gson().toJson(response));
             writer.flush();
         } catch (Exception e) {
             System.out.println("Failed to send connection");

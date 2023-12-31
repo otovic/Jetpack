@@ -38,13 +38,15 @@ public class Database {
         this.connect();
     }
 
-    public boolean executeQuery(String query) throws SQLException {
+    public String executeQuery(String query) throws SQLException {
         try {
             this.connection.createStatement().execute(query);
-            return true;
+            return "Success";
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
-            return false;
+            if (e.getMessage().contains("Duplicate entry")) {
+                return "Duplicate entry";
+            }
+            return "Failed";
         }
     }
 

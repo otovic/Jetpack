@@ -28,6 +28,7 @@ import java.util.Map;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
+import exceptions.LogoutException;
 import models.Event;
 
 public class Hook {
@@ -122,6 +123,9 @@ public class Hook {
                         break;
                     } else {
                         manager.executeEvent(eventResponse.eventName, player, eventResponse);
+                        if (eventResponse.eventName.equals("logout")) {
+                            throw new LogoutException("LOGOUT");
+                        }
                         // manager.fireEvent(event, message);
                         // manager.activePlayers.forEach((key, value) -> {
                         // System.out.println("POCINJEM");
@@ -136,6 +140,8 @@ public class Hook {
                     }
                 }
                 System.out.println("STREAM CLOSED");
+            } catch (LogoutException e) {
+                System.out.println(e.getMessage());
             } catch (Exception e) {
                 System.out.println(e.getMessage());
                 manager.disconnectPlayer(player);

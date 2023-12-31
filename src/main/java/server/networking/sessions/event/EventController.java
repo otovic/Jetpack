@@ -21,7 +21,7 @@ public class EventController {
         this.sessionManager = sessionManager;
     }
 
-    private String generatePlayerID() {
-        return sessionManager.generatePlayerID();
+    public void logout() {
+        this.sessionManager.disconnectPlayer(this.player);
     }
 }

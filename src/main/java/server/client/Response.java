@@ -129,6 +129,13 @@ public class Response {
         this.sendJson(clientOutput, gson.toJson(content));
     }
 
+    public void rawjson(final Object content) throws IOException {
+        OutputStream clientOutput = this.client.getOutputStream();
+        PrintWriter writer = new PrintWriter(clientOutput);
+        writer.println(new Gson().toJson(content));
+        writer.flush();
+    }
+
     private void sendJson(OutputStream stream, String content) throws IOException {
         stream.write(("HTTP/1.1 200 OK\r\n").getBytes());
         stream.write(("Content-Type: application/json \r\n").getBytes());

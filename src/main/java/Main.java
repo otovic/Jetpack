@@ -29,37 +29,50 @@ public class Main {
         server.corsConfig.setAllowMethods(Arrays.asList("GET", "POST", "PUT", "DELETE"));
         server.corsConfig.setAllowHeaders(Arrays.asList("Content-Type"));
 
-        server.registerEvent("connectPlayer", (controller) -> {
-
+        server.registerEvent("logout", (controller) -> {
+            controller.logout();
         });
 
         server.addRoute("/connect", ((req, res) -> {
+            
+        }));
+
+        server.addRoute("/register", RequestMethod.POST, ((req, res) -> {
             EventResponse eventResponse = new Gson().fromJson(req.body, EventResponse.class);
             String query = "INSERT INTO players (username, email, password) VALUES ('" + eventResponse.eventParams.get("username") + "', '"
                     + eventResponse.eventParams.get("email") + "', '" + eventResponse.eventParams.get("password") + "')";
             server.database.connect();
-            Boolean result = server.database.executeQuery(query);
+            String result = server.database.executeQuery(query);
             
-            if(result) {
+            if(result.equals("Success")) {
                 server.connectClient(req, res);
             } else {
-                res.json(new EventResponse("registerPlayer", new HashMap<>() {{
-                    put("result", result.toString());
+                res.rawjson(new EventResponse("registerPlayer", new HashMap<>() {{
+                    put("error", result);
                 }}, new HashMap<>()));
             } 
         }));
 
-        server.addRoute("/register", ((req, res) -> {
-            
+        server.addRoute("/login", RequestMethod.POST, ((req, res) -> {
+            System.out.println("Login route");
+            EventResponse eventResponse = new Gson().fromJson(req.body, EventResponse.class);
+            String query = "SELECT * FROM players WHERE username = '" + eventResponse.eventParams.get("username") + "' AND password = '" + eventResponse.eventParams.get("password") + "'";
+            server.database.connect();
+            System.out.println(query);
+            ResultSet result = server.database.executeQueryWithResult(query);
+            if(result.next()) {
+                server.connectClient(req, res);
+            } else {
+                res.rawjson(new EventResponse("loginPlayer", new HashMap<>() {{
+                    put("error", "Invalid credentials");
+                }}, new HashMap<>()));
+            }
         }));
 
-        server.addRoute("/petar", ((req, res) -> {
-            res.send("200 OK", "index.html");
-        }));
 
-        CORSConfig config = new CORSConfig(Arrays.asList("*"),
-                Arrays.asList("GET", "POST", "PUT", "DELETE"),
-                Arrays.asList("Content-Type"));
+        // server.addRoute("/petar", ((req, res) -> {
+        //     res.send("200 OK", "index.html");
+        // }));
 
         server.start();
     }
