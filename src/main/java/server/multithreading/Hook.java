@@ -80,23 +80,6 @@ public class Hook {
                 } else {
                     System.out.println("FIJELD: " + ((JSONField) obj.fields.get(0)).field);
                     String event = ((JSONField) obj.fields.get(0)).field;
-                    // if (!manager.fireNativeEvent(event, message, res.getSocket().getInputStream(),
-                    //         res.getSocket().getOutputStream())) {
-                    //     manager.fireEvent(event, message);
-                    // }
-                    // manager.activePlayers.forEach((key, value) -> {
-                    // System.out.println("POCINJEM");
-                    // Player p = (Player) value;
-                    // try {
-                    // PrintWriter rr = new PrintWriter(p.output, true);
-                    // System.out.println("Stampam");
-                    // System.out.println(p.output);
-                    // rr.println(JSON.repSerialize(p));
-                    // System.out.println("Stampam123");
-                    // } catch (Exception e) {
-                    // System.out.println("GRESKA");
-                    // }
-                    // });
                 }
             } catch (Exception e) {
                 System.out.println("NECE");
@@ -126,17 +109,6 @@ public class Hook {
                         if (eventResponse.eventName.equals("logout")) {
                             throw new LogoutException("LOGOUT");
                         }
-                        // manager.fireEvent(event, message);
-                        // manager.activePlayers.forEach((key, value) -> {
-                        // System.out.println("POCINJEM");
-                        // Player p = (Player) value;
-                        // try {
-                        // PrintWriter rr = new PrintWriter(p.output, true);
-                        // rr.println(JSON.repSerialize(p));
-                        // } catch (Exception e) {
-                        // System.out.println("GRESKA");
-                        // }
-                        // });
                     }
                 }
                 System.out.println("STREAM CLOSED");

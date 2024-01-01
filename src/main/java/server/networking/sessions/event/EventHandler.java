@@ -35,7 +35,7 @@ public class EventHandler {
             EventController eventController = new EventController(p, eventResponse, manager);
             events.get(eventName).call(eventController);
         } catch (Exception e) {
-            System.out.println("Event failed to run" + e.getMessage());
+            System.out.println("Event failed to run: " + e.getMessage());
         }
     }
 

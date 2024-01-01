@@ -15,15 +15,21 @@ import server.client.Request;
 import server.client.Response;
 import server.multithreading.Hook;
 import server.networking.sessions.event.EventHandler;
+import server.networking.sessions.game.GameSession;
 import server.networking.sessions.player.Player;
 
 public class SessionManager {
     private EventHandler eventHandler = new EventHandler();
     private Hook hook;
     private HashMap<String, Player> playerSessions = new HashMap<>();
+    private HashMap<String, GameSession> gameSessions = new HashMap<>();
 
     public SessionManager(Hook hook) {
         this.hook = hook;
+    }
+
+    public HashMap<String, GameSession> getGameSessions() {
+        return this.gameSessions;
     }
 
     public void registerEvent(String eventName, Event event) {
@@ -41,6 +47,26 @@ public class SessionManager {
 
     public void disconnectPlayer(final Player player) {
         this.playerSessions.remove(player.key);
+        this.gameSessions.forEach((k, v) -> {
+            if (v.owner == player) {
+                v.activePlayers.forEach((p) -> {
+                    this.sendData(p, new EventResponse("lobbyDeleted", new HashMap<>(), new HashMap<>()));
+                });
+                this.gameSessions.remove(k);
+            }
+            if (v.activePlayers.contains(player)) {
+                v.activePlayers.remove(player);
+                if (v.activePlayers.size() == 0) {
+                    this.gameSessions.remove(k);
+                } else {
+                    v.activePlayers.forEach((p) -> {
+                        this.sendData(p, new EventResponse("playerLeftLobby", new HashMap<>() {{
+                            put("playerID", player.key);
+                        }}, new HashMap<>()));
+                    });
+                }
+            }
+        });
         System.out.println("DELETING: " + player.key + " | " + this.playerSessions.toString());
     }
 
@@ -66,6 +92,33 @@ public class SessionManager {
             writer.flush();
         } catch (Exception e) {
             System.out.println("Failed to send connection");
+        }
+    }
+
+    public void sendData(final Player player, final EventResponse data) {
+        try {
+            PrintWriter writer = new PrintWriter(player.output);
+            writer.println(new Gson().toJson(data));
+            writer.flush();
+        } catch (Exception e) {
+            System.out.println("Failed to send data");
+        }
+    }
+
+    public void sendData(final String lobbyID, final EventResponse data) {
+        try {
+            GameSession gameSession = this.gameSessions.get(lobbyID);
+            gameSession.activePlayers.forEach((player) -> {
+                try {
+                    PrintWriter writer = new PrintWriter(player.output);
+                    writer.println(new Gson().toJson(data));
+                    writer.flush();
+                } catch (Exception e) {
+                    System.out.println("Failed to send data");
+                }
+            });
+        } catch (Exception e) {
+            System.out.println("Failed to send data");
         }
     }
 

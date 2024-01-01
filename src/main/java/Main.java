@@ -1,24 +1,17 @@
 import models.RequestMethod;
-import server.config.CORSConfig;
 import server.networking.sessions.game.GameSession;
+import server.networking.sessions.player.Player;
 import server.Server;
+import server.authentication.FuseID;
 import server.client.EventResponse;
-import test_classes.Person;
-import test_classes.PlayerData;
-import test_classes.PlayerR;
-import utility.json.JSON;
 
-import java.io.IOException;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.sql.ResultSet;
 
 import com.google.gson.Gson;
-import com.mysql.cj.jdbc.Driver;
 
 public class Main {
     public static void main(String[] args) throws Exception {
@@ -33,9 +26,55 @@ public class Main {
             controller.logout();
         });
 
-        server.addRoute("/connect", ((req, res) -> {
-            
-        }));
+        server.registerEvent("createLobby", (controller) -> {
+            System.out.println("Creating lobby");
+            String lobbyID = FuseID.generateToken();
+            controller.sessionManager.getGameSessions().put(lobbyID, new GameSession(lobbyID, controller.player, Arrays.asList(controller.player)));
+            EventResponse eventResponse = new EventResponse("createLobby", new HashMap<>() {{
+                put("lobbyID", lobbyID);
+            }}, new HashMap<>());
+            controller.sessionManager.sendData(controller.player, eventResponse);
+            System.out.println(controller.sessionManager.getGameSessions().toString());
+        });
+
+        server.registerEvent("leaveLobby", (controller) -> {
+            System.out.println("Leaving lobby");
+            controller.sessionManager.getGameSessions().forEach((k, v) -> {
+                if (v.activePlayers.contains(controller.player)) {
+                    //why ???
+                    List<Player> l = new ArrayList<>(v.activePlayers);
+                    l.remove(controller.player);
+                    v.activePlayers = l;
+                    if (v.activePlayers.size() == 0) {
+                        controller.sessionManager.getGameSessions().remove(k);
+                        System.out.println("Lobby deleted " + controller.sessionManager.getGameSessions().toString());
+                    } else if (v.owner == controller.player) {
+                        v.activePlayers.forEach((p) -> {
+                            controller.sessionManager.sendData(p, new EventResponse("lobbyDeleted", new HashMap<>(), new HashMap<>()));
+                        });
+                        controller.sessionManager.getGameSessions().remove(k);
+
+                    } else {
+                        v.activePlayers.forEach((p) -> {
+                            controller.sessionManager.sendData(p, new EventResponse("playerLeftLobby", new HashMap<>() {{
+                                put("playerID", controller.player.key);
+                            }}, new HashMap<>()));
+                        });
+                    }
+                }
+            });
+        });
+
+        server.registerEvent("fetchLobbies", (controler) -> {
+            System.out.println("Fetching lobbies");
+            HashMap<String, String> lobbies = new HashMap<>();
+            int i = 0;
+            controler.sessionManager.getGameSessions().forEach((k, v) -> {
+                lobbies.put("lobby" + i, k);
+            });
+            EventResponse eventResponse = new EventResponse("fetchLobbies", lobbies, new HashMap<>());
+            controler.sessionManager.sendData(controler.player, eventResponse);
+        });
 
         server.addRoute("/register", RequestMethod.POST, ((req, res) -> {
             EventResponse eventResponse = new Gson().fromJson(req.body, EventResponse.class);

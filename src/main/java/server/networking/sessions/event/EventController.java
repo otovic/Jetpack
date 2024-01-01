@@ -13,7 +13,7 @@ import server.networking.sessions.player.Player;
 public class EventController {
     public Player player;
     public EventResponse data;
-    private SessionManager sessionManager;
+    public SessionManager sessionManager;
 
     public EventController(final Player player, final EventResponse eventResponse, final SessionManager sessionManager) {
         this.player = player;
