@@ -11,6 +11,8 @@ import test_classes.PlayerR;
 public class Player {
     public String key;
     public String username;
+    public int color;
+    public boolean isReady = false;
     public String email;
     public InputStream input;
     public OutputStream output;
@@ -21,5 +23,13 @@ public class Player {
         this.email = email;
         this.input = input;
         this.output = output;
+    }
+
+    public void setColor(final int color) {
+        this.color = color;
+    }
+
+    public void setReady() {
+        this.isReady = !this.isReady;
     }
 }

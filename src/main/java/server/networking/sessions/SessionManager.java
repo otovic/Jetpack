@@ -28,8 +28,12 @@ public class SessionManager {
         this.hook = hook;
     }
 
-    public HashMap<String, GameSession> getGameSessions() {
+    public synchronized HashMap<String, GameSession> getGameSessions() {
         return this.gameSessions;
+    }
+
+    public synchronized void setGameSessions(final HashMap<String, GameSession> gameSessions) {
+        this.gameSessions = gameSessions;
     }
 
     public void registerEvent(String eventName, Event event) {
@@ -62,6 +66,7 @@ public class SessionManager {
                     v.activePlayers.forEach((p) -> {
                         this.sendData(p, new EventResponse("playerLeftLobby", new HashMap<>() {{
                             put("playerID", player.key);
+                            put("username", player.username);
                         }}, new HashMap<>()));
                     });
                 }

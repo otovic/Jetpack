@@ -7,11 +7,13 @@ import server.networking.sessions.player.Player;
 public class GameSession {
     public String id;
     public Player owner;
+    public boolean isStarted;
     public List<Player> activePlayers;
 
-    public GameSession(String id, Player owner, List<Player> activePlayers) {
+    public GameSession(String id, Player owner, List<Player> activePlayers, boolean isStarted) {
         this.id = id;
         this.owner = owner;
         this.activePlayers = activePlayers;
+        this.isStarted = isStarted;
     }
 }
