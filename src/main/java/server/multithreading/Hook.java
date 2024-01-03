@@ -90,12 +90,9 @@ public class Hook {
 
     public void addListener(final Player player, final SessionManager manager) throws IOException {
         submitTask(() -> {
-            System.out.println("listen task added");
             try (BufferedReader br = new BufferedReader(new InputStreamReader(player.input))) {
                 while (true) {
-                    System.out.println("WAITING");
                     String message = br.readLine();
-                    System.out.println("STREAM OPENED");
                     EventResponse eventResponse = new Gson().fromJson(message, EventResponse.class);
                     if (eventResponse.eventName == null || eventResponse.eventName.equals("")) {
                         System.out.println("Client disconnected.");

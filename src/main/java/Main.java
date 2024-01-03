@@ -1,5 +1,6 @@
 import models.RequestMethod;
 import server.networking.sessions.game.GameSession;
+import server.networking.sessions.game.Move;
 import server.networking.sessions.player.Player;
 import server.Server;
 import server.authentication.FuseID;
@@ -10,6 +11,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 import java.sql.ResultSet;
 
 import com.google.gson.Gson;
@@ -154,6 +156,187 @@ public class Main {
                     }}, new HashMap<>()));
                 }
             }); 
+        });
+
+        server.registerEvent("startGame", (controller) -> {
+            try {
+                System.out.println("Starting game");
+                List<Integer> colors = new ArrayList<>();
+                colors.add(1);
+                colors.add(2);
+                colors.add(3);
+                colors.add(4);
+
+                String lobbyID = controller.data.eventData.get("lobbyID");
+                GameSession gameSession = controller.sessionManager.getGameSessions().get(lobbyID);
+
+                gameSession.move.put("playersStarted", new Move(0, controller.player.key, ""));
+                gameSession.move.put("rolledDice", new Move(0, controller.player.key, ""));
+                gameSession.move.put("newPlayerTurn", new Move(0, controller.player.key, "0"));
+                gameSession.move.put("syncShowMoves", new Move(0, controller.player.key, ""));
+                gameSession.move.put("syncMoveFigure", new Move(0, controller.player.key, ""));
+
+                gameSession.isStarted = true;
+
+                gameSession.activePlayers.forEach(player -> {
+                    int num = new Random().nextInt(gameSession.activePlayers.size()) + 1;
+
+                    while (!colors.contains(num)) {
+                        num = new Random().nextInt(gameSession.activePlayers.size()) + 1;
+                    }
+
+                    colors.remove(num - 1);
+                    player.setColor(num);
+
+                    gameSession.activePlayers.forEach(p -> {
+                        controller.sessionManager.sendData(p, new EventResponse("assignColor", new HashMap<>() {{
+                            put("playerID", player.key);
+                            put("color", String.valueOf(player.color));
+                        }}, new HashMap<>()));
+                    });
+                });
+
+                gameSession.activePlayers.forEach(player -> {
+                    controller.sessionManager.sendData(player, new EventResponse("startGame", new HashMap<>(), new HashMap<>()));
+                });
+
+            } catch (Exception e) {
+                String lobbyID = controller.data.eventData.get("lobbyID");
+                GameSession gameSession = controller.sessionManager.getGameSessions().get(lobbyID);
+                gameSession.isStarted = true;
+                gameSession.activePlayers.forEach(player -> {
+                    controller.sessionManager.sendData(player, new EventResponse("error", new HashMap<>(), new HashMap<>()));
+                });
+            }
+        });
+
+        server.registerEvent("syncStartGame", (controller) -> {
+            System.out.println("syncStartGame");
+            String lobbyID = controller.data.eventData.get("lobbyID");
+            GameSession gameSession = controller.sessionManager.getGameSessions().get(lobbyID);
+
+            gameSession.move.get("playersStarted").playerFinished++;
+
+            if (gameSession.move.get("playersStarted").playerFinished == gameSession.activePlayers.size()) {
+                gameSession.move.remove("playersStarted");
+
+                gameSession.activePlayers.forEach(player -> {
+                    controller.sessionManager.sendData(player, new EventResponse("initGame", new HashMap<>(), new HashMap<>()));
+                });
+            }
+        });
+
+        server.registerEvent("rolledDice", (controller) -> {
+            System.out.println("Rolled dice");
+            String lobbyID = controller.data.eventData.get("game");
+            GameSession gameSession = controller.sessionManager.getGameSessions().get(lobbyID);
+
+            gameSession.move.get("rolledDice").data = controller.data.eventData.get("rolled");
+            gameSession.move.get("rolledDice").owningPlayer = controller.player.key;
+
+            gameSession.activePlayers.forEach(player -> {
+                controller.sessionManager.sendData(player, new EventResponse("rolledDice", new HashMap<>() {{
+                    put("playerID", controller.player.key);
+                    put("diceValue", controller.data.eventData.get("rolled"));
+                }}, new HashMap<>()));
+            });
+        });
+
+        server.registerEvent("syncRolledDice", (controller) -> {
+            System.out.println("Finished rolling");
+            String lobbyID = controller.data.eventData.get("game");
+            GameSession gameSession = controller.sessionManager.getGameSessions().get(lobbyID);
+
+            gameSession.move.get("rolledDice").playerFinished++;
+
+            if (gameSession.move.get("rolledDice").playerFinished == gameSession.activePlayers.size()) {
+                gameSession.move.get("rolledDice").playerFinished = 0;
+
+                gameSession.activePlayers.forEach(player -> {
+                    controller.sessionManager.sendData(player, new EventResponse("initShowMoves", new HashMap<>() {{
+                        put("playerID", gameSession.move.get("rolledDice").owningPlayer);
+                        put("diceValue", gameSession.move.get("rolledDice").data);
+                    }}, new HashMap<>()));
+            });
+            }
+        });
+
+        server.registerEvent("syncShowMoves", (controller) -> {
+            System.out.println("Syncing show moves");
+            String lobbyID = controller.data.eventData.get("game");
+            GameSession gameSession = controller.sessionManager.getGameSessions().get(lobbyID);
+
+            gameSession.move.get("syncShowMoves").playerFinished++;
+
+            if (gameSession.move.get("syncShowMoves").playerFinished == gameSession.activePlayers.size()) {
+                gameSession.move.get("syncShowMoves").playerFinished = 0;
+
+                gameSession.activePlayers.forEach(player -> {
+                    controller.sessionManager.sendData(player, new EventResponse("initNewPlayerTurn", new HashMap<>() {{
+                        put("playerID", gameSession.move.get("rolledDice").owningPlayer);
+                        put("diceValue", gameSession.move.get("rolledDice").data);
+                    }}, new HashMap<>()));
+                });
+            }
+        });
+
+        server.registerEvent("syncNewPlayerMove", (controller) -> {
+            System.out.println("Syncing new player move");
+            String lobbyID = controller.data.eventData.get("game");
+            GameSession gameSession = controller.sessionManager.getGameSessions().get(lobbyID);
+
+            gameSession.move.get("newPlayerTurn").playerFinished++;
+
+            if (gameSession.move.get("newPlayerTurn").playerFinished == gameSession.activePlayers.size()) {
+                gameSession.move.get("newPlayerTurn").playerFinished = 0;
+
+                gameSession.activePlayers.forEach(player -> {
+                    controller.sessionManager.sendData(player, new EventResponse("initNewPlayerTurn", new HashMap<>() {{
+                        put("playerID", gameSession.move.get("rolledDice").owningPlayer);
+                        put("diceValue", gameSession.move.get("rolledDice").data);
+                    }}, new HashMap<>()));
+                });
+            }
+        });
+
+        server.registerEvent("moveFigure", (controller) -> {
+            System.out.println("Moving figure");
+            String lobbyID = controller.data.eventData.get("game");
+            GameSession gameSession = controller.sessionManager.getGameSessions().get(lobbyID);
+
+            final String rolled = controller.data.eventData.get("rolled");
+            final String figure = controller.data.eventData.get("figure");
+
+            gameSession.move.get("syncMoveFigure").data = controller.data.eventData.get("figure");
+            gameSession.move.get("syncMoveFigure").owningPlayer = controller.player.key;
+
+            gameSession.activePlayers.forEach(player -> {
+                controller.sessionManager.sendData(player, new EventResponse("moveFigure", new HashMap<>() {{
+                    put("playerID", controller.player.key);
+                    put("figure", figure);
+                    put("rolled", rolled);
+                }}, new HashMap<>()));
+            });
+        });
+
+        server.registerEvent("syncMoveFigure", (controller) -> {
+            System.out.println("Finished moving figure");
+            String lobbyID = controller.data.eventData.get("game");
+            GameSession gameSession = controller.sessionManager.getGameSessions().get(lobbyID);
+
+            gameSession.move.get("syncMoveFigure").playerFinished++;
+
+            if (gameSession.move.get("syncMoveFigure").playerFinished == gameSession.activePlayers.size()) {
+                gameSession.move.get("syncMoveFigure").playerFinished = 0;
+                gameSession.move.get("syncShowMoves").playerFinished = 0;
+
+                gameSession.activePlayers.forEach(player -> {
+                    controller.sessionManager.sendData(player, new EventResponse("initNewPlayerTurn", new HashMap<>() {{
+                        put("playerID", gameSession.move.get("syncMoveFigure").owningPlayer);
+                        put("diceValue", gameSession.move.get("rolledDice").data);
+                    }}, new HashMap<>()));
+                });
+            }
         });
 
         server.addRoute("/register", RequestMethod.POST, ((req, res) -> {

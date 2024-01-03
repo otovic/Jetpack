@@ -1,5 +1,6 @@
 package server.networking.sessions.game;
 
+import java.util.HashMap;
 import java.util.List;
 
 import server.networking.sessions.player.Player;
@@ -8,6 +9,7 @@ public class GameSession {
     public String id;
     public Player owner;
     public boolean isStarted;
+    public HashMap<String, Move> move = new HashMap<>();
     public List<Player> activePlayers;
 
     public GameSession(String id, Player owner, List<Player> activePlayers, boolean isStarted) {
