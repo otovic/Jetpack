@@ -339,6 +339,16 @@ public class Main {
             }
         });
 
+        server.registerEvent("gameOver", (controller) -> {
+            System.out.println("Game over");
+            String lobbyID = controller.data.eventData.get("game");
+            GameSession gameSession = controller.sessionManager.getGameSessions().get(lobbyID);
+            gameSession.isStarted = false;
+            gameSession.activePlayers.forEach(player -> {
+                player.isReady = false;
+            });
+        });
+
         server.addRoute("/register", RequestMethod.POST, ((req, res) -> {
             EventResponse eventResponse = new Gson().fromJson(req.body, EventResponse.class);
             String query = "INSERT INTO players (username, email, password) VALUES ('" + eventResponse.eventParams.get("username") + "', '"
