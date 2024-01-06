@@ -12,4 +12,9 @@ public class Listener {
         this.socket = socket;
         this.hook = hook;
     }
+
+    @Override
+    public String toString() {
+        return "Listener [hook=" + hook + ", socket=" + socket + "]";
+    }
 }

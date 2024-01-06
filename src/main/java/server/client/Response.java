@@ -152,4 +152,11 @@ public class Response {
     private static String guessContentType(Path filePath) throws IOException {
         return Files.probeContentType(filePath);
     }
+
+    @Override
+    public String toString() {
+        return "Response [client=" + client + ", req=" + req + ", route=" + route + ", serverCors=" + serverCors
+                + ", allowedMethods=" + allowedMethods + ", allowedOrigins=" + allowedOrigins + ", allowedHeaders="
+                + allowedHeaders + "]";
+    }
 }

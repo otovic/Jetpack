@@ -20,4 +20,10 @@ public class Request {
         this.host = host;
         this.headers = headers;
     }
+
+    @Override
+    public String toString() {
+        return "Request [body=" + body + ", headers=" + headers + ", host=" + host + ", method=" + method + ", params="
+                + params + ", path=" + path + ", version=" + version + "]";
+    }
 }

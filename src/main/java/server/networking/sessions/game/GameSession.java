@@ -18,4 +18,10 @@ public class GameSession {
         this.activePlayers = activePlayers;
         this.isStarted = isStarted;
     }
+
+    @Override
+    public String toString() {
+        return "GameSession [activePlayers=" + activePlayers + ", id=" + id + ", isStarted=" + isStarted + ", move="
+                + move + ", owner=" + owner + "]";
+    }
 }

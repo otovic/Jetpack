@@ -19,9 +19,9 @@ public class Database {
     }
 
     public void connect() throws SQLException {
-        assert this.url != null;
-        assert this.username != null;
-        assert this.password != null;
+        if (this.connection == null) return;
+        if (this.url == null) return;
+        if (this.username == null) return;
 
         this.connection = DriverManager.getConnection(this.url, this.username, this.password);
 
@@ -52,5 +52,11 @@ public class Database {
 
     public ResultSet executeQueryWithResult(String query) throws SQLException {
         return this.connection.createStatement().executeQuery(query);
+    }
+
+    @Override
+    public String toString() {
+        return "Database [connection=" + connection + ", password=" + password + ", url=" + url + ", username="
+                + username + "]";
     }
 }

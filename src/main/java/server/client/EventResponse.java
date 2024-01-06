@@ -12,4 +12,10 @@ public class EventResponse {
         this.eventData = eventData;
         this.eventParams = eventParams;
     }
+
+    @Override
+    public String toString() {
+        return "EventResponse [eventData=" + eventData + ", eventName=" + eventName + ", eventParams=" + eventParams
+                + "]";
+    }
 }

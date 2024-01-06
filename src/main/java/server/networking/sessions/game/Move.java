@@ -10,4 +10,9 @@ public class Move {
         this.owningPlayer = owningPlayer;
         this.data = data;
     }
+
+    @Override
+    public String toString() {
+        return "Move [data=" + data + ", owningPlayer=" + owningPlayer + ", playerFinished=" + playerFinished + "]";
+    }
 }

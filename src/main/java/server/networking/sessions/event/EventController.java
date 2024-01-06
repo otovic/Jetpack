@@ -24,4 +24,9 @@ public class EventController {
     public void logout() {
         this.sessionManager.disconnectPlayer(this.player);
     }
+
+    @Override
+    public String toString() {
+        return "EventController [data=" + data + ", player=" + player + ", sessionManager=" + sessionManager + "]";
+    }
 }

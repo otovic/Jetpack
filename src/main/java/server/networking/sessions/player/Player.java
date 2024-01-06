@@ -32,4 +32,10 @@ public class Player {
     public void setReady() {
         this.isReady = !this.isReady;
     }
+
+    @Override
+    public String toString() {
+        return "Player [color=" + color + ", email=" + email + ", input=" + input + ", isReady=" + isReady + ", key="
+                + key + ", output=" + output + ", username=" + username + "]";
+    }
 }
