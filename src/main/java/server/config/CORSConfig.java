@@ -2,6 +2,10 @@ package server.config;
 
 import java.util.List;
 
+/**
+ * Klasa za postavljanje CORS konfiguracije.
+ * Cuva se lista dozvoljenih origin-a, lista dozvoljenih metoda i lista dozvoljenih head-er-a.
+ */
 public class CORSConfig {
     private List<String> accessControlAllowOrigin;
     private List<String> accessControlAllowMethods;

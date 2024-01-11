@@ -2,12 +2,10 @@ package server.networking.sessions.player;
 
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.net.Socket;
 
-import models.Replicate;
-import server.networking.sessions.SessionManager;
-import test_classes.PlayerR;
-
+/**
+ * Player klasa cuva podatke o svakom igracu koji je konektovan na server
+ */
 public class Player {
     public String key;
     public String username;

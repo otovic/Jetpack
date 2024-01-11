@@ -5,6 +5,9 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+/**
+ * Database klasa pomocu oje se ostvaruje konekcija na bazu.
+ */
 public class Database {
     public String url;
     public String username;
@@ -18,8 +21,13 @@ public class Database {
         this.password = password;
     }
 
+    /**
+     * Ostvaruje konekciju na bazu.
+     * 
+     * @throws SQLException ako konekcija na bazu ne uspe
+     */
     public void connect() throws SQLException {
-        if (this.connection == null) return;
+        if (this.password == null) return;
         if (this.url == null) return;
         if (this.username == null) return;
 
@@ -30,14 +38,21 @@ public class Database {
         }
     }
 
+    /**
+     * gasi konekciju ka bazi.
+     * @throws SQLException ako se desi greska prilikom gasenja konekcije na bazu.
+     */
     public void disconnect() throws SQLException {
         this.connection.close();
     }
 
-    public void startDatabaseSession() throws SQLException {
-        this.connect();
-    }
-
+    /**
+     * Izvrsava zadatai query nad datom bazom podataka.
+     * 
+     * @param query query koji setreba izvrsiti
+     * @return vraca poruku o uspesnosti izvrsavanja query-a
+     * @throws SQLException ako se desi greska prilikom izvrsavanja query-a
+     */
     public String executeQuery(String query) throws SQLException {
         try {
             this.connection.createStatement().execute(query);
@@ -50,6 +65,13 @@ public class Database {
         }
     }
 
+    /**
+        * Ako query treba da vraca podatke iz baze koristi se ova metoda.
+        *
+        * @param query query koji treba da se izvrsi
+        * @return vraca ResultSet objekat koji sadrzi podatke iz baze
+        * @throws SQLException ako se desi greska prilikom izvrsavanja query-a
+        */
     public ResultSet executeQueryWithResult(String query) throws SQLException {
         return this.connection.createStatement().executeQuery(query);
     }

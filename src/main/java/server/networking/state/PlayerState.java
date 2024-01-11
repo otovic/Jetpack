@@ -1,5 +1,6 @@
 package server.networking.state;
 
+//Ne koristi se
 public class PlayerState<T> {
     public T data;
 

@@ -1,42 +1,36 @@
 package server.multithreading;
 
 import server.client.EventResponse;
-import server.client.Request;
-import server.client.Response;
 import server.config.ServerConfig;
 import server.networking.sessions.SessionManager;
 import server.networking.sessions.player.Player;
-import test_classes.PlayerData;
-import test_classes.PlayerR;
-import test_classes.RequestR;
-import utility.json.JSON;
-import utility.json.object.JSONField;
-import utility.json.object.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.io.OutputStream;
-import java.io.PrintWriter;
-import java.net.Socket;
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
-import java.util.Map;
 
 import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 
 import exceptions.LogoutException;
-import models.Event;
 
+/**
+ * Hook klasa se koristi za upravljanje nitima. Koristi se za kreiranje niti koje ce izvrsavati zahteve koji stizu prema serveru
+ */
 public class Hook {
     private int taskPool;
     private ServerConfig serverConfig;
     private List<TaskThread> threads;
     private List<Runnable> tasks;
 
+    /**
+     * Konstrukotr klase Hook.
+     * U konstruktoru se inicijalizuje odredjeni broj Threadova koji je specificiran u podesavanjima servera.
+     * 
+     * @param taskPool broj threadova koji ce biti napravljen.
+     * @param serverConfig Objekat konfiguracije servera.
+     */
     public Hook(final int taskPool, ServerConfig serverConfig) {
         this.taskPool = taskPool;
         this.serverConfig = serverConfig;
@@ -50,6 +44,11 @@ public class Hook {
         }
     }
 
+    /**
+     * Dodaje task koji treba da izvrsi server.
+     *
+     * @param task zadatak koji treba da bude izvrsen
+     */
     public void submitTask(Runnable task) {
         synchronized (this.tasks) {
             this.tasks.add(task);
@@ -57,37 +56,22 @@ public class Hook {
         }
     }
 
+    /**
+     * Gasi sve threadove.
+     */
     public void shutdown() {
         for (TaskThread thread : this.threads) {
             thread.interrupt();
         }
     }
 
-    public void fireEvent(final Request req, final Response res, final SessionManager manager) throws IOException {
-        submitTask(() -> {
-            System.out.println("event task added");
-            try {
-                BufferedReader br = new BufferedReader(new InputStreamReader(res.getSocket().getInputStream()));
-                String message = br.readLine();
-                System.out.println(message);
-                JSONObject obj = JSON.deserialize(message);
-
-                if (message == null) {
-                    System.out.println("Client disconnected.");
-                }
-                if (message.equals("quit")) {
-                    System.out.println("Received quit message. Closing connection.");
-                } else {
-                    System.out.println("FIJELD: " + ((JSONField) obj.fields.get(0)).field);
-                    String event = ((JSONField) obj.fields.get(0)).field;
-                }
-            } catch (Exception e) {
-                System.out.println("NECE");
-                System.out.println(e.getMessage());
-            }
-        });
-    }
-
+    /**
+     * Dodaje listener za sve igrace koji su ostvarili konekciju na server.
+     * 
+     * @param player igrac koji salje zahteve.
+     * @param manager menadzer sesija.
+     * @throws IOException ako dodje do greske prilikom izvrsavanja nekog zadatka i diskonektuje igraca.
+     */
     public void addListener(final Player player, final SessionManager manager) throws IOException {
         submitTask(() -> {
             try (BufferedReader br = new BufferedReader(new InputStreamReader(player.input))) {
@@ -118,32 +102,40 @@ public class Hook {
         });
     }
 
-    private class TaskThread extends Thread {
-        public TaskThread() {
-        }
+    /**
+         * Ceka da se doda zadatak u listu pa se taj isti zadatak dodeljuje jednom thread-u na izvrsavanje.
+         */
+        private class TaskThread extends Thread {
+            public TaskThread() {
+            }
 
-        @Override
-        public void run() {
-            while (true) {
-                Runnable task;
-                synchronized (tasks) {
-                    while (tasks.isEmpty()) {
-                        try {
-                            tasks.wait();
-                        } catch (InterruptedException e) {
-                            Thread.currentThread().interrupt();
-                            System.out.println("Thread interrupted: " + e.getMessage());
-                            return;
+            /**
+             * Izvrsava taskove iz taska.
+             * ako nema zadataka za izvrsavanje, svi threadovi se stavljaju na cekanje.
+             * ako neki zadatak ne uspe baca se greska.
+             */
+            @Override
+            public void run() {
+                while (true) {
+                    Runnable task;
+                    synchronized (tasks) {
+                        while (tasks.isEmpty()) {
+                            try {
+                                tasks.wait();
+                            } catch (InterruptedException e) {
+                                Thread.currentThread().interrupt();
+                                System.out.println("Thread interrupted: " + e.getMessage());
+                                return;
+                            }
                         }
+                        task = tasks.remove(0);
                     }
-                    task = tasks.remove(0);
-                }
-                try {
-                    task.run();
-                } catch (RuntimeException e) {
-                    System.out.println("Task failed: " + e.getMessage());
+                    try {
+                        task.run();
+                    } catch (RuntimeException e) {
+                        System.out.println("Task failed: " + e.getMessage());
+                    }
                 }
             }
         }
-    }
 }

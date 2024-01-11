@@ -13,6 +13,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 
 import com.google.gson.Gson;
 
@@ -435,7 +436,6 @@ public class Main {
                 EventResponse eventResponse = new Gson().fromJson(req.body, EventResponse.class);
                 String query = "SELECT * FROM players WHERE username = '" + eventResponse.eventParams.get("username") + "' AND password = '" + eventResponse.eventParams.get("password") + "'";
                 server.database.connect();
-                System.out.println(query);
                 ResultSet result = server.database.executeQueryWithResult(query);
                 if(result.next()) {
                     server.connectClient(req, res);
@@ -444,6 +444,8 @@ public class Main {
                         put("error", "Invalid credentials");
                     }}, new HashMap<>()));
                 }
+            } catch(SQLException sql) {
+                System.out.println("Error: " + sql.getMessage());
             } catch (Exception e) {
                 System.out.println("Error: " + e.getMessage());
             }

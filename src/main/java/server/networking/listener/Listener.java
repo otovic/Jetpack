@@ -4,6 +4,7 @@ import java.net.Socket;
 
 import server.multithreading.Hook;
 
+//Ne koristi se
 public class Listener {
     public Socket socket;
     private Hook hook;

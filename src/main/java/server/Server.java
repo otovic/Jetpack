@@ -6,9 +6,7 @@ import logger.Logger;
 import exceptions.LoggerException;
 import models.Callback;
 import models.Event;
-import models.EventTask;
 import models.RequestMethod;
-import server.client.EventResponse;
 import server.client.Request;
 import server.client.Response;
 import server.config.CORSConfig;
@@ -16,22 +14,15 @@ import server.config.ServerConfig;
 import server.database.Database;
 import server.multithreading.Hook;
 import server.networking.sessions.SessionManager;
-import server.networking.sessions.player.Player;
 import server.routing.Router;
-import test_classes.Person;
-import test_classes.PlayerR;
-import utility.json.JSON;
 
-import java.beans.EventHandler;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.*;
 
-import com.google.gson.Gson;
 
 public class Server {
     public int socket;
@@ -59,20 +50,17 @@ public class Server {
         this.currentEvent.updateSnapshot(event);
     }
 
+    /**
+     * Pokreće server i osluškuje dolazne klijentske veze.
+     * 
+     * @throws Exception ako dođe do greške pri pokretanju servera.
+     */
     public void start() throws Exception {
         try (ServerSocket serverSocket = new ServerSocket(this.socket)) {
             this.updateSnapshot("Server started on port " + this.socket + "!");
             Logger.logMessage(LogType.SERVER_START, true, this.currentEvent);
             while (true) {
                 try {
-                    // Socket client = serverSocket.accept();
-                    // BufferedReader br = new BufferedReader(new
-                    // InputStreamReader(client.getInputStream()));
-                    // PrintWriter pr = new PrintWriter(client.getOutputStream(), true);
-                    // while (true) {
-                    // System.out.println(br.readLine());
-                    // pr.println("ODGOVOR SA SERVERA");
-                    // }
                     Socket client = serverSocket.accept();
                     hook.submitTask(() -> {
                         try {
@@ -100,6 +88,13 @@ public class Server {
         }
     }
 
+    /**
+     * Rukuje dolaznim zahtevima od klijenta
+     * 
+     * @param client soket koja predstavlja klijentsku vezu
+     * @throws IOException ako dođe do I/O greške tokom obrade zahteva
+     * @throws LoggerException ako dođe do greške prilikom evidentiranja zahteva
+     */
     private void handleIncomingRequest(Socket client) throws IOException, LoggerException {
         try {
             System.out.println("Handling request from client: " + client.toString());
@@ -142,6 +137,9 @@ public class Server {
         }
     }
 
+    /**
+     * Parsira telo zahteva, ako postoji
+     */
     private StringBuilder parseBody(List<String> headers, BufferedReader br) throws IOException {
         int contentLength = Integer.parseInt(headers.stream()
                 .filter(header -> header.contains("Content-Length: "))
@@ -155,6 +153,9 @@ public class Server {
         return new StringBuilder(new String(bodyData));
     }
 
+    /**
+     * Gradi zahtev od klijenta, cita svaku liniju, hedere, body, browser itd.
+     */
     private StringBuilder buildRequest(BufferedReader br) throws IOException {
         StringBuilder requestBuilder = new StringBuilder();
         String line;
@@ -164,6 +165,9 @@ public class Server {
         return requestBuilder;
     }
 
+    /**
+     * Parsira zahtev od klijenta i vraca objekat klase Request
+     */
     private Request parseRequest(String req) {
         String[] reqLines = req.split("\r\n");
         String[] reqLine = reqLines[0].split(" ");
@@ -186,6 +190,14 @@ public class Server {
         return new Request(method, path, params, version, host, headers);
     }
 
+    /**
+     * Dodaje putanju na ruter servera.
+     *
+     * @param route      putanja
+     * @param reqMethod  koji je tip zahteva, get,m post, put, delete
+     * @param routeCORS  CORS konfiguracija za putanju
+     * @param callback   sta ce se izvrsiti kada klijent pritupi ovoj putanji
+     */
     public void addRoute(String route, RequestMethod reqMethod, CORSConfig routeCORS, Callback callback) {
         this.router.registerRoute(route, reqMethod, routeCORS, callback);
     }
@@ -202,20 +214,14 @@ public class Server {
         this.manager.registerEvent(eventName, event);
     }
 
-    // public void executeEvent(final Request req, final Response res) {
-    //     EventResponse eventResponse = new Gson().fromJson(req.body, EventResponse.class);
-    //     this.manager.executeEvent(eventResponse.eventName, eventResponse);
-    // }
-
+    /**
+     * Povezuje klijenta na server.
+     * 
+     * @param req Objekat zahteva gde se sadrze sve informacije klijenta.
+     * @param res Objekat odgovora sa servera.
+     * @throws IOException ako se desi greska prilikom povezivanja klijenta na server.
+     */
     public void connectClient(final Request req, final Response res) throws IOException {
         this.manager.connectPlayer(req, res);
-    }
-
-    public void listen(final Request req, final Response res) throws IOException {
-        try {
-            this.hook.fireEvent(req, res, this.manager);
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
     }
 }

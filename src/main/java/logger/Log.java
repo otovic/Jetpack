@@ -9,6 +9,9 @@ import java.time.LocalTime;
 import exceptions.LoggerException;
 import utility.UtilityService;
 
+/**
+ * Log klasa pomocu koje se loguju poruke u fajl..
+ */
 public class Log {
 
     public Log() throws LoggerException {
